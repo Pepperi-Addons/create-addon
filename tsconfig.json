@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "strict": true,
+    "rootDir": ".",
+    "outDir": "build",
+    "esModuleInterop": true,
+    "declaration": true,
+    "sourceMap": true
+  },
+  "exclude": [
+    "./build/**",
+    "./dest/**"
+  ]
+}
