@@ -15,6 +15,7 @@ interface Request {
 
 // add functions here
 // this function will run on the 'api/foo' endpoint
+// the real function is runnning on another typescript file
 export async function foo(client: Client, request: Request) {
     const service = new MyService();
     service.doSomething();
@@ -26,6 +27,8 @@ export async function foo(client: Client, request: Request) {
     }
 };
 
-export async function foo1(client: Client, request: Request) {
-    return JavascriptService.goo();
+// this function will run on api/js_foo endpoint
+// note that the code here is running from a javascript file
+export async function js_foo(client: Client, request: Request) {
+    return JavascriptService.js_foo(client, request);
 }
