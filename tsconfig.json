@@ -6,7 +6,9 @@
     "outDir": "build",
     "esModuleInterop": true,
     "declaration": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "allowJs": true
   },
   "exclude": [
     "./build/**",

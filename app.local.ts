@@ -26,7 +26,17 @@ class Server {
 
     createClient(req: express.Request) {
         const token = req.header('Authorization')?.replace('Bearer ', '') || '';
-        const parsedToken: any = jwtdecode(token);
+        let parsedToken: any;
+        try {
+            parsedToken = jwtdecode(token);
+            // check experation :)
+            //if (Date.now() / 1000 > parsedToken.exp) throw new Error("unauthorized");
+        }
+        catch(ex)
+        {
+            throw new Error("unauthorized");
+        }
+
         console.log(parsedToken);
         return {
             BaseURL: parsedToken['pepperi.baseurl'],
@@ -45,16 +55,30 @@ class Server {
     }
 
     async handler(req: express.Request, res: express.Response) {
+        
+        var result= {};
         try {
+            res.status(200);
             const file = req.params['file'];
             const funcName = req.params['func'];
             const mod = await import('./' + file);
             const func = mod[funcName];
-            var result = await func(this.createClient(req), this.createRequest(req));
-            res.status(200).json(result);
-        } catch (error) {
-            console.log('error :', error);
-            res.status(500).json({ message: error.message, stack: error.stack});
+            result = await func(this.createClient(req), this.createRequest(req));
+            
+        } catch (ex) {
+            console.log('error :', ex);
+            // set the correct status code
+            if(ex.message == "unauthorized") {
+                res.status(401);
+            }
+            else {
+                res.status(500);
+            }
+            result = { message: ex.message, stack: ex.stack};
+        }
+        finally
+        {
+            res.json(result);
         }
     }
 }

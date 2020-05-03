@@ -1,4 +1,6 @@
 import MyService from './my.service'
+import JavascriptService from './my.javascript.service.js'
+
 
 interface Client {
     BaseURL: string;
@@ -23,3 +25,7 @@ export async function foo(client: Client, request: Request) {
         request
     }
 };
+
+export async function foo1(client: Client, request: Request) {
+    return JavascriptService.goo();
+}
