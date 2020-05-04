@@ -1,0 +1,26 @@
+{
+  "name": "test",
+  "version": "0.0.0",
+  "description": "",
+  "main": "api.js",
+  "license": "Apache-2.0",
+  "keywords": [],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup -c",
+    "start": "node app.local.js"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^11.1.0",
+    "dotenv": "^8.2.0",
+    "rollup": "^2.7.5"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jwt-decode": "^2.2.0",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.5"
+  }
+}
