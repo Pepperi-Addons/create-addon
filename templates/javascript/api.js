@@ -11,4 +11,4 @@ async function foo(client, request) {
     }
 };
 
-export { foo }
+exports.foo = foo;
