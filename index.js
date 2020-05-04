@@ -54,7 +54,7 @@ async function install() {
 
 
 async function main() {
-    const template = process.argv[1] || 'typescript';
+    const template = process.argv[2] || 'typescript';
     const path = '.';
     const tmpPath = path + '/tmp';
     const zipFile = tmpPath + '/repo.zip';
@@ -75,12 +75,12 @@ async function main() {
         await extract(zipFile, tmpPath);
 
         const templatePath = tmpPath + '/HelloWorld-Backend-master/templates/' + template;
-        if (!fs.exists(templatePath)) {
+        if (!fs.existsSync(templatePath)) {
             throw new Error(`Template ${template} doesn't exists`);
         }
         
         console.log('copying neccesary files');
-        await copy(tmpPath + '/HelloWorld-Backend-master/templates/' + template, path);
+        await copy(templatePath, path);
         
         console.log("installing dependancies..");
         await install();
@@ -88,7 +88,7 @@ async function main() {
         console.log('you are now good to go');
     }
     catch (err) {
-        console.err(err);
+        console.error(err);
     }
     finally {
         console.log("removing temporary files");
