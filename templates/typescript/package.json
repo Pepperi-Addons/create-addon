@@ -13,27 +13,18 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "tsc",
     "build": "rollup -c",
-    "start": "tsc -w"
+    "start": "tsc -w app.local.ts"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.6",
     "@types/dotenv": "^8.2.0",
-    "@types/express": "^4.17.6",
-    "@types/jwt-decode": "^2.2.1",
     "@types/node": "^10.0.3",
-    "@types/request-promise": "^4.1.46",
-    "dotenv": "^8.2.0",
-    "rollup": "^2.7.5",
+    "rollup": "^2.7.6",
     "rollup-plugin-typescript2": "^0.27.0",
-    "ts-node": "^8.9.1",
+    "ts-node": "^8.10.1",
     "typescript": "~3.8.0"
   },
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "jwt-decode": "^2.2.0",
-    "request": "^2.88.2",
-    "request-promise": "^4.2.5"
+    "@pepperi-addons/debug-server": "0.0.16",
+    "dotenv": "^8.2.0"
   }
 }

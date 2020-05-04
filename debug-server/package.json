@@ -1,0 +1,27 @@
+{
+  "name": "@pepperi-addons/debug-server",
+  "version": "0.0.16",
+  "description": "A server to run a pepperi addon localy",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "npm version patch"
+  },
+  "keywords": [
+    "pepperi",
+    "pepperi-addons",
+    "debug-server",
+    "debugging",
+    "addons"
+  ],
+  "author": "chasky.h@pepperi.com",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jwt-decode": "^2.2.0",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.5"
+  }
+}
