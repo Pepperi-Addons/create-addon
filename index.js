@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('fs-extra');
+const rimraf = require('rimraf');
 const https = require('follow-redirects').https;
 const AdmZip = require('adm-zip');
 
@@ -44,7 +45,7 @@ async function copy(src, dest) {
 async function install() {
     return new Promise((resolve, reject) => {
         const exec = require('child_process').exec;
-        const cmd = exec('npm install');
+        const cmd = exec('cd test; npm install');
         cmd.on('exit', () => {
             resolve()
         });
@@ -63,18 +64,18 @@ async function main() {
         console.log("template = ", template);
 
         if (fs.existsSync(tmpPath)) {
-            fs.rmdirSync(tmpPath, { recursive: true});
+            rimraf.sync(tmpPath);
         }
     
         fs.mkdirSync(tmpPath, { recursive: true});
     
         console.log('downloading files from github...');
-        await downloadRepo('https://github.com/Pepperi-Addons/HelloWorld-Backend/archive/master.zip', zipFile);
+        await downloadRepo('https://github.com/Pepperi-Addons/create-addon-api/archive/master.zip', zipFile);
         
         console.log('extracting zip file');
         await extract(zipFile, tmpPath);
 
-        const templatePath = tmpPath + '/HelloWorld-Backend-master/templates/' + template;
+        const templatePath = tmpPath + '/create-addon-api-master/templates/' + template;
         if (!fs.existsSync(templatePath)) {
             throw new Error(`Template ${template} doesn't exists`);
         }
