@@ -4,6 +4,7 @@ const fs = require('fs-extra');
 const rimraf = require('rimraf');
 const https = require('follow-redirects').https;
 const AdmZip = require('adm-zip');
+const { spawn } = require('child_process');
 
 
 async function downloadRepo(url, path) {
@@ -43,13 +44,20 @@ async function copy(src, dest) {
 }
 
 async function install() {
-    return new Promise((resolve, reject) => {
-        const exec = require('child_process').exec;
-        const cmd = exec('cd test; npm install');
-        cmd.on('exit', () => {
-            resolve()
-        });
-    });
+    return await Promise.all([
+        new Promise((resolve, reject) => {
+            const serverInstall = spawn('npm install', { cwd: 'server-side' });
+            serverInstall.on('close', (code) => {
+                resolve()
+            });
+        }),
+        new Promise((resolve, reject) => {
+            const serverInstall = spawn('npm install', { cwd: 'client-side' });
+            serverInstall.on('close', (code) => {
+                resolve()
+            });
+        })
+    ]);
 } 
 
 
