@@ -46,14 +46,14 @@ async function copy(src, dest) {
 async function install() {
     return await Promise.all([
         new Promise((resolve, reject) => {
-            const serverInstall = spawn('npm install', { cwd: 'server-side' });
-            serverInstall.on('close', (code) => {
+            const cmd = spawn('npm install', { cwd: `${__dirname}/server-side` });
+            cmd.on('close', (code) => {
                 resolve()
             });
         }),
         new Promise((resolve, reject) => {
-            const serverInstall = spawn('npm install', { cwd: 'client-side' });
-            serverInstall.on('close', (code) => {
+            const cmd = spawn('npm install', { cwd: `${__dirname}/client-side` });
+            cmd.on('close', (code) => {
                 resolve()
             });
         })
