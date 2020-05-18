@@ -109,7 +109,7 @@ async function main() {
     }
     finally {
         console.log("removing temporary files");
-        fs.rmdirSync(tmpPath, { recursive: true });
+        // fs.rmdirSync(tmpPath, { recursive: true });
     }
     
 }
