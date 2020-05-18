@@ -50,11 +50,19 @@ async function install() {
             cmd.on('close', (code) => {
                 resolve()
             });
+            cmd.on('error', (err) => {
+                console.error(err);
+                reject()
+            });
         }),
         new Promise((resolve, reject) => {
             const cmd = spawn('npm install', { cwd: `${__dirname}/client-side` });
             cmd.on('close', (code) => {
                 resolve()
+            });
+            cmd.on('error', (err) => {
+                console.error(err);
+                reject()
             });
         })
     ]);
