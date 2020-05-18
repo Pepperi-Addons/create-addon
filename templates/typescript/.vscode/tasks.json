@@ -1,0 +1,33 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Rollup API",
+			"type": "npm",
+			"path": "server-side/",
+			"script": "build",
+			"group": "build"
+		},
+		{
+			"label": "Build API",
+			"type": "typescript",
+			"tsconfig": "server-side/tsconfig.json",
+			"problemMatcher": [
+				"$tsc"
+			],
+			"group": "build",
+			"dependsOn": "Rollup API"
+		},
+		{
+			"label": "Build Addon",
+			"type": "npm",
+			"script": "build",
+			"path": "client-side/",
+			"group": "build",
+			"problemMatcher": [],
+			"detail": "rollup -c",
+			"dependsOn": ["Build API"]
+		},
+	
+	]
+}

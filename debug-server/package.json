@@ -1,6 +1,6 @@
 {
   "name": "@pepperi-addons/debug-server",
-  "version": "0.0.16",
+  "version": "0.0.19",
   "description": "A server to run a pepperi addon localy",
   "main": "index.js",
   "scripts": {

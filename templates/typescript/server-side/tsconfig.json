@@ -2,13 +2,14 @@
   "compilerOptions": {
     "module": "commonjs",
     "strict": true,
-    "rootDir": ".",
+    "rootDir": "..",
     "outDir": "build",
     "esModuleInterop": true,
     "declaration": true,
     "sourceMap": true,
     "noImplicitAny": false,
-    "allowJs": true
+    "allowJs": true,
+    "resolveJsonModule": true
   },
   "exclude": [
     "./build/**",

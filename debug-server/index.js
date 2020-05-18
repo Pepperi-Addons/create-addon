@@ -8,7 +8,7 @@ class DebugServer {
     
     constructor(options) {
         this.app = express();
-        this.port = options.port | 3000;
+        this.port = options.port || 0;
         this.addonUUID = options.addonUUID || '';
         this.apiDirectory = options.apiDirectory || process.cwd();
 
@@ -24,6 +24,10 @@ class DebugServer {
         this.app.listen(this.port, () => {
             console.log(`listening on http://localhost:${this.port}`);
         });
+    }
+
+    addStaticFolder(virtualPath, path) {
+        this.app.use(virtualPath, express.static(path));
     }
 
     createClient(req) {

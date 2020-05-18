@@ -12,7 +12,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "tsc",
-    "build": "rollup -c",
+    "build": "rollup -c rollup.config.js && rollup -c installation.rollup.config.js",
     "start": "tsc -w app.local.ts"
   },
   "devDependencies": {
@@ -24,7 +24,6 @@
     "typescript": "~3.8.0"
   },
   "dependencies": {
-    "@pepperi-addons/debug-server": "0.0.16",
-    "dotenv": "^8.2.0"
+    "@pepperi-addons/debug-server": "0.0.19"
   }
 }

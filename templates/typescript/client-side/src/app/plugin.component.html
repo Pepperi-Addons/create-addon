@@ -1,0 +1,25 @@
+<div id="editor-container" class="plugin-container">
+
+    <div id="pluginHeader" class="header-content">
+        <div class="content pepperi-border-bottom">
+            <div class="left-container spacing-element-negative pull-left flip">
+                <div class="spacing-element title">
+                    {{ 'Plugin_Title' | translate }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="pluginBody" class="main-content" *ngIf="installing == false">
+        <mat-tab-group>
+            <mat-tab label="Test API">
+                <app-api-tester></app-api-tester>
+            </mat-tab>
+            <mat-tab label="Pepperi Lists">
+                <div>
+                    A list example (todo)
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>

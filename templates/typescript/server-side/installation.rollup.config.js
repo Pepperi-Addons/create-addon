@@ -2,10 +2,10 @@ import typescript from 'rollup-plugin-typescript2';
 import pkgjson from './package.json'
 
 export default {
- input: pkgjson.main, // our source file
+ input: 'installation.ts', // our source file
  output: [
   {
-   file: 'dist/api.js',
+   file: '../publish/installation.js',
    format: 'cjs'
   }
  ],
@@ -15,7 +15,8 @@ export default {
   typescript({
       tsconfigOverride: {
           compilerOptions: {
-              module: "ES2015"
+              module: "ES2015",
+              declaration: false
           }
       }
    })

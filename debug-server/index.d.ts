@@ -5,5 +5,9 @@ export default class DebugServer {
         addonUUID: string | undefined,
         apiDirectory: string | undefined
     });
+    
     start(): void;
+
+    addStaticFolder(virtualPath: string, path: string): void;
+
 }

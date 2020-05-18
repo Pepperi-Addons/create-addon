@@ -1,30 +1,18 @@
 import MyService from './my.service'
 import JavascriptService from './my.javascript.service.js'
-
-
-interface Client {
-    BaseURL: string;
-    OAuthAccessToken: string;
-    Module: any
-}
-
-interface Request {
-    body: any,
-    query: any
-}
+import Client from './Client'
+import Request from './Request';
 
 // add functions here
 // this function will run on the 'api/foo' endpoint
 // the real function is runnning on another typescript file
 export async function foo(client: Client, request: Request) {
-    const service = new MyService();
-    service.doSomething();
-    
-    return {
-        hello: 'world', 
-        client, 
-        request
-    }
+    const service = new MyService(client)
+    // service.doSomething();
+    // client.addLogEntry("Info", "Start GetTransactions");
+
+     const res = await service.getAddons()
+     return res
 };
 
 // this function will run on api/js_foo endpoint

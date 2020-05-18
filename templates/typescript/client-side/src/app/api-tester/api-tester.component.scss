@@ -1,0 +1,18 @@
+.content {
+    .mat-card{
+        max-width: 50%;
+        display: grid;
+        margin-bottom: .5rem;
+    }
+
+    button {
+        margin: 1rem 0 0 0;
+        &.back-button {
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
+        }
+        .mat-icon {
+            vertical-align: middle;
+        }
+    }
+}
