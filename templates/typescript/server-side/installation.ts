@@ -1,5 +1,4 @@
-import Client from './Client'
-import Request from './Request'
+import { Client, Request } from '@pepperi-addons/debug-server'
 
 export async function install(client: Client, request: Request): Promise<any> {
     return {success:true,resultObject:{}}

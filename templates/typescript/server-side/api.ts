@@ -1,7 +1,6 @@
 import MyService from './my.service'
 import JavascriptService from './my.javascript.service.js'
-import Client from './Client'
-import Request from './Request';
+import { Client, Request } from '@pepperi-addons/debug-server'
 
 // add functions here
 // this function will run on the 'api/foo' endpoint
@@ -10,7 +9,6 @@ export async function foo(client: Client, request: Request) {
     const service = new MyService(client)
     // service.doSomething();
     // client.addLogEntry("Info", "Start GetTransactions");
-
      const res = await service.getAddons()
      return res
 };

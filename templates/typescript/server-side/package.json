@@ -24,6 +24,6 @@
     "typescript": "~3.8.0"
   },
   "dependencies": {
-    "@pepperi-addons/debug-server": "0.0.19"
+    "@pepperi-addons/debug-server": "file:../../../debug-server"
   }
 }

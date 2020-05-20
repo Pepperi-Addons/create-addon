@@ -1,20 +1,46 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const rp = require('request-promise')
-const cors = require('cors');
-const jwtdecode = require('jwt-decode')
+import express, { request } from 'express'
+import bodyParser from 'body-parser'
+import rp from 'request-promise'
+import cors from 'cors'
+import jwtDecode from 'jwt-decode'
 
-class DebugServer {
+export interface Client {
+    AddonUUID: string,
+    BaseURL: string,
+    OAuthAccessToken: string,
+    Module: {
+        rp: any,
+        jwtDecode: any
+    }
+}
+
+export interface Request {
+    method: string,
+    body: any, 
+    query: any
+}
+
+interface DebugServerOptions {
+    port?: number,
+    addonUUID?: string,
+    apiDirectory?: string
+}
+
+export class DebugServer {
     
-    constructor(options) {
+    app: express.Application
+    port: number
+    addonUUID: string
+    apiDirectory: string
+
+    constructor(options: DebugServerOptions) {
         this.app = express();
-        this.port = options.port || 0;
+        this.port = options.port || 4400;
         this.addonUUID = options.addonUUID || '';
         this.apiDirectory = options.apiDirectory || process.cwd();
 
         this.app.use(bodyParser.json());
         this.app.use(cors());
-        // this.app.use(bodyParser.urlencoded({ extended: true }));
         this.app.all('/:file/:func', (req, res) => {
             this.handler(req, res);
         })
@@ -26,42 +52,40 @@ class DebugServer {
         });
     }
 
-    addStaticFolder(virtualPath, path) {
+    addStaticFolder(virtualPath: string, path: string) {
         this.app.use(virtualPath, express.static(path));
     }
 
-    createClient(req) {
-        const token = req.header('Authorization').replace('Bearer ', '') || '';
-        let parsedToken = '';
-        try {
-            parsedToken = jwtdecode(token);
-            // check experation :)
-            //if (Date.now() / 1000 > parsedToken.exp) throw new Error("unauthorized");
-        }
-        catch(ex)
-        {
+    createClient(req: express.Request): Client {
+        const authorization = req.header('Authorization') || '';
+
+        if (!authorization) {
             throw new Error("unauthorized");
         }
 
-        console.log(parsedToken);
+        const token = authorization.replace('Bearer ', '') || '';
+        let parsedToken = jwtDecode<any>(token);
+
         return {
             AddonUUID: this.addonUUID,
             BaseURL: parsedToken['pepperi.baseurl'],
             OAuthAccessToken: token,
             Module: {
-                rp
+                rp,
+                jwtDecode
             }
         };
     }
 
-    createRequest(req) {
+    createRequest(req: express.Request): Request {
         return {
+            method: req.method,
             body: req.body,
             query: req.query
         };
     }
 
-    async handler(req, res) {
+    async handler(req: express.Request, res: express.Response) {
         
         var result= {};
         try {
@@ -90,5 +114,3 @@ class DebugServer {
         }
     }
 }
-
-module.exports = DebugServer;
