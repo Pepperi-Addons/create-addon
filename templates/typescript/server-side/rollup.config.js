@@ -1,4 +1,6 @@
 import typescript from 'rollup-plugin-typescript2';
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
 
 export default {
  input: 'api.ts',
@@ -14,10 +16,12 @@ export default {
   typescript({
       tsconfigOverride: {
           compilerOptions: {
-              module: "ES2015",
+              module: "es2015",
               declaration: false
           }
       }
-   })
+   }),
+   resolve(),
+   commonjs()
  ]
 };

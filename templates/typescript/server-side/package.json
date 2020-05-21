@@ -16,6 +16,8 @@
     "start": "tsc -w app.local.ts"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^12.0.0",
+    "@rollup/plugin-node-resolve": "^8.0.0",
     "@types/dotenv": "^8.2.0",
     "@types/node": "^10.0.3",
     "rollup": "^2.7.6",
@@ -24,6 +26,6 @@
     "typescript": "~3.8.0"
   },
   "dependencies": {
-    "@pepperi-addons/debug-server": "0.0.20"
+    "@pepperi-addons/debug-server": "0.0.21"
   }
 }
