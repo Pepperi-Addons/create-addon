@@ -22,15 +22,12 @@
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "jwt-decode": "^2.2.0",
-    "request": "^2.88.2",
-    "request-promise": "^4.2.5"
+    "jwt-decode": "^2.2.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.6",
     "@types/express": "^4.17.6",
     "@types/jwt-decode": "^2.2.1",
-    "@types/request-promise": "^4.1.46",
     "typescript": "^3.9.3"
   }
 }

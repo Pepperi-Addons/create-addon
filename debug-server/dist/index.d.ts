@@ -3,10 +3,6 @@ export interface Client {
     AddonUUID: string;
     BaseURL: string;
     OAuthAccessToken: string;
-    Module: {
-        rp: any;
-        jwtDecode: any;
-    };
 }
 export interface Request {
     method: string;
