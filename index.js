@@ -87,12 +87,12 @@ async function main() {
         fs.mkdirSync(tmpPath, { recursive: true});
     
         console.log('downloading files from github...');
-        await downloadRepo('https://github.com/Pepperi-Addons/create-addon-api/archive/master.zip', zipFile);
+        await downloadRepo('https://github.com/Pepperi-Addons/create-addon/archive/master.zip', zipFile);
         
         console.log('extracting zip file');
         await extract(zipFile, tmpPath);
 
-        const templatePath = tmpPath + '/create-addon-api-master/templates/' + template;
+        const templatePath = tmpPath + '/create-addon-master/templates/' + template;
         if (!fs.existsSync(templatePath)) {
             throw new Error(`Template ${template} doesn't exists`);
         }
