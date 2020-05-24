@@ -17,7 +17,7 @@ export class AddonApiService
     parsedToken: any
     papiBaseURL = ''
     cdnBaseURL = 'cdn.staging.pepperi.com'
-    localhostBaseURL = "http://localhost:4300"
+    localhostBaseURL = "http://localhost:4400"
 
 
     constructor(
