@@ -5,6 +5,7 @@ const rimraf = require('rimraf');
 const https = require('follow-redirects').https;
 const AdmZip = require('adm-zip');
 const { spawn } = require('child_process');
+const tmp = require('tmp');
 
 
 async function downloadRepo(url, path) {
@@ -74,7 +75,10 @@ async function install() {
 async function main() {
     const template = process.argv[2] || 'typescript';
     const path = '.';
-    const tmpPath = path + '/tmp';
+    const tmpDirObj = tmp.dirSync({
+        unsafeCleanup: true
+    });
+    const tmpPath = path + tmpDirObj.name;
     const zipFile = tmpPath + '/repo.zip';
 
     try {
@@ -110,7 +114,7 @@ async function main() {
     }
     finally {
         console.log("removing temporary files");
-        fs.rmdirSync(tmpPath, { recursive: true });
+        tmpDirObj.removeCallback();
     }
     
 }
