@@ -94,7 +94,7 @@ async function main() {
         }
         
         console.log('copying neccesary files');
-        await copy(templatePath, path);
+        await copy(templatePath, '.');
         
         console.log("installing dependancies..");
         await install();
