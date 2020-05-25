@@ -2,26 +2,11 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "Build API",
-			"type": "typescript",
-			"tsconfig": "server-side/tsconfig.json",
-			"option": "watch",
-			"problemMatcher": [
-				"$tsc-watch"
-			],
-			"group": "build",
-			"dependsOn": "Rollup API"
-		},
-		{
 			"label": "Build Addon",
 			"type": "npm",
 			"script": "build",
-			"path": "client-side/",
 			"group": "build",
-			"problemMatcher": [],
-			"detail": "rollup -c",
-			"dependsOn": ["Build API"]
-		},
-	
+			"problemMatcher": []
+		}
 	]
 }
