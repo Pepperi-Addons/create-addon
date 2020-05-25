@@ -6,6 +6,8 @@ const https = require('follow-redirects').https;
 const AdmZip = require('adm-zip');
 const { spawn } = require('child_process');
 const tmp = require('tmp');
+const path = require('path');
+const cwd = process.cwd();
 
 
 async function downloadRepo(url, path) {
@@ -46,19 +48,9 @@ async function copy(src, dest) {
 
 async function install() {
     const npm = process.platform == 'win32' ? 'npm.cmd' : 'npm';
-    return await Promise.all([
-        new Promise((resolve, reject) => {
-            const cmd = spawn(npm, ['install'], { cwd: `${process.cwd()}/server-side` });
-            cmd.on('close', (code) => {
-                resolve()
-            });
-            cmd.on('error', (err) => {
-                console.error(err);
-                reject()
-            });
-        }),
-        new Promise((resolve, reject) => {
-            const cmd = spawn(npm, ['install'], { cwd: `${process.cwd()}/client-side` });
+    const npmInstall = async function(cwd) {
+        return new Promise((resolve, reject) => {
+            const cmd = spawn(npm, ['install'], { cwd: cwd });
             cmd.on('close', (code) => {
                 resolve()
             });
@@ -67,6 +59,13 @@ async function install() {
                 reject()
             });
         })
+    }
+    
+
+    return await Promise.all([
+        npmInstall(path.join(cwd, 'server-side')),
+        npmInstall(path.join(cwd, 'client-side')),
+        npmInstall(cwd)
     ]);
 } 
 
@@ -74,12 +73,11 @@ async function install() {
 
 async function main() {
     const template = process.argv[2] || 'typescript';
-    const path = '.';
     const tmpDirObj = tmp.dirSync({
         unsafeCleanup: true
     });
-    const tmpPath = path + tmpDirObj.name;
-    const zipFile = tmpPath + '/repo.zip';
+    const tmpPath = tmpDirObj.name;
+    const zipFile = path.join(tmpPath, 'repo.zip');
 
     try {
         console.log("template = ", template);
