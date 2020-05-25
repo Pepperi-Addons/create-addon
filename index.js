@@ -83,12 +83,6 @@ async function main() {
 
     try {
         console.log("template = ", template);
-
-        if (fs.existsSync(tmpPath)) {
-            rimraf.sync(tmpPath);
-        }
-    
-        fs.mkdirSync(tmpPath, { recursive: true});
     
         console.log('downloading files from github...');
         await downloadRepo('https://github.com/Pepperi-Addons/create-addon/archive/master.zip', zipFile);
