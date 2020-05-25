@@ -7233,7 +7233,7 @@
             this.accessToken = '';
             this.papiBaseURL = '';
             this.cdnBaseURL = 'cdn.staging.pepperi.com';
-            this.localhostBaseURL = "http://localhost:4300";
+            this.localhostBaseURL = "http://localhost:4400";
             this.route.params.subscribe(params => {
                 this.addonUUID = params.pluginID;
             });

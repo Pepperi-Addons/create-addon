@@ -1,21 +1,23 @@
+import { PapiClient, InstalledAddon } from '@pepperi-addons/papi-sdk'
+import { Client } from '@pepperi-addons/debug-server';
+
 class MyService {
-    constructor(private client: any) {
+
+    papiClient: PapiClient
+
+    constructor(private client: Client) {
+        this.papiClient = new PapiClient({
+            baseURL: client.BaseURL,
+            token: client.OAuthAccessToken
+        });
     }
 
     doSomething() {
         console.log("doesn't really do anything....");
     }
 
-    getAddons() {
-       
-        const headers = { authorization: 'Bearer ' + this.client.OAuthAccessToken }
-        const options = {
-            uri: this.client.BaseURL+ '/addons/installed_addons',
-            method: 'GET',
-            headers: headers,
-            json: true
-        }
-        return this.client.Module.rp(options)
+    getAddons(): Promise<InstalledAddon[]> {
+        return this.papiClient.addons.installedAddons.find({});
     }
 }
 
