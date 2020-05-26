@@ -7,10 +7,8 @@ import { Client, Request } from '@pepperi-addons/debug-server'
 // the real function is runnning on another typescript file
 export async function foo(client: Client, request: Request) {
     const service = new MyService(client)
-    // service.doSomething();
-    // client.addLogEntry("Info", "Start GetTransactions");
-     const res = await service.getAddons()
-     return res
+    const res = await service.getAddons()
+    return res
 };
 
 // this function will run on api/js_foo endpoint

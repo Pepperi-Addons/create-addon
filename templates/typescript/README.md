@@ -30,7 +30,7 @@ The node_modules folder is in use by `npm`
 
 #### Folders
 |Folder | Description |
-| :---  | :---:       |
+| ---:  | :---       |
 | .vscode | vscode tasks & launch |
 | client-side | an angular app that is the UI of the plugin |
 | server-side | a typescripe node.js app for writing an addon API |
@@ -68,3 +68,38 @@ Then run:
 ``` bash 
 npm run publish-addon
 ```
+
+## Addon API
+---
+An addon API is a javascript file that exports functions that can be called through the api.
+For example in `server-side/api.ts` we export a function `foo` like so:
+``` typescript
+export async function foo(client: Client, request: Request) {
+    const service = new MyService(client)
+    const res = await service.getAddons()
+    return res
+};
+```
+This function will run for the following API call:
+https://papi.pepperi.com/v1.0/addons/api/a8f4698f-eb75-4a75-bdf6-1524eb9f6baf/api/foo
+
+You can acess the API call method, query and body in `request.method` `request.query` and `request.body` respectfully.
+
+You can add as many files as you like in both typescript & javascript. These can `require` other files & packags. The build script will create a output file for every endpoint specified in: `addon.config.json` *Endpoints* field.
+
+To debug these api's locally, just press F5, and call:
+http://localhost:4400/api/foo
+
+
+## Addon Editor
+---
+The editor is the addon's UI and is developed as an Angular app.
+
+## Contributions
+---
+This project is far from being complete, and is missing in tooling, documentation, examples and more. We are also interested in creating other templates like a html-css-js front-end with a vanilla node.js backend. You are welcome to contribute at: 
+https://github.com/Pepperi-Addons/create-addon
+
+Please create your on addon in a repo under:
+https://github.com/Pepperi-Addons
+so that we can all learn from each other
