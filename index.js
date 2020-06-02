@@ -69,6 +69,20 @@ async function install() {
     ]);
 } 
 
+async function createAddon() {
+    const npx = process.platform == 'win32' ? 'npx.cmd' : 'npx';
+    return new Promise((resolve, reject) => {
+        const cmd = spawn(npx, ['create-addon'], { cwd: cwd });
+        cmd.on('close', (code) => {
+            resolve()
+        });
+        cmd.on('error', (err) => {
+            console.error(err);
+            reject()
+        });
+    })
+} 
+
 
 
 async function main() {
@@ -98,6 +112,9 @@ async function main() {
         
         console.log("installing dependancies..");
         await install();
+
+        console.log("creating your addon..");
+        await createAddon();
         
         console.log('you are now good to go');
     }

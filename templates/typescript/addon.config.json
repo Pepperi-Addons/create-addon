@@ -1,8 +1,7 @@
 {
-  "AddonUUID": "a8f4698f-eb75-4a75-bdf6-1524eb9f6baf",
-  "AddonVersion": "v1.0",
+  "AddonUUID": "",
+  "AddonVersion": "0.0.0",
   "DebugPort": 4400,
-  "PapiBaseUrl": "https://papi.sandbox.pepperi.com/v1.0",
   "WebappBaseUrl": "https://app.sandbox.pepperi.com",
   "DefaultEditor": "editor",
   "Endpoints": [
