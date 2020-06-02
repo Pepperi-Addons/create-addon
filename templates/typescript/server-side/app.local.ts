@@ -13,6 +13,7 @@ server.addStaticFolder(`/assets/plugins/${config.AddonUUID}/${config.AddonVersio
 
 // serve the plugin assets locally
 server.addStaticFolder(`/Addon/Public/${config.AddonUUID}/${config.AddonVersion}`, process.cwd() +  '/../publish/assets');
+server.addStaticFolder(`/assets/plugins/${config.AddonUUID}/${config.AddonVersion}`, process.cwd() +  '/../publish/assets');
 
 server.start();
 

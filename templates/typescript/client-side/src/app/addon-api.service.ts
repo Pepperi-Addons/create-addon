@@ -10,48 +10,31 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class AddonApiService
 {
-    isInDevMode = false
-    addonUUID = ''
-    addonVersion = 'v1.0'
-    accessToken = ''
-    parsedToken: any
     papiBaseURL = ''
-    cdnBaseURL = 'cdn.staging.pepperi.com'
-    localhostBaseURL = "http://localhost:4400"
+    addonData: any = {}
 
 
     constructor(
-        private route: ActivatedRoute,
-        private router: Router,
         private userService: UserService,
         private httpClient: HttpClient
     ) {
-        this.route.params.subscribe(params => {
-            this.addonUUID = params.pluginID;
-        });
-
-        this.route.queryParams.subscribe(params => {
-            this.isInDevMode = params['dev'] || false;
-        });
-
-        this.accessToken = this.userService.getUserToken();
-        this.parsedToken = jwt(this.accessToken);
-        this.papiBaseURL = this.parsedToken['pepperi.baseUrl']
+        const parsedToken = jwt(this.userService.getUserToken());
+        this.papiBaseURL = parsedToken['pepperi.baseurl']
     }
 
     getAddonApiBaseURL(): string {
-        return this.isInDevMode ? this.localhostBaseURL : `${this.papiBaseURL}/addons/api/${this.addonUUID}`;
+        const dev = (this.userService.getAddonStaticFolder() as string).indexOf('localhost') > -1;
+        return dev ? "http://localhost:4400" : `${this.papiBaseURL}/addons/api/${this.addonData.Addon.UUID}`;
     }
 
     getAddonStaticFolderURL(): string {
-        var baseURL = this.isInDevMode ? this.localhostBaseURL : this.cdnBaseURL;
-        return `${baseURL}/Addon/Public/${this.addonUUID}/${this.addonVersion}/`;
+        return this.userService.getAddonStaticFolder();
     }
 
     get(url) {
         const options = { 
             'headers': {
-                'Authorization': 'Bearer ' + this.accessToken
+                'Authorization': 'Bearer ' + this.userService.getUserToken()
             }
         };
         return this.httpClient.get(this.getAddonApiBaseURL() + url, options);

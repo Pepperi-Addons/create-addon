@@ -5,6 +5,7 @@ import {
   OnDestroy
 } from "@angular/core";
 import { TranslateService } from '@ngx-translate/core';
+import { AddonApiService } from './addon-api.service';
 
 @Component({
   selector: "plugin",
@@ -19,9 +20,11 @@ import { TranslateService } from '@ngx-translate/core';
 export class PluginComponent implements OnInit, OnDestroy {
 
   installing: boolean = false;
+  addonData: any = {};
 
   constructor(
-    public translate: TranslateService
+    public translate: TranslateService,
+    private addonApiService: AddonApiService
   ) {
     let userLang = 'en';
     translate.setDefaultLang(userLang);
@@ -31,6 +34,7 @@ export class PluginComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+    this.addonApiService.addonData = this.addonData;
   }
 
   ngOnDestroy() {
