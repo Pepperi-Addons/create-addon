@@ -29,14 +29,19 @@ export class DebugServer {
     apiDirectory: string
 
     constructor(options: DebugServerOptions) {
+        
         this.app = express();
         this.port = options.port || 4400;
         this.addonUUID = options.addonUUID || '';
         this.apiDirectory = options.apiDirectory || process.cwd();
-
+        this.app.use((req, res, next) => {
+            console.log(`Request URL: http://localhost:${this.port}${req.url}`);
+            next();
+        })
         this.app.use(bodyParser.json());
         this.app.use(cors());
         this.app.all('/:file/:func', (req, res) => {
+            
             this.handler(req, res);
         })
     }
