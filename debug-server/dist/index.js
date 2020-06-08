@@ -14,6 +14,10 @@ class DebugServer {
         this.port = options.port || 4400;
         this.addonUUID = options.addonUUID || '';
         this.apiDirectory = options.apiDirectory || process.cwd();
+        this.app.use((req, res, next) => {
+            console.log(`Request URL: http://localhost:${this.port}${req.url}`);
+            next();
+        });
         this.app.use(body_parser_1.default.json());
         this.app.use(cors_1.default());
         this.app.all('/:file/:func', (req, res) => {
