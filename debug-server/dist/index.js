@@ -23,6 +23,9 @@ class DebugServer {
         this.app.all('/:file/:func', (req, res) => {
             this.handler(req, res);
         });
+        let assetsRelativePath = 'publish/assets';
+        this.addStaticFolder(`/${assetsRelativePath}`, process.cwd() + `/../${assetsRelativePath}`);
+        this.assetsDirectory = `http://localhost:${this.port}/${assetsRelativePath}`;
     }
     start() {
         this.app.listen(this.port, () => {
@@ -42,7 +45,8 @@ class DebugServer {
         return {
             AddonUUID: this.addonUUID,
             BaseURL: parsedToken['pepperi.baseurl'],
-            OAuthAccessToken: token
+            OAuthAccessToken: token,
+            AssetsBaseUrl: this.assetsDirectory
         };
     }
     createRequest(req) {
