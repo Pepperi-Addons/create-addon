@@ -2,6 +2,7 @@ import express from 'express';
 export interface Client {
     AddonUUID: string;
     BaseURL: string;
+    AssetsBaseUrl: string;
     OAuthAccessToken: string;
 }
 export interface Request {
@@ -19,6 +20,7 @@ export declare class DebugServer {
     port: number;
     addonUUID: string;
     apiDirectory: string;
+    assetsDirectory: string;
     constructor(options: DebugServerOptions);
     start(): void;
     addStaticFolder(virtualPath: string, path: string): void;

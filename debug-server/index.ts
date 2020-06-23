@@ -6,6 +6,7 @@ import jwtDecode from 'jwt-decode'
 export interface Client {
     AddonUUID: string,
     BaseURL: string,
+    AssetsBaseUrl: string,
     OAuthAccessToken: string
 }
 
@@ -22,11 +23,11 @@ interface DebugServerOptions {
 }
 
 export class DebugServer {
-    
-    app: express.Application
-    port: number
-    addonUUID: string
-    apiDirectory: string
+    app: express.Application;
+    port: number;
+    addonUUID: string;
+    apiDirectory: string;
+    assetsDirectory: string;
 
     constructor(options: DebugServerOptions) {
         
@@ -44,6 +45,10 @@ export class DebugServer {
             
             this.handler(req, res);
         })
+
+        let assetsRelativePath = 'publish/assets';
+        this.addStaticFolder(`/${assetsRelativePath}`, process.cwd() + `/../${assetsRelativePath}`);
+        this.assetsDirectory = `http://localhost:${this.port}/${assetsRelativePath}`;
     }
 
     start() {
@@ -69,7 +74,8 @@ export class DebugServer {
         return {
             AddonUUID: this.addonUUID,
             BaseURL: parsedToken['pepperi.baseurl'],
-            OAuthAccessToken: token
+            OAuthAccessToken: token,
+            AssetsBaseUrl: this.assetsDirectory
         };
     }
 
