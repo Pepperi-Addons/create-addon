@@ -4,10 +4,11 @@ import cors from 'cors'
 import jwtDecode from 'jwt-decode'
 
 export interface Client {
-    AddonUUID: string,
-    BaseURL: string,
-    AssetsBaseUrl: string,
-    OAuthAccessToken: string
+    AddonUUID: string;
+    BaseURL: string;
+    AssetsBaseUrl: string;
+    OAuthAccessToken: string;
+    Retry: (delay: number) => void;
 }
 
 export interface Request {
@@ -75,7 +76,8 @@ export class DebugServer {
             AddonUUID: this.addonUUID,
             BaseURL: parsedToken['pepperi.baseurl'],
             OAuthAccessToken: token,
-            AssetsBaseUrl: this.assetsDirectory
+            AssetsBaseUrl: this.assetsDirectory,
+            Retry: () => {}
         };
     }
 
