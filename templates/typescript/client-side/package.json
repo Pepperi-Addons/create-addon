@@ -3,11 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --port 4444",
+    "start": "ng serve --port 4209",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build:single-spa:client-side": "ng build client-side --prod --deploy-url http://localhost:4209/",
+    "serve:single-spa:client-side": "ng s --project client-side --disable-host-check --port 4209 --deploy-url http://localhost:4209/ --live-reload false"
   },
   "private": true,
   "dependencies": {
@@ -20,17 +22,20 @@
     "@angular/platform-browser-dynamic": "~9.0.0",
     "@angular/router": "~9.0.0",
     "rxjs": "~6.5.4",
+    "single-spa": "^5.5.5",
+    "single-spa-angular": "^4.3.2",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
+    "@angular-builders/custom-webpack": "^9.2.0",
     "@angular-devkit/build-angular": "~0.900.0",
     "@angular/cli": "~9.0.0",
     "@angular/compiler-cli": "~9.0.0",
     "@angular/language-service": "~9.0.0",
-    "@types/node": "^12.11.1",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "^12.11.1",
     "codelyzer": "^5.1.2",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
