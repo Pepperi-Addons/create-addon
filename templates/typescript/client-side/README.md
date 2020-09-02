@@ -1,6 +1,6 @@
-# PluginB
+# ClientSide
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.3.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.0.
 
 ## Development server
 
