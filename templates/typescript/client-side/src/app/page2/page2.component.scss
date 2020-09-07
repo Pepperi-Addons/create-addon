@@ -1,0 +1,39 @@
+
+.addon-container{
+
+  margin: 0 2rem;
+
+  .main-content{
+    padding-top: 2rem;
+  }
+
+  .header-content{
+    position: sticky;
+    padding-top: 1rem;
+    top: 64px;
+    background: white;
+    z-index: 100;
+    .content{
+      line-height: 50px;
+    }
+  }
+
+  .child-container{
+    max-width: 21%;
+    display: inline-table;
+    margin-right: 4rem;
+    width: 100%;
+  }
+
+  h1{
+    margin: 2rem  2rem 0rem 2rem;
+  }
+
+  hr {
+    margin: 1rem 2rem 2rem 2rem;
+  }
+
+
+
+}
+
