@@ -1,0 +1,18 @@
+<div class="content">
+    <mat-card>
+        <label class="lblTitle">{{ 'Test_Prompt_Title' | translate }} </label>
+        <input
+            class="pepperi-input spacing-bottom"
+            mat-input
+            type="text"
+            [(ngModel)]="apiEndpoint"
+        />
+        <button type="button" class="btn pepperi-button mat-button strong color-main sm pull-right flip" (click)="testEndpoint(apiEndpoint)">
+            {{ 'Submit_Btn_Title' | translate }}
+        </button>
+    </mat-card>
+
+    <mat-card *ngIf="data">
+        <pre>{{ data | json }}</pre>
+    </mat-card>
+</div>

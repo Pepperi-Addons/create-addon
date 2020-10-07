@@ -1,0 +1,18 @@
+{
+  "name": "typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cd ./server-side && npm run build && cd .. && cd ./client-side && npm run build && cd ..",
+    "init": "npm install && cd ./server-side && npm install && cd .. && cd ./client-side && npm install && cd ..",
+    "publish-addon": "npm run build && publish-addon"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@pepperi-addons/scripts": "^1.0.18"
+  }
+}
