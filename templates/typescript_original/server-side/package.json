@@ -1,0 +1,33 @@
+{
+    "name": "test",
+    "version": "0.0.0",
+    "description": "",
+    "main": "api.ts",
+    "types": "",
+    "files": [
+        "build"
+    ],
+    "license": "Apache-2.0",
+    "keywords": [],
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "compile": "tsc",
+        "build": "rollup -c rollup.config.js",
+        "start": "tsc -w app.local.ts"
+    },
+    "devDependencies": {
+        "@rollup/plugin-commonjs": "^12.0.0",
+        "@rollup/plugin-node-resolve": "^8.0.0",
+        "@types/dotenv": "^8.2.0",
+        "@types/node": "^10.17.24",
+        "nodemon": "^2.0.4",
+        "rollup": "^2.10.9",
+        "rollup-plugin-typescript2": "^0.27.1",
+        "ts-node": "^8.10.1",
+        "typescript": "~3.8.0"
+    },
+    "dependencies": {
+        "@pepperi-addons/debug-server": "0.0.24",
+        "@pepperi-addons/papi-sdk": "^1.0.14"
+    }
+}
