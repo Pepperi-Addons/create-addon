@@ -1,0 +1,165 @@
+<!-- <main> -->
+  <div class="addon-container">
+    <div class="header-content">
+        <div class="content pepperi-border-bottom">
+            <div class="left-container spacing-element-negative pull-left flip">
+                <div class="spacing-element title">
+                    Pep components example:&nbsp;
+                    <pep-size-detector class="pull-right"></pep-size-detector>
+                </div>
+            </div>
+            <div class="right-container spacing-element-negative pull-right flip">
+                <button class="mat-button pepperi-button weak md spacing-element">
+                    Test
+                </button>
+                <div class="menu spacing-element pull-right flip">
+                    <pep-menu [key]="'menu'" [label]="'menu'" [disabled]="false" [xAlignment]="2"
+                        [options]="[{ Key: 'test1', Value: 'test 1'}, { Key: 'test2', Value: 'test 2'}]"
+                        [layoutType]="1" (elementClicked)="elementClicked($event)"
+                        (notifyMenuItemClicked)="onMenuItemClicked($event)">
+                    </pep-menu>
+                </div>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+    </div>
+    <div class="main-content ">
+        <div class="content">
+            <!--
+                xAlignment values - 1 || 0 (default) : left, 2: right, 3: center
+                minValue & maxValue - number of days from 1900" (0 is default)
+                Text box type - 'text' (default) || 'link' || 'phone' || 'email' || 'int' || 'real' || 'currency' || 'percentage'
+            -->
+
+            <div id="child1-container" class="child-container">
+                  <pep-icon name="system_bolt"></pep-icon>
+                  <pep-icon name="demo_artist"></pep-icon>
+                  <pep-icon name="no_image"></pep-icon>
+
+                  <pep-image [key]="'image1'"
+                      [srcLarge]="'https://idpfiles.sandbox.pepperi.com/f389fd2e-4a31-4965-a21e-3a98b4553300/images/left-side-background.jpg'"
+                      [src]="'https://idpfiles.sandbox.pepperi.com/f389fd2e-4a31-4965-a21e-3a98b4553300/images/logo.svg'"
+                      [label]="'image'" [required]="false" [disabled]="false" [readonly]="false" [xAlignment]="2"
+                      [rowSpan]="3" (elementClicked)="elementClicked($event)" (valueChanged)="onValueChanged($event)">
+                  </pep-image>
+
+                  <pep-images-filmstrip [objectId]="'52525'" [key]="'images-filmstrip'" [label]="'filmstrip'"
+                      [showTitle]="true" [rowSpan]="3" [value]="'https://idpfiles.sandbox.pepperi.com/f389fd2e-4a31-4965-a21e-3a98b4553300/images/left-side-background.jpg;
+                  https://idpfiles.sandbox.pepperi.com/f389fd2e-4a31-4965-a21e-3a98b4553300/images/logo.svg'">
+                  </pep-images-filmstrip>
+
+                  <pep-images-filmstrip [objectId]="'52525'" [key]="'ItemFilmstripImages'" [label]="'filmstrip'"
+                      [showTitle]="true" [rowSpan]="3" [value]="'https://cdn.staging.pepperi.com/WrntyImages/30012351/PortfolioItems/3/52967653/4_1.jpg;
+                  https://cdn.staging.pepperi.com/WrntyImages/30012351/PortfolioItems/3/52967653/3_1.jpg;
+                  https://cdn.staging.pepperi.com/WrntyImages/30012351/PortfolioItems/3/52967653/2_1.jpg;
+                  https://idpfiles.sandbox.pepperi.com/f389fd2e-4a31-4965-a21e-3a98b4553300/images/logo.svg'">
+                  </pep-images-filmstrip>
+
+                  <pep-select [required]="false" [disabled]="true" [readonly]="false" [xAlignment]="2" [rowSpan]="1"
+                      [key]="'select1'" [label]="'select'" [value]="'val2'"
+                      [options]="[{ 'Key': 'val1', 'Value': 'value1' }, { 'Key': 'val2', 'Value': 'value2' }]"
+                      (valueChanged)="onValueChanged($event)">
+                  </pep-select>
+
+                  <pep-select [key]="'multi1'" [label]="'multi'" [type]="'multi'" [value]="'val1;val2'" [xAlignment]="2"
+                      [options]="[{ 'Key': 'val1', 'Value': 'value1' }, { 'Key': 'val2', 'Value': 'value2' }]"
+                      (valueChanged)="onValueChanged($event)"></pep-select>
+
+                      <pep-checkbox [key]="'cb1'" [label]="'cb'" [value]="'true'" [required]="false" [disabled]="true"
+                      [readonly]="false" [xAlignment]="2" [rowSpan]="1" (valueChanged)="onValueChanged($event)">
+                  </pep-checkbox>
+
+                  <pep-checkbox [key]="'bt1'" [label]="'boolean text'" [type]="'booleanText'" [value]="'true'"
+                      [additionalValue]="{ 'CheckedText': '❤', 'UncheckedText': '💛' }" [required]="false" [disabled]="true"
+                      [readonly]="false" [xAlignment]="2" [rowSpan]="1" (valueChanged)="onValueChanged($event)">
+                  </pep-checkbox>
+
+
+            </div>
+            <div id="child2-container" class="child-container">
+
+
+              <pep-date [key]="'date1'" [label]="'date'" [value]="'1-1-2020'" [minValue]="" [maxValue]=""
+                  [required]="false" [disabled]="false" [readonly]="false" [xAlignment]="2" [rowSpan]="1"
+                  (valueChanged)="onValueChanged($event)">
+              </pep-date>
+
+              <pep-date [key]="'dateTime1'" [label]="'date Time'" [type]="'datetime'" [value]="'1-1-2020 12:00'"
+                  [xAlignment]="2" (valueChanged)="onValueChanged($event)"></pep-date>
+
+              <pep-textbox [key]="'text1'" [label]="'text'" [placeholder]="'place holder'"
+                  [value]="'bla bla regular text'" [maxFieldCharacters]="10" [required]="false" [disabled]="true"
+                  [readonly]="false" [xAlignment]="2" [rowSpan]="1" (valueChanged)="onValueChanged($event)">
+              </pep-textbox>
+              <pep-textbox [key]="'number1'" [label]="'number'" [type]="'real'" [xAlignment]="2" [value]="'5555'"
+                  [formattedValue]="'5,555'" (valueChanged)="onValueChanged($event)"></pep-textbox>
+              <pep-textbox [key]="'email1'" [label]="'email'" [type]="'email'" [xAlignment]="2"
+                  [value]="'email@email.com'" (valueChanged)="onValueChanged($event)"></pep-textbox>
+
+              <pep-textarea [key]="'textarea1'" [label]="'textarea'" [value]="'bla bla textarea'" [rowSpan]="2"
+                  [maxFieldCharacters]="300" [required]="false" [disabled]="false" [readonly]="false" [xAlignment]="2"
+                  (valueChanged)="onValueChanged($event)"></pep-textarea>
+
+              <pep-rich-html-textarea [key]="'richText1'" [label]="'richText1'" [value]="richTextValue" [rowSpan]="3"
+                  [maxFieldCharacters]="300" [required]="false" [disabled]="false" [readonly]="false" [xAlignment]="2"
+                  (valueChanged)="onValueChanged($event)">
+              </pep-rich-html-textarea>
+              <pep-color [key]="'color1'" [label]="'choose color'" [value]="color" [xAlignment]="2"
+              [showAAComplient]="true" [disabled]="false" [readonly]="false" (valueChanged)="onValueChanged($event)"
+              [type]="colorType">
+              </pep-color>
+            </div>
+
+
+            <div id="child3-container"  class="child-container">
+
+
+
+                  <pep-signature [key]="'sig1'"
+                      [src]="'https://cdn.staging.pepperi.com/30012351/Attachments/a3c9e1a40d404d4192059c1cd392cd74.png'"
+                      [label]="'sig'" [required]="false" [disabled]="false" [readonly]="false" [xAlignment]="2" [rowSpan]="4"
+                      (valueChanged)="onValueChanged($event)"></pep-signature>
+
+                  <pep-attachment [key]="'attachment1'" [label]="'attachment'" [required]="false" [disabled]="false"
+                      [readonly]="false" [xAlignment]="1" [rowSpan]="4" (elementClicked)="elementClicked($event)"
+                      (valueChanged)="onValueChanged($event)">
+                  </pep-attachment>
+
+                  <pep-separator [key]="'sep1'" [label]="'sep'" [xAlignment]="2"></pep-separator>
+
+                  <pep-internal-button [key]="'btn1'" [label]="'btn'" [value]="55"
+                      (elementClicked)="elementClicked($event)" [required]="false" [disabled]="false" [readonly]="false"
+                      [xAlignment]="2" [rowSpan]="1">
+                  </pep-internal-button>
+
+                  <pep-quantity-selector [key]="'qs1'" [label]="'qs1'" [value]="50" [xAlignment]="3"
+                      (elementClicked)="elementClicked($event)"></pep-quantity-selector>
+                  <pep-quantity-selector [key]="'qs2'" [label]="'qs2'" [type]="'button'" [value]="55" [xAlignment]="2"
+                      (elementClicked)="elementClicked($event)" (valueChanged)="onValueChanged($event)">
+                  </pep-quantity-selector>
+
+                  <pep-group-buttons [buttons]="groupButtons" [buttonsClass]="'md regular'" [buttonsDisabled]="false"
+                      [viewType]="GROUP_BUTTONS_VIEW_TYPE.Split">
+                  </pep-group-buttons>
+
+            </div>
+
+
+            <div class="list-container" #listContainer>
+                <pep-list
+                  [firstFieldAsLink]="false"
+                  [isReport]="true"
+                  [supportSorting]="false"
+                  [supportResizing]="false"
+                  [selectionTypeForActions]="2"
+                  [noDataFoundMsg]="'No data'"
+                  [parentScroll]="listContainer"
+                  (notifyListChanged)="onListChange($event)"
+                  (notifyFieldClicked)="onCustomizeFieldClick($event)"
+                  (notifySelectedItemsChanged)="selectedRowsChanged($event)">
+                </pep-list>
+            </div>
+
+        </div>
+    </div>
+</div>
