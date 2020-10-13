@@ -22,7 +22,7 @@ async function downloadRepo(url, path) {
             });
         })
     })
-} 
+}
 
 async function extract(src, dest) {
     return new Promise((resolve, reject) => {
@@ -38,8 +38,7 @@ async function copy(src, dest) {
             if (err) {
                 console.log(err);
                 reject(err);
-            }
-            else {
+            } else {
                 resolve();
             }
         });
@@ -60,14 +59,14 @@ async function install() {
             });
         })
     }
-    
+
 
     return await Promise.all([
         npmInstall(path.join(cwd, 'server-side')),
         npmInstall(path.join(cwd, 'client-side')),
         npmInstall(cwd)
     ]);
-} 
+}
 
 async function createAddon() {
     const npx = process.platform == 'win32' ? 'npx.cmd' : 'npx';
@@ -81,12 +80,15 @@ async function createAddon() {
             reject()
         });
     })
-} 
+}
 
 
 
 async function main() {
-    const template = process.argv[2] || 'typescript';
+    const serverSideTmp = process.argv[2] || 'typescript';
+    // const serverSideVer = process.argv[3] || null;
+    const clientSideTmp = process.argv[3] || 'angular';
+    const clientSideVer = process.argv[4] || '10';
     const tmpDirObj = tmp.dirSync({
         unsafeCleanup: true
     });
@@ -94,38 +96,44 @@ async function main() {
     const zipFile = path.join(tmpPath, 'repo.zip');
 
     try {
-        console.log("template = ", template);
-    
+        console.log("template = ", serverSideTmp + '-' + clientSideTmp + '-');
+
         console.log('downloading files from github...');
         await downloadRepo('https://github.com/Pepperi-Addons/create-addon/archive/master.zip', zipFile);
-        
+
         console.log('extracting zip file');
         await extract(zipFile, tmpPath);
 
-        const templatePath = tmpPath + '/create-addon-master/templates/' + template;
-        if (!fs.existsSync(templatePath)) {
-            throw new Error(`Template ${template} doesn't exists`);
+        const serverTemplatePath = tmpPath + '/create-addon-master/templates/server-side' + serverSideTmp;
+        const clientTemplatePath = tmpPath + '/create-addon-master/templates/client-side' + clientSideTmp + '/' + clientSideVer;
+
+        if (!fs.existsSync(serverTemplatePath)) {
+            throw new Error(`Template ${serverSideTmp} doesn't exists`);
         }
-        
+
+        if (!fs.existsSync(clientTemplatePath)) {
+            throw new Error(`Template ${clientSideTmp/clientSideVer} doesn't exists`);
+        }
+
         console.log('copying neccesary files');
-        await copy(templatePath, '.');
-        
+        await copy(serverTemplatePath, './server-side');
+        console.log('copying neccesary files');
+        await copy(clientTemplatePath, './client-side');
+
         console.log("installing dependancies..");
         await install();
 
         console.log("creating your addon..");
         await createAddon();
-        
+
         console.log('you are now good to go');
-    }
-    catch (err) {
+    } catch (err) {
         console.error(err);
-    }
-    finally {
+    } finally {
         console.log("removing temporary files");
         tmpDirObj.removeCallback();
     }
-    
+
 }
 
 
