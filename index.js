@@ -99,36 +99,41 @@ async function createAddon() {
     })
 }
 
+async function runWizard() {
+    console.log(chalk.red('\n --- Write your credentials for a token: \n'));
+    const credentials = await inquirer.askPepperiCredentials();
+    console.log(chalk.yellow('\n --- Choose your server side and client side templates: \n'));
+    const template = await inquirer.askTemplates();
+    console.log(chalk.blue('\n --- Fill in the details of your plugin: \n'));
+    const addonMetadata = await inquirer.askAddonMetadata();
+
+    // const template = { servertemplate: 'typescript', framework: 'angular', version: '10' };
+    // const credentials = { username: 'lk', password: 'l' };
+    // const addonMetadata = {
+    //     addonname: 'l',
+    //     addondescription: 'l',
+    //     addontype: 'Sytem',
+    //     addonuuid: 'l',
+    //     usengxlib: true
+    // };
+
+    return { credentials, template, addonMetadata };
+
+
+}
+
 
 
 const main = async() => {
 
-    // console.log(chalk.red('\n --- Write your credentials for a token: \n'));
-    // const credentials = await inquirer.askPepperiCredentials();
-    const credentials = { username: 'lk', password: 'l' };
-    // console.log(chalk.yellow('\n --- Choose your server side and client side templates: \n'));
-    // const template = await inquirer.askTemplates();
-    const template = { servertemplate: 'typescript', framework: 'angular', version: '10' };
-    // console.log(chalk.blue('\n --- Fill in the details of your plugin: \n'));
-    // const addonMetadata = await inquirer.askAddonMetadata();
-    const addonMetadata = {
-        addonname: 'l',
-        addondescription: 'l',
-        addontype: 'Sytem',
-        addonuuid: 'l',
-        usengxlib: true
-    };
+    const userInput = await runWizard();
 
-    console.log(credentials);
-    console.log(template);
-    console.log(addonMetadata);
-    const serverSideTmp = template.servertemplate || 'typescript';
-    const clientSideTmp = template.framework || 'angular';
-    const clientSideVer = template.version || '10';
+    const serverSideTmp = userInput.template.servertemplate || 'typescript';
+    const clientSideTmp = userInput.template.framework || 'angular';
+    const clientSideVer = userInput.template.version || '10';
     const tmpDirObj = tmp.dirSync({
         unsafeCleanup: true
     });
-    // const tmpPath = 'C:\\git\\addon-wizard';
     const tmpPath = tmpDirObj.name;
     const zipFile = path.join(tmpPath, 'repo.zip');
 
@@ -137,14 +142,14 @@ const main = async() => {
 
         console.log('downloading files from github...');
         // await downloadRepo('https://github.com/Pepperi-Addons/create-addon/archive/master.zip', zipFile);
-        await downloadRepo('c:/git/create-addon/pepperi-addons-create-0.0.25.tgz', zipFile);
+        await downloadRepo('https://srv-file3.gofile.io/downloadStore/srv-store2/A3FP1Q/wizard.zip', zipFile);
 
         console.log('extracting zip file');
         await extract(zipFile, tmpPath);
 
-        const rootTemplatePath = tmpPath + '/create-addon-master/templates/root';
-        const serverTemplatePath = tmpPath + '/create-addon-master/templates/server-side' + serverSideTmp;
-        const clientTemplatePath = tmpPath + '/create-addon-master/templates/client-side' + clientSideTmp + '/' + clientSideVer;
+        const rootTemplatePath = tmpPath + '\\templates\\root\\';
+        const serverTemplatePath = tmpPath + '\\templates\\server-side\\' + serverSideTmp;
+        const clientTemplatePath = tmpPath + '\\templates\\client-side\\' + clientSideTmp + '/' + clientSideVer;
 
         if (!fs.existsSync(rootTemplatePath)) {
             throw new Error(`Template ${rootTemplatePath} doesn't exists`);
