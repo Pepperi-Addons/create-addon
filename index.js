@@ -8,6 +8,23 @@ const { spawn } = require('child_process');
 const tmp = require('tmp');
 const path = require('path');
 const cwd = process.cwd();
+const chalk = require('chalk');
+const clear = require('clear');
+const figlet = require('figlet');
+const files = require('./lib/files');
+const inquirer = require('./lib/inquirer');
+clear();
+
+console.log(
+    chalk.green(
+        figlet.textSync('@Pepperi-Addons', { horizontalLayout: 'full' })
+    )
+);
+
+// if (files.directoryExists('.git')) {
+//     console.log(chalk.red('Already a Git repository!'));
+//     process.exit();
+// }
 
 
 async function downloadRepo(url, path) {
@@ -84,28 +101,54 @@ async function createAddon() {
 
 
 
-async function main() {
-    const serverSideTmp = process.argv[2] || 'typescript';
-    // const serverSideVer = process.argv[3] || null;
-    const clientSideTmp = process.argv[3] || 'angular';
-    const clientSideVer = process.argv[4] || '10';
+const main = async() => {
+
+    // console.log(chalk.red('\n --- Write your credentials for a token: \n'));
+    // const credentials = await inquirer.askPepperiCredentials();
+    const credentials = { username: 'lk', password: 'l' };
+    // console.log(chalk.yellow('\n --- Choose your server side and client side templates: \n'));
+    // const template = await inquirer.askTemplates();
+    const template = { servertemplate: 'typescript', framework: 'angular', version: '10' };
+    // console.log(chalk.blue('\n --- Fill in the details of your plugin: \n'));
+    // const addonMetadata = await inquirer.askAddonMetadata();
+    const addonMetadata = {
+        addonname: 'l',
+        addondescription: 'l',
+        addontype: 'Sytem',
+        addonuuid: 'l',
+        usengxlib: true
+    };
+
+    console.log(credentials);
+    console.log(template);
+    console.log(addonMetadata);
+    const serverSideTmp = template.servertemplate || 'typescript';
+    const clientSideTmp = template.framework || 'angular';
+    const clientSideVer = template.version || '10';
     const tmpDirObj = tmp.dirSync({
         unsafeCleanup: true
     });
+    // const tmpPath = 'C:\\git\\addon-wizard';
     const tmpPath = tmpDirObj.name;
     const zipFile = path.join(tmpPath, 'repo.zip');
 
     try {
-        console.log("template = ", serverSideTmp + '-' + clientSideTmp + '-');
+        console.log("template = ", serverSideTmp + '-' + clientSideTmp + '-' + clientSideVer);
 
         console.log('downloading files from github...');
-        await downloadRepo('https://github.com/Pepperi-Addons/create-addon/archive/master.zip', zipFile);
+        // await downloadRepo('https://github.com/Pepperi-Addons/create-addon/archive/master.zip', zipFile);
+        await downloadRepo('c:/git/create-addon/pepperi-addons-create-0.0.25.tgz', zipFile);
 
         console.log('extracting zip file');
         await extract(zipFile, tmpPath);
 
+        const rootTemplatePath = tmpPath + '/create-addon-master/templates/root';
         const serverTemplatePath = tmpPath + '/create-addon-master/templates/server-side' + serverSideTmp;
         const clientTemplatePath = tmpPath + '/create-addon-master/templates/client-side' + clientSideTmp + '/' + clientSideVer;
+
+        if (!fs.existsSync(rootTemplatePath)) {
+            throw new Error(`Template ${rootTemplatePath} doesn't exists`);
+        }
 
         if (!fs.existsSync(serverTemplatePath)) {
             throw new Error(`Template ${serverSideTmp} doesn't exists`);
@@ -115,6 +158,10 @@ async function main() {
             throw new Error(`Template ${clientSideTmp/clientSideVer} doesn't exists`);
         }
 
+
+
+        console.log('copying neccesary files');
+        await copy(rootTemplatePath, './');
         console.log('copying neccesary files');
         await copy(serverTemplatePath, './server-side');
         console.log('copying neccesary files');
