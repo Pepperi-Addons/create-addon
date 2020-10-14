@@ -139,7 +139,6 @@ const main = async() => {
 
     try {
         console.log("template = ", serverSideTmp + '-' + clientSideTmp + '-' + clientSideVer);
-
         console.log('downloading files from github...');
         // await downloadRepo('https://github.com/Pepperi-Addons/create-addon/archive/master.zip', zipFile);
         await downloadRepo('https://srv-file3.gofile.io/downloadStore/srv-store2/A3FP1Q/wizard.zip', zipFile);
