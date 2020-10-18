@@ -1,3 +1,4 @@
-**/node_modules/**
-debug-server/dist
-templates/typescript_old/client-side/.rpt2_cache/
+/publish/api
+/publish/editors
+var_sk
+node_modules/

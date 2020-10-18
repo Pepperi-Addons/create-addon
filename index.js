@@ -13,18 +13,21 @@ const clear = require('clear');
 const figlet = require('figlet');
 const files = require('./lib/files');
 const inquirer = require('./lib/inquirer');
+const { add } = require('lodash');
 clear();
 
-console.log(
-    chalk.green(
-        figlet.textSync('@Pepperi-Addons', { horizontalLayout: 'full' })
-    )
-);
+// console.log(
+//     chalk.green(
+//         figlet.textSync('@Pepperi-Addons', { horizontalLayout: 'full' })
+//     )
+// );
 
 // if (files.directoryExists('.git')) {
 //     console.log(chalk.red('Already a Git repository!'));
 //     process.exit();
 // }
+
+
 
 
 async function downloadRepo(url, path) {
@@ -99,27 +102,43 @@ async function createAddon() {
     })
 }
 
+async function checkCredentials(credentials) {
+    return;
+}
+
 async function runWizard() {
-    console.log(chalk.red('\n --- Write your credentials for a token: \n'));
-    const credentials = await inquirer.askPepperiCredentials();
+    // console.log(chalk.red('\n --- Write your credentials for a token: \n'));
+    // const credentials = await inquirer.askPepperiCredentials();
+    // checkCredentials(credentials);
     console.log(chalk.yellow('\n --- Choose your server side and client side templates: \n'));
     const template = await inquirer.askTemplates();
-    console.log(chalk.blue('\n --- Fill in the details of your plugin: \n'));
-    const addonMetadata = await inquirer.askAddonMetadata();
+    // console.log(chalk.blue('\n --- Fill in the details of your plugin: \n'));
+    // const addonMetadata = await inquirer.askAddonMetadata();
 
     // const template = { servertemplate: 'typescript', framework: 'angular', version: '10' };
-    // const credentials = { username: 'lk', password: 'l' };
-    // const addonMetadata = {
-    //     addonname: 'l',
-    //     addondescription: 'l',
-    //     addontype: 'Sytem',
-    //     addonuuid: 'l',
-    //     usengxlib: true
-    // };
+    const credentials = { username: 'lk', password: 'l' };
+    const addonMetadata = {
+        addonname: 'l',
+        addondescription: 'l',
+        addontype: 'Sytem',
+        addonuuid: 'l',
+        usengxlib: true
+    };
+    if (addonMetadata) {
+        modifyAddonConfig(addonMetadata);
+    }
 
     return { credentials, template, addonMetadata };
 
 
+}
+
+function modifyAddonConfig(metadata) {
+    const addonConfigFile = fs.readFileSync('C:/git/create-addon/templates/root/addon.config.json');
+    const addonObject = JSON.parse(addonConfigFile);
+    addonObject.UUID = metadata.AddonUUID || '';
+    addonObject['Name'] = metadata.addonname || '';
+    // addonObject['Description'] = metadata.addondescription || '';
 }
 
 
