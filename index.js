@@ -13,6 +13,8 @@ const clear = require('clear');
 const figlet = require('figlet');
 const files = require('./lib/files');
 const inquirer = require('./lib/inquirer');
+const Spinner = require('cli-spinner').Spinner;
+ 
 clear();
 
 console.log(
@@ -100,13 +102,11 @@ async function createAddon() {
 }
 
 async function runWizard() {
-    console.log(chalk.red('\n --- Write your credentials for a token: \n'));
-    const credentials = await inquirer.askPepperiCredentials();
+    // console.log(chalk.red('\n --- Write your credentials for a token: \n'));
+    // const credentials = await inquirer.askPepperiCredentials();
     console.log(chalk.yellow('\n --- Choose your server side and client side templates: \n'));
     const template = await inquirer.askTemplates();
-    console.log(chalk.blue('\n --- Fill in the details of your plugin: \n'));
-    const addonMetadata = await inquirer.askAddonMetadata();
-
+  
     // const template = { servertemplate: 'typescript', framework: 'angular', version: '10' };
     // const credentials = { username: 'lk', password: 'l' };
     // const addonMetadata = {
@@ -117,7 +117,7 @@ async function runWizard() {
     //     usengxlib: true
     // };
 
-    return { credentials, template, addonMetadata };
+    return { template };
 
 
 }
@@ -128,9 +128,9 @@ const main = async() => {
 
     const userInput = await runWizard();
 
-    const serverSideTmp = userInput.template.servertemplate || 'typescript';
-    const clientSideTmp = userInput.template.framework || 'angular';
-    const clientSideVer = userInput.template.version || '10';
+    const serverSideTmp = userInput.template.serverLanguage || 'typescript';
+    const clientSideTmp = userInput.template.clientFramework || 'angular';
+    const clientSideVer = userInput.template.frameworkVersion || '10';
     const tmpDirObj = tmp.dirSync({
         unsafeCleanup: true
     });
@@ -138,10 +138,11 @@ const main = async() => {
     const zipFile = path.join(tmpPath, 'repo.zip');
 
     try {
-        console.log("template = ", serverSideTmp + '-' + clientSideTmp + '-' + clientSideVer);
+        console.log("template = ", serverSideTmp + ', ' + clientSideTmp + ' ' + clientSideVer);
         console.log('downloading files from github...');
-        await downloadRepo('https://github.com/Pepperi-Addons/create-addon/archive/wizard.zip', zipFile);
-
+        // await downloadRepo('https://github.com/Pepperi-Addons/create-addon/archive/wizard.zip', zipFile);
+        await downloadRepo('https://srv-store1.gofile.io/download/67AbY7/wizard.zip', zipFile);
+        
         console.log('extracting zip file');
         await extract(zipFile, tmpPath);
 
@@ -162,25 +163,29 @@ const main = async() => {
         }
 
 
-
-        console.log('copying neccesary files');
+        console.log('copying root neccesary files');
         await copy(rootTemplatePath, './');
-        console.log('copying neccesary files');
+        console.log('copying server neccesary files');
         await copy(serverTemplatePath, './server-side');
-        console.log('copying neccesary files');
+        console.log('copying client neccesary files');
         await copy(clientTemplatePath, './client-side');
 
-        console.log("installing dependancies..");
+        console.log("installing dependencies...");
+        const spinner = new Spinner('');
+        spinner.setSpinnerString('|/-\\');
+        spinner.start();
         await install();
 
-        console.log("creating your addon..");
+        console.log("creating your addon...");
         await createAddon();
 
         console.log('you are now good to go');
+        spinner.stop();
     } catch (err) {
         console.error(err);
     } finally {
         console.log("removing temporary files");
+        
         tmpDirObj.removeCallback();
     }
 
