@@ -8,6 +8,7 @@ export interface Client {
     BaseURL: string;
     AssetsBaseUrl: string;
     OAuthAccessToken: string;
+    EncryptedAddonUUID: string;
     Retry: (delay: number) => void;
 }
 
