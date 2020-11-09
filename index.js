@@ -140,7 +140,7 @@ const main = async() => {
     try {
         console.log("template = ", serverSideTmp + ', ' + clientSideTmp + ' ' + clientSideVer ? clientSideVer : '');
         console.log('downloading files from github...');
-        await downloadRepo('https://github.com/Pepperi-Addons/create-addon/archive/wizard.zip', zipFile);
+        await downloadRepo('https://github.com/Pepperi-Addons/create-addon/archive/master.zip', zipFile);
         
         console.log('extracting zip file');
         await extract(zipFile, tmpPath);
