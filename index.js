@@ -130,7 +130,7 @@ const main = async() => {
 
     const serverSideTmp = userInput.template.serverLanguage || 'typescript';
     const clientSideTmp = userInput.template.clientFramework || 'angular';
-    const clientSideVer = userInput.template.frameworkVersion || '10';
+    const clientSideVer = userInput.template.frameworkVersion || null;
     const tmpDirObj = tmp.dirSync({
         unsafeCleanup: true
     });
@@ -138,7 +138,7 @@ const main = async() => {
     const zipFile = path.join(tmpPath, 'repo.zip');
 
     try {
-        console.log("template = ", serverSideTmp + ', ' + clientSideTmp + ' ' + clientSideVer);
+        console.log("template = ", serverSideTmp + ', ' + clientSideTmp + ' ' + clientSideVer ? clientSideVer : '');
         console.log('downloading files from github...');
         await downloadRepo('https://github.com/Pepperi-Addons/create-addon/archive/wizard.zip', zipFile);
         
@@ -147,7 +147,7 @@ const main = async() => {
 
         const rootTemplatePath = tmpPath + '\\create-addon-wizard\\templates\\root\\';
         const serverTemplatePath = tmpPath + '\\create-addon-wizard\\templates\\server-side\\' + serverSideTmp;
-        const clientTemplatePath = tmpPath + '\\create-addon-wizard\\templates\\client-side\\' + clientSideTmp + '/' + clientSideVer;
+        const clientTemplatePath = tmpPath + '\\create-addon-wizard\\templates\\client-side\\' + clientSideTmp + (clientSideVer ? '/' + clientSideVer : '' );
 
         if (!fs.existsSync(rootTemplatePath)) {
             throw new Error(`Template ${rootTemplatePath} doesn't exists`);
@@ -158,7 +158,7 @@ const main = async() => {
         }
 
         if (!fs.existsSync(clientTemplatePath)) {
-            throw new Error(`Template ${clientSideTmp/clientSideVer} doesn't exists`);
+            throw new Error(`Template ${clientTemplatePath} doesn't exists`);
         }
 
 
