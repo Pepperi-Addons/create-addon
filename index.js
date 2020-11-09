@@ -145,11 +145,15 @@ const main = async() => {
         console.log('extracting zip file');
         await extract(zipFile, tmpPath);
 
-        const rootTemplatePath = tmpPath + '\\create-addon-wizard\\templates\\root\\**';
+        const rootTemplatePath = tmpPath + '\\create-addon-wizard\\templates\\root\\';
+        const publishTemplatePath = tmpPath + '\\create-addon-wizard\\templates\\root\\';
         const serverTemplatePath = tmpPath + '\\create-addon-wizard\\templates\\server-side\\' + serverSideTmp;
         const clientTemplatePath = tmpPath + '\\create-addon-wizard\\templates\\client-side\\' + clientSideTmp + '/' + clientSideVer;
 
         if (!fs.existsSync(rootTemplatePath)) {
+            throw new Error(`Template ${rootTemplatePath} doesn't exists`);
+        }
+        if (!fs.existsSync(publishTemplatePath)) {
             throw new Error(`Template ${rootTemplatePath} doesn't exists`);
         }
 
@@ -164,6 +168,8 @@ const main = async() => {
 
         console.log('copying root neccesary files');
         await copy(rootTemplatePath, './');
+        console.log('copying publish neccesary files');
+        await copy(publishTemplatePath, './');
         console.log('copying server neccesary files');
         await copy(serverTemplatePath, './server-side');
         console.log('copying client neccesary files');
