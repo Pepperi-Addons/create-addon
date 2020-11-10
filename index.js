@@ -145,9 +145,9 @@ const main = async() => {
         console.log('extracting zip file');
         await extract(zipFile, tmpPath);
 
-        const rootTemplatePath = tmpPath + '\\create-addon-wizard\\templates\\root\\';
-        const serverTemplatePath = tmpPath + '\\create-addon-wizard\\templates\\server-side\\' + serverSideTmp;
-        const clientTemplatePath = tmpPath + '\\create-addon-wizard\\templates\\client-side\\' + clientSideTmp + (clientSideVer ? '/' + clientSideVer : '' );
+        const rootTemplatePath = tmpPath + '\\create-addon-master\\templates\\root\\';
+        const serverTemplatePath = tmpPath + '\\create-addon-master\\templates\\server-side\\' + serverSideTmp;
+        const clientTemplatePath = tmpPath + '\\create-addon-master\\templates\\client-side\\' + clientSideTmp + (clientSideVer ? '/' + clientSideVer : '' );
 
         if (!fs.existsSync(rootTemplatePath)) {
             throw new Error(`Template ${rootTemplatePath} doesn't exists`);
@@ -187,7 +187,7 @@ const main = async() => {
         
         tmpDirObj.removeCallback();
     }
-    
+
 
 }
 
