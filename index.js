@@ -145,9 +145,9 @@ const main = async() => {
         console.log('extracting zip file');
         await extract(zipFile, tmpPath);
 
-        const rootTemplatePath = tmpPath + '\\templates\\root\\';
-        const serverTemplatePath = tmpPath + '\\templates\\server-side\\' + serverSideTmp;
-        const clientTemplatePath = tmpPath + '\\templates\\client-side\\' + clientSideTmp + (clientSideVer ? '/' + clientSideVer : '' );
+        const rootTemplatePath = tmpPath + '\\create-addon-0.0.29\\templates\\root\\';
+        const serverTemplatePath = tmpPath + '\\create-addon-0.0.29\\templates\\server-side\\' + serverSideTmp;
+        const clientTemplatePath = tmpPath + '\\create-addon-0.0.29\\templates\\client-side\\' + clientSideTmp + (clientSideVer ? '/' + clientSideVer : '' );
 // \\create-addon-master
         if (!fs.existsSync(rootTemplatePath)) {
             throw new Error(`Template ${rootTemplatePath} doesn't exists`);
