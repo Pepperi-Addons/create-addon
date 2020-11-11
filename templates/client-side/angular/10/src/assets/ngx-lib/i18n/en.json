@@ -1,0 +1,76 @@
+{
+    "COLOR": {
+        "AA_COMPLIENT": "AA Complient",
+        "ADD_VALUE_HERE": "Or add (hsl, reg, hex)",
+        "CHANGE_HUE": "Change hue",
+        "CHANGE_SATURATION": "Change saturation",
+        "CHANGE_LIGHTNESS": "Change lightness",
+        "DIALOG_TITLE": "Color picker"
+    },
+    "CHECKBOX": {
+        "TRUE": "True",
+        "FALSE": "False"
+    },
+    "IMAGE": {
+        "NO_IMAGE": "No image",
+        "CLICK_TO_ENLARGE": "Click to enlarge"
+    },
+    "FILE": {
+        "HINT": "Drag and drop a file here or click",
+        "UPLOADING_FILE": "Uploading File",
+        "SEE_ORIGINAL": "See original"
+    },
+    "QS": {
+        "ORDER": "Order"
+    },
+    "INTERNAL_PAGE": {
+        "CLICK_TO_ORDER": "Click to order"
+    },
+    "RICH_TEXTAREA": {
+        "HINT": "Enter Text"
+    },
+    "SELECT": {
+        "HINT": "Please select an option"
+    },
+    "SIGNATURE": {
+        "HINT": "Signature",
+        "TAP_TO_SIGN": "Tap to Sign",
+        "DIALOG_TITLE": "Add signature here"
+    },
+    "ACTIONS": {
+        "CANCEL": "Cancel",
+        "CLEAR": "Clear",
+        "CLEAR_ALL": "Clear All",
+        "CLOSE": "Close",
+        "CREATE_NEW": "Create new",
+        "DONE": "Done",
+        "OK": "Ok",
+        "SAVE": "Save"
+    },
+    "LIST": {
+        "ALL": "All",
+        "NONE": "None",
+        "SELECT": "Select",
+        "SELECTED": "selected",
+        "SORT_ASC": "Ascending",
+        "SORT_DESC": "Descending"
+    },
+    "MESSAGES": {
+        "TITLE_NOTICE": "Notice",
+        "ERROR_CASE_QUANTITY_LIMIT": "Case quantity",
+        "ERROR_FAILD_TO_LOAD_EXTENSION": "Failed to upload file, {{fileExtension}} format is not supported",
+        "ERROR_FAILD_TO_LOAD_SIZE": "Failed to upload file, file size limitation is - {{fileSize}} MB",
+        "ERROR_INVALID_FIELDS": "Please validate the following fields:",
+        "ERROR_INVENTORY_LIMIT": "Max quantity",
+        "ERROR_IS_NOT_VALID": "{{field}} is not valid",
+        "ERROR_IS_REQUIRED": "{{field}} is required",
+        "ERROR_MANDATORY_FIELDS": "Required fields:",
+        "ERROR_MAX_QUANTITY_LIMIT": "Max quantity",
+        "ERROR_MIN_QUANTITY_LIMIT": "Min quantity",
+        "ERROR_RANGE_IS_NOT_VALID": "Value should be between {{min}} and {{max}}",
+        "INFO_LOADING_FILE": "Loading",
+        "INFO_MISSING_FILE": "Missing file",
+        "INFO_MISSING_IMAGE": "Missing image",
+        "INFO_MISSING_SIGNATURE": "Signature missing"
+    }
+}

@@ -1,0 +1,45 @@
+<!-- <main> -->
+  <div class="addon-container">
+    <div class="header-content">
+        <div class="content pep-border-bottom">
+            <div class="left-container spacing-element-negative pull-left flip">
+                <div class="spacing-element title">
+                    Pep components example:&nbsp;
+                    <pep-size-detector class="pull-right"></pep-size-detector>
+                </div>
+            </div>
+            <div class="right-container spacing-element-negative pull-right flip">
+                <button class="mat-button pep-button weak md spacing-element">
+                    Test
+                </button>
+                <div class="menu spacing-element pull-right flip">
+                    <pep-menu [key]="'menu'" [label]="'menu'" [disabled]="false" [xAlignment]="2"
+                        [options]="[{ Key: 'test1', Value: 'test 1'}, { Key: 'test2', Value: 'test 2'}]"
+                        [layoutType]="1" (elementClicked)="elementClicked($event)"
+                        (notifyMenuItemClicked)="onMenuItemClicked($event)">
+                    </pep-menu>
+                </div>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+    </div>
+    <div class="main-content ">
+        <div class="content">
+            <div class="list-container" #listContainer>
+                <pep-list
+                  [firstFieldAsLink]="false"
+                  [isReport]="true"
+                  [supportSorting]="false"
+                  [supportResizing]="false"
+                  [selectionTypeForActions]="2"
+                  [noDataFoundMsg]="'No data'"
+                  [parentScroll]="listContainer"
+                  (notifyListChanged)="onListChange($event)"
+                  (notifyFieldClicked)="onCustomizeFieldClick($event)"
+                  (notifySelectedItemsChanged)="selectedRowsChanged($event)">
+                </pep-list>
+            </div>
+
+        </div>
+    </div>
+</div>

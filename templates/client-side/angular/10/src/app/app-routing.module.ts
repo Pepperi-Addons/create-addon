@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { Page2Component } from './page2/page2.component';
-import { Page1Component } from './page1/page1.component';
+import { PepperiListExampleComponent } from './pepperi-list-example/pepperi-list-example.component';
+import { PepperiNgxLibExamplesComponent } from './pepperi-ngx-lib-examples/pepperi-ngx-lib-examples.component'
 import { EmptyRouteComponent } from './empty-route/empty-route.component';
 import * as config from '../../../addon.config.json';
 
 const routes: Routes = [
   {
-    path: `settings/95501678-6687-4fb3-92ab-1155f47f839e/page1`,
-    component: Page1Component
+    path: `settings/95501678-6687-4fb3-92ab-1155f47f839e/ngx-lib-components`,
+    component: PepperiNgxLibExamplesComponent
   },
   {
-    path: `settings/95501678-6687-4fb3-92ab-1155f47f839e/page2`,
-    component: Page2Component
+    path: `settings/95501678-6687-4fb3-92ab-1155f47f839e/pepperi-list-example`,
+    component: PepperiListExampleComponent
   },
   {
     path: '**',

@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/client-side",
+            "outputPath": "dist/standalone-client-side",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "",
@@ -29,7 +29,9 @@
             ],
             "styles": [
               "src/styles.scss",
-              "src/theme.scss"
+              "src/theme.scss",
+              "node_modules/quill/dist/quill.snow.css",
+              "node_modules/quill/dist/quill.core.css"
             ],
             "scripts": [
               "node_modules/zone.js/dist/zone.js"

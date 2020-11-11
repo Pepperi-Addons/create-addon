@@ -8,7 +8,7 @@ import { CustomizationService, HttpService, ObjectSingleData, DataConvertorServi
 import { PepColorType } from '@pepperi-addons/ngx-lib/color';
 
 import { PepListComponent, ChangeSortingEvent, VIEW_TYPE } from '@pepperi-addons/ngx-lib/list';
-import { FakeData } from './page2.fake-data';
+import { FakeData } from './fake-data';
 
 export enum AddonType {
   System = 1,
@@ -18,11 +18,11 @@ export enum AddonType {
 }
 
 @Component({
-  selector: 'addon-page2',
-  templateUrl: './page2.component.html',
-  styleUrls: ['./page2.component.scss']
+  selector: 'addon-pepperi-list-exmaple',
+  templateUrl: './pepperi-list-example.component.html',
+  styleUrls: ['./pepperi-list-example.component.scss']
 })
-export class Page2Component implements OnInit {
+export class PepperiListExampleComponent implements OnInit {
   title = 'pepperi web app test';
   color = 'hsl(100, 100%, 25%)';
   value = '';
@@ -47,8 +47,8 @@ export class Page2Component implements OnInit {
 
       const browserCultureLang = translate.getBrowserCultureLang();
       this.groupButtons = [
-          { 'Value': 'test', 'Class': '', 'Callback': () => this.onGroupButtonClicked(event, 'test'), 'Icon': null },
-          { 'Value': '', 'Class': 'caution', 'Callback': () => this.onGroupButtonClicked(event, 'del'), 'Icon': 'system_bin' },
+          { 'key': '1', 'value': 'test', 'class': '', 'callback': () => this.onGroupButtonClicked(event, 'test'), 'icon': null },
+          { 'key': '2', 'value': '', 'class': 'caution', 'callback': () => this.onGroupButtonClicked(event, 'del'), 'icon': 'system_bin' },
       ];
   }
 

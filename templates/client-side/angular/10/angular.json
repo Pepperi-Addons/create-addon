@@ -17,9 +17,9 @@
         "build": {
           "builder": "@angular-builders/custom-webpack:browser",
           "options": {
-            "outputPath": "dist/client-side",
+            "outputPath": "../publish/editors",
             "index": "src/index.html",
-            "main": "src\\main.single-spa.ts",
+            "main": "src/main.single-spa.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
