@@ -87,9 +87,8 @@ async function install() {
     ]);
 }
 
-async function createAddon() {
+async function createAddon(metadata) {
 
-    const metadata = await chooseAddonMetadata();
     const npx = process.platform == 'win32' ? 'npx.cmd' : 'npx';
     return new Promise((resolve, reject) => {
         const cmd = spawn(npx, ['create-addon', 
@@ -118,18 +117,9 @@ async function chooseTemplate() {
 }
 
 async function chooseAddonMetadata() {
-
-    console.log(chalk.yellow('\n --- Choose your server side and client side templates: \n'));
+    console.log(chalk.yellow('\n --- Fill in your addon\'s details: \n'));
     const addonMetadata = await inquirer.askForAddonMetadata();
     return { addonMetadata };
-
-    // const addonMetadata = {
-    //     addonname: 'l',
-    //     addondescription: 'l',
-    //     addontype: 'Sytem',
-    //     addonuuid: 'l',
-    //     usengxlib: true
-    // };
 }
 
 
@@ -185,7 +175,8 @@ const main = async() => {
         await install();
 
         console.log("creating your addon...");
-        await createAddon();
+        const userInput = await chooseAddonMetadata();
+        await createAddon(userInput.metadata);
 
         console.log('you are now good to go');
         spinner.stop();
