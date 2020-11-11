@@ -92,9 +92,9 @@ async function createAddon(metadata) {
     const npx = process.platform == 'win32' ? 'npx.cmd' : 'npx';
     return new Promise((resolve, reject) => {
         const cmd = spawn(npx, ['create-addon', 
-       '--addon-uuid=' + metadata.addonuuid, 
-        '--addon-name=' + metadata.addonname, 
-        '--addon-description=' + metadata.addondescription], { cwd: cwd });
+    //    '--addon-uuid=' + metadata.addonuuid, 
+        '--addon-name=\"' + metadata.addonname + '\"', 
+        '--addon-description=\"' + metadata.addondescription + '\"'], { cwd: cwd });
         cmd.on('close', (code) => {
             resolve()
         });
@@ -172,11 +172,11 @@ const main = async() => {
         const spinner = new Spinner('');
         spinner.setSpinnerString('|/-\\');
         spinner.start();
-        await install();
+        // await install();
 
         console.log("creating your addon...");
         const userInput = await chooseAddonMetadata();
-        await createAddon(userInput.metadata);
+        await createAddon(userInput.addonMetadata);
 
         console.log('you are now good to go');
         spinner.stop();
