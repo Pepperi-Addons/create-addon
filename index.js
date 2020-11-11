@@ -88,9 +88,14 @@ async function install() {
 }
 
 async function createAddon() {
+
+    const metadata = await chooseAddonMetadata();
     const npx = process.platform == 'win32' ? 'npx.cmd' : 'npx';
     return new Promise((resolve, reject) => {
-        const cmd = spawn(npx, ['create-addon'], { cwd: cwd });
+        const cmd = spawn(npx, ['create-addon', 
+       '--addon-uuid=' + metadata.addonuuid, 
+        '--addon-name=' + metadata.addonname, 
+        '--addon-description=' + metadata.addondescription], { cwd: cwd });
         cmd.on('close', (code) => {
             resolve()
         });
@@ -101,14 +106,23 @@ async function createAddon() {
     })
 }
 
-async function runWizard() {
+async function chooseTemplate() {
     // console.log(chalk.red('\n --- Write your credentials for a token: \n'));
     // const credentials = await inquirer.askPepperiCredentials();
+
     console.log(chalk.yellow('\n --- Choose your server side and client side templates: \n'));
     const template = await inquirer.askTemplates();
-  
-    // const template = { servertemplate: 'typescript', framework: 'angular', version: '10' };
-    // const credentials = { username: 'lk', password: 'l' };
+    return { template };
+
+
+}
+
+async function chooseAddonMetadata() {
+
+    console.log(chalk.yellow('\n --- Choose your server side and client side templates: \n'));
+    const addonMetadata = await inquirer.askForAddonMetadata();
+    return { addonMetadata };
+
     // const addonMetadata = {
     //     addonname: 'l',
     //     addondescription: 'l',
@@ -116,10 +130,6 @@ async function runWizard() {
     //     addonuuid: 'l',
     //     usengxlib: true
     // };
-
-    return { template };
-
-
 }
 
 
