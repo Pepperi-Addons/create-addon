@@ -136,7 +136,7 @@ async function chooseAddonMetadata() {
 
 const main = async() => {
 
-    const userInput = await runWizard();
+    const userInput = await chooseTemplate();
 
     const serverSideTmp = userInput.template.serverLanguage || 'typescript';
     const clientSideTmp = userInput.template.clientFramework || 'angular';
