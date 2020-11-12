@@ -144,14 +144,14 @@ const main = async() => {
         await extract(zipFile, tmpPath);
 
         
-        const rootTemplatePath = tmpPath + '\\create-addon-master\\templates\\root';
+        const rootTemplatePath = tmpPath + '/create-addon-master/templates/root';
         if (!fs.existsSync(rootTemplatePath)) {
             throw new Error(`Template ${rootTemplatePath} doesn't exists`);
         }
         console.log('copying root neccesary files');
         await copy(rootTemplatePath, './');
         if (userInput.template.useServer) {
-            const serverTemplatePath = tmpPath + '\\create-addon-master\\templates\\server-side\\' + serverSideTmp;
+            const serverTemplatePath = tmpPath + '/create-addon-master/templates/server-side/' + serverSideTmp;
             if (!fs.existsSync(serverTemplatePath)) {
                 throw new Error(`Template ${serverSideTmp} doesn't exists`);
             }
@@ -159,7 +159,7 @@ const main = async() => {
             await copy(serverTemplatePath, './server-side');
         }
         if (userInput.template.useClient) {
-            const clientTemplatePath = tmpPath + '\\create-addon-master\\templates\\client-side\\' + clientSideTmp + (clientSideVer ? '/' + clientSideVer : '' );
+            const clientTemplatePath = tmpPath + '/create-addon-master/templates/client-side/' + clientSideTmp + (clientSideVer ? '/' + clientSideVer : '' );
             if (!fs.existsSync(clientTemplatePath)) {
                 throw new Error(`Template ${clientTemplatePath} doesn't exists`);
             }
