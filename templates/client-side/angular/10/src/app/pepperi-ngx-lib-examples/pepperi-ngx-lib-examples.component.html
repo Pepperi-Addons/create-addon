@@ -1,170 +1,151 @@
-<div class="plugin-page-container">
-  <div class="header-content">
-      <div class="content">
-          <div class="spacing-element title">
+<div class="plugin-page-container ui-test-container">
+    <div class="header-content full-screen">
+        <div class="content pep-border-bottom">
+            <div class="left-container body-lg spacing-element-negative pull-left flip">
+                <div class="spacing-element title">
+                    {{ 'Components_Example_Title' | translate }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main-content ngx-lib">
+        <div class="content">
+            <div class="child1 child-container">
+                <!-- Textbox Examples -->
+                <pep-textbox [key]="'Texbox'" [label]="'Pepperi Texbox'" [placeholder]="'place holder'"
+                    [maxFieldCharacters]="15" [required]="true" [xAlignment]="'left'" [rowSpan]="2"
+                    [value]="'Pepperi Textbox'" (valueChanged)="onValueChanged($event)">
+                </pep-textbox>
+                <pep-textbox [key]="'Number'" [label]="'Pepperi Number'" [type]="'real'" [xAlignment]="'left'" [value]="'9399371'"
+                    [required]="true" [formattedValue]="'9,399,371'">
+                </pep-textbox>
+                <pep-textbox [key]="'Email'" [label]="'Pepperi Email'" [type]="'email'" [xAlignment]="'left'"
+                    [value]="'email@pepperi.com'">
+                </pep-textbox>
 
-              <!-- Separator Example -->
+                <!-- Separator Example -->
+                <pep-separator [key]="'sep1'" [label]="'separator'"></pep-separator>
 
-              <pep-separator key="sep1" label="@pep-addons/ngx-lib : Pepperi Components - Library components written with Angular10" xAlignment="1">
-              </pep-separator>
+                <!-- Checkbox Exmaples -->
+                <pep-checkbox [key]="'cb1'" [label]="'Pepperi Checkbox'" [value]="'true'" [xAlignment]="'left'"
+                    (valueChanged)="onValueChanged($event)">
+                </pep-checkbox>
+                <pep-checkbox [key]="'bt1'" [label]="'Pepperi Emoji Checkbox'" [type]="'booleanText'" [value]="'true'"
+                    [additionalValue]='{ "CheckedText": "❤", "UncheckedText": "💛" }' 
+                    [xAlignment]="'left'" >
+                </pep-checkbox>
 
-          </div>
-      </div>
-  </div>
-  <div class="main-content ngx-lib">
-      <div class="content">
+                <!-- Date Examples -->
+                <pep-date [key]="'date1'" [label]="'Pepperi Date'" [value]="'1-1-2020'" [minValue]="minDateValue" [maxValue]="maxDateValue"
+                    [xAlignment]="'left'" 
+                    (valueChanged)="onValueChanged($event)">
+                </pep-date>
+                <pep-date [key]="'dateTime1'" [label]="'Pepperi Date Time'" [type]="'datetime'" [value]="'1-1-2020 12:00'"
+                    [xAlignment]="'left'"
+                    (valueChanged)="onValueChanged($event)">
+                </pep-date>
 
-          <div class="child1 child-container">
+                <!-- Quantity Selector -->
+                <pep-quantity-selector [key]="'qs2'" [label]="'Pepperi Quantity Selector 1'" [type]="'button'" [value]="'55'"
+                    [xAlignment]="'left'"
+                    (valueChanged)="onValueChanged($event)">
+                </pep-quantity-selector>
+            </div>
 
-              <!-- Textbox Examples -->
+            <div class="child2 child-container">
+                <!-- Signature Example -->
+                <pep-signature [key]="'sig1'" [src]="'https://i.ibb.co/VMHwLkm/58957776-8700-4c6a-b9bc-a171b84d8080.png'"
+                    [label]="'Pepperi Signature'" [xAlignment]="'center'" [rowSpan]="4"
+                    (valueChanged)="onValueChanged($event)">
+                </pep-signature>
 
-              <pep-textbox key="Texbox" label="Pepperi Texbox" placeholder="place holder"
-                  maxFieldCharacters="15" required="true" xAlignment="1" rowSpan="2" value="Pepperi Textbox">
-              </pep-textbox>
+                <!-- Attachment Example -->
+                <pep-attachment [key]="'attachment1'" [label]="'Pepperi Attachment'" [xAlignment]="'center'"
+                    [rowSpan]="2" (valueChanged)="onValueChanged($event)">
+                </pep-attachment>
 
-              <pep-textbox key="Number" label="Pepperi Number" type="real" xAlignment="1" value="9399371"
-                  required="true" formatted-value="9,399,371">
-              </pep-textbox>
+                <!-- Icons Examples -->
+                <!-- <pep-icon name="system_bolt"></pep-icon>
+                    <pep-icon name="no_image"></pep-icon> 
+                -->
 
-              <pep-textbox key="Email" label="Pepperi Email" type="email" xAlignment="1"
-                  value="email@pepperi.com">
-              </pep-textbox>
+                <!-- Menu Example -->
+                <pep-menu [key]="'menu'" [label]="'Pepperi Menu'" [xAlignment]="'left'"
+                    [options]='[{ "Key": "val1", "Value": "Menu Item 1" }, { "Key": "val2", "Value": "Menu Item 2" }, { "Key": "val3", "Value": "Menu Item 3" }, { "Key": "val4", "Value": "Menu Item 4" }]'
+                    (notifyMenuItemClicked)="onMenuItemClicked($event)">
+                </pep-menu>
 
-              <!-- Checkbox Exmaples -->
+                <!-- Internal Button Example -->
+                <pep-internal-button [key]="'btn1'" [label]="'Pepperi Internal Button'" [value]="'55'">
+                </pep-internal-button>
+            </div>
 
-              <pep-checkbox key="cb1" label="Pepperi Checkbox" value="true" required="false" xAlignment="1"
-                  rowSpan="1">
-              </pep-checkbox>
+            <div class="child3 child-container">
+                <!-- Images Examples Events [elementClicked, valueChanged]-->
+                <!-- <pep-image [key]="'No Image'" [src]="" [label]="'image'" [xAlignment]="'center'"
+                    [rowSpan]="6">
+                </pep-image> -->
 
-              <pep-checkbox key="bt1" label="Pepperi Emoji Checkbox" type="booleanText" value="true"
-                  additionalValue='{ "CheckedText": "❤", "UncheckedText": "💛" }' required="false"
-                  xAlignment="1" rowSpan="1">
-              </pep-checkbox>
+                <pep-image [key]="'Image'" [label]="'Pepperi Image'" [xAlignment]="'center'" [rowSpan]="3"
+                    [src]="'https://idpfiles.sandbox.pepperi.com/f389fd2e-4a31-4965-a21e-3a98b4553300/images/logo.svg'"
+                    (elementClicked)="elementClicked($event)">
+                </pep-image>
 
-              <!-- Date Examples -->
+                <!-- Filmstrip Examples -->
+                <!-- <pep-images-filmstrip [objectId]="'Images Filmstrip 1'" [key]="'Images Filmstrip 1'" [xAlignment]="'center'"
+                    [label]="'Pepperi Images Filmstrip 1'" [showTitle]="true" [rowSpan]="3" [value]="'https://idpfiles.sandbox.pepperi.com/f389fd2e-4a31-4965-a21e-3a98b4553300/images/left-side-background.jpg;
+                    https://idpfiles.sandbox.pepperi.com/f389fd2e-4a31-4965-a21e-3a98b4553300/images/logo.svg'">
+                </pep-images-filmstrip> -->
 
-              <pep-date key="date1" label="Pepperi Date" value="1-1-2020" min-value="" max-value=""
-                  required="false" xAlignment="1" rowSpan="1">
-              </pep-date>
+                <pep-images-filmstrip [objectId]="'Images Filmstrip'" [key]="'Images Filmstrip 2'" [xAlignment]="'center'"
+                    [label]="'Pepperi Images Filmstrip 1'" [showTitle]="true" [rowSpan]="7"
+                    [value]="'https://idpfiles.sandbox.pepperi.com/f389fd2e-4a31-4965-a21e-3a98b4553300/images/left-side-background.jpg;https://idpfiles.sandbox.pepperi.com/f389fd2e-4a31-4965-a21e-3a98b4553300/images/logo.svg'"
+                    (elementClicked)="elementClicked($event)">
+                </pep-images-filmstrip>
+            </div>
 
-              <pep-date key="dateTime1" label="Pepperi Date Time" type="datetime" value="1-1-2020 12:00"
-                  xAlignment="1">
-              </pep-date>
+            <div class="child4 child-container">
 
-              <!-- Quantity Selector -->
+                <pep-group-buttons [buttons]="groupButtons" [buttonsClass]="'md regular'" [buttonsDisabled]="false"
+                    [viewType]="'split'">
+                </pep-group-buttons>
+                
+                <!-- Color Picker Example -->
+                <pep-color [key]="'color1'" [label]="'Pepperi Color Picker'" [value]="'hsl(77, 87%, 42%)'" [xAlignment]="'right'"
+                    [showAAComplient]="true" [type]="'any'">
+                </pep-color>
 
-              <pep-quantity-selector key="qs2" label="Pepperi Quantity Selector 1" type="button" value="55"
-                  xAlignment="1">
-              </pep-quantity-selector>
+                <!-- Quantity Selector -->
+                <pep-quantity-selector [key]="'qs1'" [label]="'Pepperi Quantity Selector 2'" [value]="'50'" [xAlignment]="'right'"
+                    (elementClicked)="elementClicked($event)">
+                </pep-quantity-selector>
 
-          </div>
+                <!-- Select Example -->
+                <pep-select [key]="'select1'" [label]="'Pepperi Select'" [value]="'val2'" [xAlignment]="'right'"
+                    [options]='[{ "Key": "val1", "Value": "Option 1" }, { "Key": "val2", "Value": "Option 2" }]'
+                    (valueChanged)="onValueChanged($event)">
+                </pep-select>
 
-          <div class="child2 child-container">
+                <pep-select [key]="'multi1'" [label]="'Pepperi Multi Select'" [type]="'multi'" [value]="'val1;val2'" [xAlignment]="'right'"
+                    [options]='[{ "Key": "val1", "Value": "Option 1" }, { "Key": "val2", "Value": "Option 2" }, { "Key": "val3", "Value": "Option 3" }]'
+                    (valueChanged)="onValueChanged($event)">
+                </pep-select>
 
-              <!-- Signature Example -->
+                <!-- Textarea Example -->
+                <pep-textarea [key]="'textarea1'" [label]="'Pepperi Text Area'" [value]="'Pepperi Textarea Example'"
+                    [rowSpan]="2" [maxFieldCharacters]="300" [xAlignment]="'right'">
+                </pep-textarea>
 
-              <pep-signature key="sig1" src="https://i.ibb.co/VMHwLkm/58957776-8700-4c6a-b9bc-a171b84d8080.png"
-                  label="Pepperi Signature" required="false" xAlignment="3" rowSpan="4">
-              </pep-signature>
+                <!-- Rich Html Textarea Example -->
+                <pep-rich-html-textarea [key]="'richText1'" [label]="'Pepperi Rich Html Textarea'"
+                    [value]="richHtml"
+                    [rowSpan]="3" [maxFieldCharacters]="300" [xAlignment]="'left'">
+                </pep-rich-html-textarea>
 
-
-              <!-- Attachment Example -->
-
-              <pep-attachment key="attachment1" label="Pepperi Attachment" required="false" xAlignment="3"
-                  rowSpan="2">
-              </pep-attachment>
-
-              <!-- Icons Examples -->
-
-              <!-- <pep-icon name="system_bolt"></pep-icon>
-                  <pep-icon name="no_image"></pep-icon> -->
-
-              <!-- Menu Example -->
-
-              <pep-menu key="menu" label="Pepperi Menu" xAlignment="1" layout-type="1"
-                  [options]='[{ "Key": "val1", "Value": "Menu Item 1" }, { "Key": "val2", "Value": "Menu Item 2" }, { "Key": "val3", "Value": "Menu Item 3" }, { "Key": "val4", "Value": "Menu Item 4" }]'>
-              </pep-menu>
-
-              <!-- Internal Button Example -->
-
-              <pep-internal-button key="btn1" label="Pepperi Internal Button" value="55" required="false"
-                  rowSpan="1">
-              </pep-internal-button>
-
-          </div>
-
-          <div class="child3 child-container">
-
-              <!-- Images Examples Events [elementClicked, valueChanged]-->
-
-              <!-- <pep-image key="No Image" layout-type="1" src="" label="image" required="false" xAlignment="3"
-                  rowSpan="6">
-              </pep-image> -->
-
-              <pep-image key="Image"
-                  src="https://idpfiles.sandbox.pepperi.com/f389fd2e-4a31-4965-a21e-3a98b4553300/images/logo.svg"
-                  label="Pepperi Image" required="false" xAlignment="3" rowSpan="3"></pep-image>
-
-              <!-- Filmstrip Examples -->
-
-              <!-- <pep-images-filmstrip object-id="Images Filmstrip 1" key="Images Filmstrip 1" xAlignment="3"
-                  label="Pepperi Images Filmstrip 1" show-title="true" rowSpan="3" value="https://idpfiles.sandbox.pepperi.com/f389fd2e-4a31-4965-a21e-3a98b4553300/images/left-side-background.jpg;
-                  https://idpfiles.sandbox.pepperi.com/f389fd2e-4a31-4965-a21e-3a98b4553300/images/logo.svg">
-              </pep-images-filmstrip> -->
-
-              <pep-images-filmstrip object-id="Images Filmstrip" key="Images Filmstrip 2" xAlignment="3"
-                  label="Pepperi Images Filmstrip 1" show-title="true" rowSpan="7"
-                  value="https://idpfiles.sandbox.pepperi.com/f389fd2e-4a31-4965-a21e-3a98b4553300/images/left-side-background.jpg;https://idpfiles.sandbox.pepperi.com/f389fd2e-4a31-4965-a21e-3a98b4553300/images/logo.svg">
-              </pep-images-filmstrip>
-
-          </div>
-
-          <div class="child4 child-container">
-
-              <!-- Color Picker Example -->
-
-              <pep-color key="color1" label="Pepperi Color Picker" value="hsl(77, 87%, 42%)" xAlignment="2"
-                  showAAComplient="true" type="colorType">
-              </pep-color>
-
-
-              <!-- Quantity Selector -->
-
-              <pep-quantity-selector key="qs1" label="Pepperi Quantity Selector 2" value="50" xAlignment="2">
-              </pep-quantity-selector>
-
-
-              <!-- Select Example -->
-
-              <pep-select required="false" xAlignment="2" rowSpan="1" key="select1" label="Pepperi Select"
-                  value="val2"
-                  [options]='[{ "Key": "val1", "Value": "Option 1" }, { "Key": "val2", "Value": "Option 2" }]'>
-              </pep-select>
-
-              <pep-select key="multi1" label="Pepperi Multi Select" type="multi" value="val1;val2" xAlignment="2"
-                  [options]='[{ "Key": "val1", "Value": "Option 1" }, { "Key": "val2", "Value": "Option 2" }, { "Key": "val3", "Value": "Option 3" }]'>
-              </pep-select>
-
-
-              <!-- Textarea Example -->
-
-              <pep-textarea key="textarea1" label="Pepperi Text Area" value="Pepperi Textarea Example"
-                  rowSpan="2" maxFieldCharacters="300" required="false" xAlignment="2">
-              </pep-textarea>
-
-              <!-- Rich Html Textarea Example -->
-
-              <pep-rich-html-textarea key="richText1" label="Pepperi Rich Html Textarea"
-                  value="<h1><u>Rich Text Value Example</u></h1><h2><em style=' color: rgb(147, 200, 14);'>Pepperi Rich Text Value </em><u style='color: rgb(0, 102, 204);'>Example</u></h2><ol><li><strong><u>Pepperi Rich Text Value Example</u></strong></li><li>Pepperi Rich text value example</li></ol>"
-                  rowSpan="3" maxFieldCharacters="300" required="false" xAlignment="1">
-              </pep-rich-html-textarea>
-
-              <!-- <pep-rich-html-textarea key="'richText2'" label="'richText2'" value="richTextValue" rowSpan="3"
-                  maxFieldCharacters="300" required="false" xAlignment="2" inline-mode="true">
-              </pep-rich-html-textarea> -->
-
-          </div>
-
-      </div>
-  </div>
+                <!-- <pep-rich-html-textarea [key]="'richText2'" [label]="'richText2'" [value]="richTextValue" [rowSpan]="3"
+                    [maxFieldCharacters]="300" [xAlignment]="'right'" [inlineMode]="true">
+                </pep-rich-html-textarea> -->
+            </div>
+        </div>
+    </div>
 </div>
