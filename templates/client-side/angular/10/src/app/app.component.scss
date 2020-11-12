@@ -1,0 +1,85 @@
+@import 'ngx-lib/src/core/style/abstracts/mixins';
+@import 'ngx-lib/src/core/style/abstracts/variables';
+
+.viewportDiv {
+    background: white;
+    display: -ms-grid;
+    display: grid;
+    height: 100vh;
+
+    max-width: $max-scr-width;
+    margin: 0 auto;
+
+    grid-template-areas: 'header header' 'sidebar content';
+    -ms-grid-rows: $header-height 1fr;
+    grid-template-rows: $header-height 1fr;
+    -ms-grid-columns: auto 1fr;
+    grid-template-columns: auto 1fr;
+
+    header {
+        grid-row: header;
+        -ms-grid-row: header;
+        grid-row-start: header;
+        -ms-grid-row-span: NaN;
+        grid-row-end: header;
+        grid-column: header;
+        -ms-grid-column: header;
+        grid-column-start: header;
+        -ms-grid-column-span: NaN;
+        grid-column-end: header;
+
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: $z-index-high + 1;
+    }
+
+    aside {
+        grid-area: sidebar;
+    }
+
+    main {
+        -ms-grid-row: 2;
+        -ms-grid-column: 2;
+        grid-area: content;
+    }
+}
+
+#header {
+    height: $header-height;
+
+    .navbar {
+        // border: none !important;
+        border-radius: 0;
+        @include box-sizing(border-box);
+        height: inherit;
+        width: 100%;
+        padding: $spacing-lg $double-content-padding;
+        margin: 0;
+        max-width: $max-scr-width;
+
+        @media (max-width: $screen-max-size-xs) {
+            padding-left: $content-padding;
+            padding-right: $content-padding;
+        }
+
+        .navbar-default {
+            background-color: transparent;
+            border-bottom-color: transparent;
+        }
+    }
+}
+
+#mainCont {
+    flex-grow: 1;
+    min-height: 100%;
+}
+
+// #loadingSpinnerModal {
+//     z-index: $z-index-high + 101;
+//     height: 1rem;
+
+//     &.no-top-bar {
+//         top: $header-height !important;
+//     }
+// }

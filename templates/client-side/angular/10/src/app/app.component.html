@@ -1,2 +1,42 @@
-<router-outlet></router-outlet>
+<!--
+    This code is for stand alon addon, if this addon should be under webapp remove all
+    except the <router-outlet></router-outlet>
+-->
+<!-- <router-outlet></router-outlet> -->
 
+<div class="viewportDiv" #viewportDiv pepRtlDirection >
+    <header>
+        <div id="header" pepRtlClass>
+            <nav class="navbar {{ getTopBarStyle() }} navbar-light bg-faded menuCont" [ngStyle]="{'background-color': customizationService.getBrandingMainColor() }">
+                <button id="btnMenuHome" (click)="navigateHome()"
+                    class="spacing-element pep-button icon-button sm weak pull-left flip " [ngClass]="getButtonClassName()" mat-button>
+                    <mat-icon>
+                        <pep-icon name="system_home"></pep-icon>
+                    </mat-icon>
+                </button>
+                <button id="btnToggleSettings" class="spacing-element pep-button icon-button sm weak pull-right flip " [ngClass]="getButtonClassName()" mat-button>
+                    <mat-icon>
+                        <pep-icon name="system_menu"></pep-icon>
+                    </mat-icon>
+                </button>
+            </nav>
+        </div>
+    </header>
+    <aside>
+    </aside>
+    <main>
+        <!-- [style.height]="!userService.showModal ? '0' : '100%'" -->
+        <!-- <div #loadingSpinner [hidden]="!showLoading || isLogin" pepRtlClass
+            [ngClass]="{ 'no-top-bar': userService?.isObjectChooserOpen || userService?.isListOfObjectsOpen }"
+            id="loadingSpinnerModal">
+            <div id="loadingSpinner">
+                <div class="pep-loading-spinner" *ngFor="let number of [0, 1, 2, 3, 4]" [ngStyle]="{ 'background-color': customizationService?.getLoadingSpinnerColor() }"></div>
+            </div>
+        </div> -->
+        <div id="mainCont" #mainCont pepRtlDirection pepRtlClass
+            [ngStyle]="{ 'padding-bottom': footerHeight + 'rem' }">
+            <router-outlet [ngStyle]="{ 'padding-bottom': footerHeight + 'rem' }"></router-outlet>
+        </div>
+    </main>
+</div>
+<pep-size-detector></pep-size-detector>

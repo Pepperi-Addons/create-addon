@@ -13,18 +13,18 @@ import { environment } from './environments/environment';
 import { singleSpaPropsSubject } from './single-spa/single-spa-props';
 
 if (environment.production) {
-  enableProdMode();
+    enableProdMode();
 }
 
 const lifecycles = singleSpaAngular({
-  bootstrapFunction: singleSpaProps => {
-    singleSpaPropsSubject.next(singleSpaProps);
-    return platformBrowserDynamic(getSingleSpaExtraProviders()).bootstrapModule(AppModule);
-  },
-  template: '<addon-root />',
-  Router,
-  NgZone,
-  AnimationEngine,
+    bootstrapFunction: singleSpaProps => {
+        singleSpaPropsSubject.next(singleSpaProps);
+        return platformBrowserDynamic(getSingleSpaExtraProviders()).bootstrapModule(AppModule);
+    },
+    template: '<addon-root />',
+    Router,
+    NgZone,
+    AnimationEngine,
 });
 
 export const bootstrap = lifecycles.bootstrap;
