@@ -1,0 +1,26 @@
+
+@mixin addon-theme($pepperi-theme) {
+    #header {
+        background-color: get-pep-color($pepperi-theme, color-system-primary-invert, color-base);
+
+        .navbar {
+            box-shadow: get-pep-shadow($pepperi-theme, shadow-sm, regular);
+            
+            &.weak {
+                @include state-weak-default($pepperi-theme, color-top-header);
+            }
+            
+            &.regular {
+                @include state-regular-default($pepperi-theme, true, color-top-header);
+            }
+            
+            &.strong {
+                @include state-strong-default($pepperi-theme, color-top-header);
+            }
+            
+            border-right: none !important;
+            border-left: none !important;
+        }
+    }
+
+}

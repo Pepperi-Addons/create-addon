@@ -81,8 +81,8 @@ async function install() {
 
 
     return await Promise.all([
-        npmInstall(path.join(cwd, 'server-side')),
-        npmInstall(path.join(cwd, 'client-side')),
+        // npmInstall(path.join(cwd, 'server-side')),
+        // npmInstall(path.join(cwd, 'client-side')),
         npmInstall(cwd)
     ]);
 }
@@ -91,10 +91,7 @@ async function createAddon(metadata) {
 
     const npx = process.platform == 'win32' ? 'npx.cmd' : 'npx';
     return new Promise((resolve, reject) => {
-        const cmd = spawn(npx, ['create-addon', 
-    //    '--addon-uuid=' + metadata.addonuuid, 
-        '--addon-name=\"' + metadata.addonname + '\"', 
-        '--addon-description=\"' + metadata.addondescription + '\"'], { cwd: cwd });
+        const cmd = spawn(npx, ['create-addon'], { cwd: cwd });
         cmd.on('close', (code) => {
             resolve()
         });
@@ -118,19 +115,15 @@ async function chooseTemplate() {
 
 async function chooseAddonMetadata() {
     console.log(chalk.yellow('\n --- Fill in your addon\'s details: \n'));
-    const addonMetadata = await inquirer.askForAddonMetadata();
-    return { addonMetadata };
+    const metadata = await inquirer.askForAddonMetadata();
+    return { metadata };
 }
 
 
 
 const main = async() => {
 
-    const userInput = await chooseTemplate();
-
-    const serverSideTmp = userInput.template.serverLanguage || 'typescript';
-    const clientSideTmp = userInput.template.clientFramework || 'angular';
-    const clientSideVer = userInput.template.frameworkVersion || null;
+   
     const tmpDirObj = tmp.dirSync({
         unsafeCleanup: true
     });
@@ -138,6 +131,11 @@ const main = async() => {
     const zipFile = path.join(tmpPath, 'repo.zip');
 
     try {
+        const userInput = await chooseTemplate();
+
+        const serverSideTmp = userInput.template.serverLanguage || 'typescript';
+        const clientSideTmp = userInput.template.clientFramework || 'angular';
+        const clientSideVer = userInput.template.frameworkVersion || null;
         console.log("template = ", serverSideTmp + ', ' + clientSideTmp + ' ' + clientSideVer ? clientSideVer : '');
         console.log('downloading files from github...');
         await downloadRepo('https://github.com/Pepperi-Addons/create-addon/archive/master.zip', zipFile);
@@ -145,38 +143,43 @@ const main = async() => {
         console.log('extracting zip file');
         await extract(zipFile, tmpPath);
 
-        const rootTemplatePath = tmpPath + '\\create-addon-master\\templates\\root';
-        const serverTemplatePath = tmpPath + '\\create-addon-master\\templates\\server-side\\' + serverSideTmp;
-        const clientTemplatePath = tmpPath + '\\create-addon-master\\templates\\client-side\\' + clientSideTmp + (clientSideVer ? '/' + clientSideVer : '' );
+        
+        const rootTemplatePath = tmpPath + '/create-addon-master/templates/root';
         if (!fs.existsSync(rootTemplatePath)) {
             throw new Error(`Template ${rootTemplatePath} doesn't exists`);
         }
-
-        if (!fs.existsSync(serverTemplatePath)) {
-            throw new Error(`Template ${serverSideTmp} doesn't exists`);
-        }
-
-        if (!fs.existsSync(clientTemplatePath)) {
-            throw new Error(`Template ${clientTemplatePath} doesn't exists`);
-        }
-
-
         console.log('copying root neccesary files');
         await copy(rootTemplatePath, './');
-        console.log('copying server neccesary files');
-        await copy(serverTemplatePath, './server-side');
-        console.log('copying client neccesary files');
-        await copy(clientTemplatePath, './client-side');
+        if (userInput.template.useServer) {
+            const serverTemplatePath = tmpPath + '/create-addon-master/templates/server-side/' + serverSideTmp;
+            if (!fs.existsSync(serverTemplatePath)) {
+                throw new Error(`Template ${serverSideTmp} doesn't exists`);
+            }
+            console.log('copying server neccesary files');
+            await copy(serverTemplatePath, './server-side');
+        }
+        if (userInput.template.useClient) {
+            const clientTemplatePath = tmpPath + '/create-addon-master/templates/client-side/' + clientSideTmp + (clientSideVer ? '/' + clientSideVer : '' );
+            if (!fs.existsSync(clientTemplatePath)) {
+                throw new Error(`Template ${clientTemplatePath} doesn't exists`);
+            }
+            console.log('copying client neccesary files');
+            await copy(clientTemplatePath, './client-side');
+    
+        }
 
         console.log("installing dependencies...");
         const spinner = new Spinner('');
         spinner.setSpinnerString('|/-\\');
         spinner.start();
-        // await install();
+        await install();
+
 
         console.log("creating your addon...");
-        const userInput = await chooseAddonMetadata();
-        await createAddon(userInput.addonMetadata);
+        // const addon = await chooseAddonMetadata();
+        // const res = await createAddon(addon.metadata);
+        await createAddon();
+        
 
         console.log('you are now good to go');
         spinner.stop();
