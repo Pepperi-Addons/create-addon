@@ -171,10 +171,13 @@ export class PepperiListExampleComponent implements OnInit {
                 break;
 
             case 'AutomaticUpgrade':
-                dataRowField.FieldType = FIELD_TYPE.Boolean;
+                dataRowField.FieldType = FIELD_TYPE.ComboBox;
                 const automaticUpgrade = systemData.AutomaticUpgrade ? systemData.AutomaticUpgrade : true;
-                dataRowField.FormattedValue = automaticUpgrade !== undefined ? automaticUpgrade : false;
-                dataRowField.Value = automaticUpgrade !== undefined ? automaticUpgrade : false;
+                dataRowField.FormattedValue = 'test'; // automaticUpgrade !== undefined ? automaticUpgrade : false;
+                dataRowField.Value = 'test'; // automaticUpgrade !== undefined ? automaticUpgrade : false;
+                dataRowField.Enabled = true;
+                dataRowField.ReadOnly = false;
+                dataRowField.OptionalValues = [{ 'Key': 'test', 'Value': 'test'}, { 'Key': 'test1', 'Value': 'test1'}];
                 break;
             default:
                 dataRowField.FormattedValue = addon[key] ? addon[key].toString() : '';
