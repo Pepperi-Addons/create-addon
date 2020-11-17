@@ -126,10 +126,11 @@ import { MultiTranslateHttpLoader } from 'ngx-translate-multi-http-loader';
 
 export function createTranslateLoader(http: HttpClient, fileService: FileService) {
     const translationsPath: string = fileService.getAssetsTranslationsPath();
+    const translationsSuffix: string = fileService.getAssetsTranslationsSuffix();
 
     return new MultiTranslateHttpLoader(http, [
-        {prefix: translationsPath, suffix: '.json'},
-        {prefix: '/assets/i18n/', suffix: '.json'},
+        {prefix: '/', suffix: translationsSuffix},
+        {prefix: '/', suffix: '.json'},
     ]);
 }
 

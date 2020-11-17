@@ -33,7 +33,7 @@
         "@ngx-gallery/core": "^5.0.0-beta.0",
         "@ngx-translate/core": "^13.0.0",
         "@ngx-translate/http-loader": "^6.0.0",
-        "@pepperi-addons/ngx-lib": "^0.1.25",
+        "@pepperi-addons/ngx-lib": "^0.1.26",
         "@pepperi-addons/papi-sdk": "^1.16.0",
         "@tweenjs/tween.js": "^17.1.1",
         "angular2-signaturepad": "^2.11.0",
