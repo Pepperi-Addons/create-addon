@@ -17,7 +17,6 @@ export class PepperiListExampleComponent implements OnInit {
 
     @ViewChild(PepListComponent) customList: PepListComponent;
  
-
     constructor(
         private translate: TranslateService,
         private dataConvertorService: DataConvertorService,
@@ -29,7 +28,7 @@ export class PepperiListExampleComponent implements OnInit {
 
     ngOnInit() {
         
-        // this.httpService.getPapiHttpCall('http://get_data')
+        // this.httpService.getPapiHttpCall('/meta_data/transactions/types')
         //     .subscribe(
         //         (res) => {
         //             debugger;
@@ -52,7 +51,6 @@ export class PepperiListExampleComponent implements OnInit {
 
     ngAfterViewInit() {
     }
-
 
     initPepList(dataSource) {
         if (this.customList && dataSource) {
@@ -116,8 +114,7 @@ export class PepperiListExampleComponent implements OnInit {
     onListChange(event) {
     }
 
-    onCustomizeFieldClick(event) {
-        
+    onCustomizeFieldClick(event) {   
     }
 
     selectedRowsChanged(selectedRowsCount) {
