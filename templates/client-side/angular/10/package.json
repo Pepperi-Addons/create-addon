@@ -3,14 +3,14 @@
     "version": "0.0.0",
     "scripts": {
         "ng": "ng",
-        "start": "ng serve --port 4210",
+        "start": "ng serve --port 4400",
         "build": "ng build",
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",
         "build:single-spa:client-side": "ng build client-side --prod",
-        "serve:single-spa:client-side": "ng s --project client-side --disable-host-check --port 4210 --deploy-url http://localhost:4210/ --live-reload false",
-        "assets-server": "http-server ./src/ -p 4209 -d --cors"
+        "serve:single-spa:client-side": "ng s --project client-side --disable-host-check --port 4400 --deploy-url http://localhost:4400/ --live-reload false",
+        "assets-server": "http-server ./src/ -p 4300 -d --cors"
     },
     "private": true,
     "dependencies": {

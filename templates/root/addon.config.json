@@ -12,7 +12,18 @@
     "editor"
   ],
   "Assets": [
+    "de.json",
     "en.json",
-    "he.json"
+    "es.json",
+    "fr.json",
+    "he.json",
+    "hu.json",
+    "it.json",
+    "ja.json",
+    "nl.json",
+    "pl.json",
+    "pt.json",
+    "ru.json",
+    "zh.json"
   ]
 }
