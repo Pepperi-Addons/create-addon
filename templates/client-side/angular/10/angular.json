@@ -25,6 +25,7 @@
             "aot": true,
             "stylePreprocessorOptions": {
               "includePaths": [
+                  // "../../../../../../pepperi-angular-library/dist",
                   "node_modules/@pepperi-addons",
                   "node_modules"
               ]
