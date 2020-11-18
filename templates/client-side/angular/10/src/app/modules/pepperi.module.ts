@@ -10,8 +10,6 @@ import { PepDateModule } from '@pepperi-addons/ngx-lib/date';
 import { PepGroupButtonsModule } from '@pepperi-addons/ngx-lib/group-buttons';
 import { PepImageModule } from '@pepperi-addons/ngx-lib/image';
 import { PepImagesFilmstripModule } from '@pepperi-addons/ngx-lib/images-filmstrip';
-import { PepInternalButtonModule } from '@pepperi-addons/ngx-lib/internal-button';
-import { PepMenuModule } from '@pepperi-addons/ngx-lib/menu';
 import { PepQuantitySelectorModule } from '@pepperi-addons/ngx-lib/quantity-selector';
 import { PepRichHtmlTextareaModule } from '@pepperi-addons/ngx-lib/rich-html-textarea';
 import { PepSelectModule } from '@pepperi-addons/ngx-lib/select';
@@ -103,8 +101,6 @@ const pepperiComponentsModules = [
     PepImagesFilmstripModule,
     PepListModule,
     PepCheckboxModule,
-    PepInternalButtonModule,
-    PepMenuModule,
     PepQuantitySelectorModule,
     PepRichHtmlTextareaModule,
     PepSelectModule,

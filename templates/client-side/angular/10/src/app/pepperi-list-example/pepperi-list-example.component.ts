@@ -53,10 +53,6 @@ export class PepperiListExampleComponent implements OnInit {
 
     }
 
-    onMenuItemClicked(event) {
-        alert(`${event.key}: was clicked`);
-    }
-
     ngAfterViewInit() {
         this.loadlist('all');
     }

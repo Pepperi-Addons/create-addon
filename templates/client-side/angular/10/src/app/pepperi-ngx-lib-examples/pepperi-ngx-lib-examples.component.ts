@@ -39,10 +39,6 @@ export class PepperiNgxLibExamplesComponent implements OnInit {
     elementClicked(event: PepFieldClickedData) {
         alert(`${event.key}: was clicked`);
     }
-    
-    onMenuItemClicked(event) {
-        alert(`${event.key}: was clicked`);
-    }
 
     onGroupButtonClicked(event: PepGroupButton, title): void {
         alert(title);
