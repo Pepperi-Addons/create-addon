@@ -40,10 +40,10 @@
               }
             ],
             "styles": [
-              "src/styles.scss",
-              "src/theme.scss",
               "node_modules/quill/dist/quill.snow.css",
-              "node_modules/quill/dist/quill.core.css"
+              "node_modules/quill/dist/quill.core.css",
+              "src/styles.scss",
+              "src/theme.scss"
             ],
             "scripts": [
               "node_modules/zone.js/dist/zone.js",

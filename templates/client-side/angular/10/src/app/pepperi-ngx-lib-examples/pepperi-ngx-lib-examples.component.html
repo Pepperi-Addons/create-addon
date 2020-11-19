@@ -6,6 +6,12 @@
                     {{ 'Components_Example_Title' | translate }}
                 </div>
             </div>
+            <div class="right-container spacing-element-negative pull-right flip">
+                <pep-menu class="pull-right flip" [xPosition]="'before'" [menuSize]="'md'" [menuStyle]="'weak'"
+                    [items]="menuItems" [showAnimation]="false" (menuClick)="menuClicked($event)"
+                    (menuItemClick)="onMenuItemClicked($event)">
+                </pep-menu>
+            </div>
         </div>
     </div>
     <div class="main-content ngx-lib">
@@ -65,19 +71,10 @@
                 </pep-attachment>
 
                 <!-- Icons Examples -->
+                <pep-icon name="system_spinner" [spin]="true"></pep-icon>
                 <!-- <pep-icon name="system_bolt"></pep-icon>
                     <pep-icon name="no_image"></pep-icon> 
                 -->
-
-                <!-- Menu Example -->
-                <pep-menu [key]="'menu'" [label]="'Pepperi Menu'" [xAlignment]="'left'"
-                    [options]='[{ "Key": "val1", "Value": "Menu Item 1" }, { "Key": "val2", "Value": "Menu Item 2" }, { "Key": "val3", "Value": "Menu Item 3" }, { "Key": "val4", "Value": "Menu Item 4" }]'
-                    (notifyMenuItemClicked)="onMenuItemClicked($event)">
-                </pep-menu>
-
-                <!-- Internal Button Example -->
-                <pep-internal-button [key]="'btn1'" [label]="'Pepperi Internal Button'" [value]="'55'">
-                </pep-internal-button>
             </div>
 
             <div class="child3 child-container">
