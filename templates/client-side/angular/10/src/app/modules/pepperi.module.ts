@@ -124,13 +124,14 @@ import { MultiTranslateHttpLoader } from 'ngx-translate-multi-http-loader';
 //    return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
 // }
 
-export function createTranslateLoader(http: HttpClient, fileService: FileService) {
-    const translationsPath: string = fileService.getAssetsTranslationsPath();
+export function createTranslateLoader(http: HttpClient, fileService: FileService, addonService: AddonService) {
+    const addonStaticFolder = addonService.getAddonStaticFolder();
+    const translationsPath: string = addonStaticFolder.length > 0 ? addonStaticFolder : fileService.getAssetsTranslationsPath();
     const translationsSuffix: string = fileService.getAssetsTranslationsSuffix();
 
     return new MultiTranslateHttpLoader(http, [
-        {prefix: '/', suffix: translationsSuffix},
-        {prefix: '/', suffix: '.json'},
+        {prefix: translationsPath, suffix: translationsSuffix},
+        {prefix: addonStaticFolder.length > 0 ? addonStaticFolder : '/assets/i18n/', suffix: '.json'},
     ]);
 }
 
@@ -144,7 +145,7 @@ export function createTranslateLoader(http: HttpClient, fileService: FileService
             loader: {
                 provide: TranslateLoader,
                 useFactory: createTranslateLoader,
-                deps: [HttpClient, FileService]
+                deps: [HttpClient, FileService, AddonService]
             }
         })
     ],
