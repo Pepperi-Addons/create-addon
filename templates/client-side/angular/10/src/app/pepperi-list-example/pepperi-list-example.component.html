@@ -8,12 +8,13 @@
                 </div>
             </div>
             <div class="right-container spacing-element-negative pull-right flip">
-                <button mat-button class="pep-button weak md spacing-element">
-                    Test
+                <button class="mat-button pep-button weak md spacing-element" (click)="toggleMenu()">
+                    toggle menu
                 </button>
-                <div class="menu spacing-element pull-right flip">
-                   
-                </div>
+                <pep-menu class="pull-right flip" [xPosition]="'after'" [menuStyle]="'strong'" [items]="menuItems"
+                    [showAnimation]="true" (menuClick)="menuClicked($event)" [icon]="'system_edit'"
+                    (menuItemClick)="onMenuItemClicked($event)" (animationStateChange)="onAnimationStateChange($event)">
+                </pep-menu>
             </div>
         </div>
     </div>

@@ -3,6 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { CustomizationService, HttpService, ObjectSingleData, DataConvertorService,
     PepRowData, PepFieldData, AddonService, FIELD_TYPE, UtilitiesService } from '@pepperi-addons/ngx-lib';
 import { PepListComponent, ChangeSortingEvent } from '@pepperi-addons/ngx-lib/list';
+import { PepMenuItem, PepMenuItemClick } from '@pepperi-addons/ngx-lib/menu';
 import { FakeData } from './fake-data';
 
 export enum AddonType {
@@ -18,9 +19,10 @@ export enum AddonType {
     styleUrls: ['./pepperi-list-example.component.scss']
 })
 export class PepperiListExampleComponent implements OnInit {
-  
     @ViewChild(PepListComponent) customList: PepListComponent;
     addons = FakeData.Addons;
+
+    menuItems: Array<PepMenuItem>;
 
     constructor(
         private translate: TranslateService,
@@ -54,7 +56,38 @@ export class PepperiListExampleComponent implements OnInit {
     }
 
     ngAfterViewInit() {
+        this.loadMenuItems();
         this.loadlist('all');
+    }
+
+    getMenuItems(): Array<PepMenuItem> {
+        const menuItems: Array<PepMenuItem> = [
+            { key: 'test1', title: 'test 1'},
+            { key: 'test2', title: 'test 2', disable: true },
+            { key: 'sep', type: 'splitter' },
+            { key: 'test3', title: 'test 3'}];
+
+        return menuItems;
+    }
+
+    private loadMenuItems(): void {
+        this.menuItems = this.getMenuItems();
+    }
+
+    toggleMenu(): void {
+        this.menuItems = this.menuItems === null ? this.getMenuItems() : null;
+    }
+
+    onMenuItemClicked(action: PepMenuItemClick): void {
+        alert(action.source.key);
+    }
+
+    menuClicked(event): void {
+        alert('menu clicked');
+    }
+
+    onAnimationStateChange(state): void {
+
     }
 
     loadlist(apiEndpoint) {
