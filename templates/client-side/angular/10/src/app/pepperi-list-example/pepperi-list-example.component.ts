@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { CustomizationService, HttpService, ObjectSingleData, DataConvertorService,
     PepRowData, PepFieldData, AddonService, FIELD_TYPE, UtilitiesService } from '@pepperi-addons/ngx-lib';
@@ -11,7 +11,7 @@ import { FakeData } from './fake-data';
     templateUrl: './pepperi-list-example.component.html',
     styleUrls: ['./pepperi-list-example.component.scss']
 })
-export class PepperiListExampleComponent implements OnInit {
+export class PepperiListExampleComponent implements OnInit, AfterViewInit {
     @ViewChild(PepListComponent) customList: PepListComponent;
     dataSource = FakeData.Addons;
 
@@ -44,8 +44,11 @@ export class PepperiListExampleComponent implements OnInit {
 
     }
 
-    ngAfterViewInit() {
-        this.initPepList(this.dataSource);
+    ngAfterViewInit(): void {
+        if (this.customList && this.dataSource) {
+            this.loadMenuItems();
+            this.loadlist(this.dataSource);
+        }
     }
 
     private loadMenuItems(): void {
@@ -68,13 +71,6 @@ export class PepperiListExampleComponent implements OnInit {
 
     }
 
-    initPepList(dataSource) {
-        if (this.customList && dataSource) {
-            this.loadMenuItems();
-            this.loadlist(dataSource);
-        }
-    }
-
     getMenuItems(): Array<PepMenuItem> {
         const menuItems: Array<PepMenuItem> = [
             { key: 'test1', title: 'test 1'},
@@ -84,7 +80,7 @@ export class PepperiListExampleComponent implements OnInit {
 
         return menuItems;
     }
-    
+
     loadlist(dataSource) {
         if (this.customList && dataSource) {
             const tableData = new Array<PepRowData>();
