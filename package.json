@@ -1,12 +1,13 @@
 {
     "name": "@pepperi-addons/create",
-    "version": "0.0.36",
+    "version": "0.0.53",
     "description": "a script that downloads the sample repo and installs locally",
     "main": "index.js",
     "bin": "./index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "prepublishOnly": "npm version patch"
+        "prepublishOnly": "npm version patch",
+        "testaddon": "cd test-addon && npx ../"
     },
     "repository": {
         "type": "git",

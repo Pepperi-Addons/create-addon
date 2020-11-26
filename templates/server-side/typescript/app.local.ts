@@ -10,6 +10,7 @@ const server = new DebugServer({
 
 // serve the plugin file locally
 server.addStaticFolder(`/assets/plugins/${config.AddonUUID}/${config.AddonVersion}`, process.cwd() +  '/../publish/editors');
+server.addStaticFolder(`/`, process.cwd() +  '/../publish/editors');
 
 // serve the plugin assets locally
 server.addStaticFolder(`/Addon/Public/${config.AddonUUID}/${config.AddonVersion}`, process.cwd() +  '/../publish/assets');
