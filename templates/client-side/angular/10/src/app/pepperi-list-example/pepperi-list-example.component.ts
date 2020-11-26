@@ -27,6 +27,8 @@ export class PepperiListExampleComponent implements OnInit, AfterViewInit {
 
     ngOnInit() {
 
+        this.loadMenuItems();
+
         // this.httpService.getPapiHttpCall('/meta_data/transactions/types')
         //     .subscribe(
         //         (res) => {
@@ -46,7 +48,6 @@ export class PepperiListExampleComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit(): void {
         if (this.customList && this.dataSource) {
-            this.loadMenuItems();
             this.loadlist(this.dataSource);
         }
     }

@@ -25,7 +25,7 @@
     <aside>
     </aside>
     <main>
-        <div #loadingSpinner pepRtlClass
+        <div #loadingSpinner pepRtlClass [ngStyle]="{ visibility: showLoading ? 'visible' : 'hidden' }"
             id="loadingSpinnerModal">
             <div id="loadingSpinner">
                 <div class="pep-loading-spinner" *ngFor="let number of [0, 1, 2, 3, 4]" [ngStyle]="{ 'background-color': customizationService?.getLoadingSpinnerColor() }"></div>
