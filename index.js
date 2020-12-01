@@ -81,8 +81,8 @@ async function install() {
 
 
     return await Promise.all([
-        // npmInstall(path.join(cwd, 'server-side')),
-        // npmInstall(path.join(cwd, 'client-side')),
+        npmInstall(path.join(cwd, 'server-side')),
+        npmInstall(path.join(cwd, 'client-side')),
         npmInstall(cwd)
     ]);
 }
