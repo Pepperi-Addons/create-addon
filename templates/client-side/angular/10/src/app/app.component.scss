@@ -75,11 +75,78 @@
     min-height: 100%;
 }
 
-// #loadingSpinnerModal {
-//     z-index: $z-index-high + 101;
-//     height: 1rem;
+#loadingSpinnerModal {
+    z-index: $z-index-high + 101;
+    height: 1rem;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    background-color: transparent;
+    opacity: 1;
+ 
+    &.no-top-bar {
+        top: $header-height !important;
+    }
+}
+ 
+#loadingSpinner {
+    z-index: $z-index-high;
+    width: 100%;
+    margin-top: 5px;
+ 
+    div {
+        width: 7px;
+        height: 7px;
+        position: absolute;
+        left: -20px;
+        // background-color: @pepperiGreen;
+        border-radius: 50%;
+        -moz-animation: move 4s infinite cubic-bezier(0.2, 0.64, 0.81, 0.23);
+        -o-animation: move 4s infinite cubic-bezier(0.2, 0.64, 0.81, 0.23);
+        -webkit-animation: move 4s infinite cubic-bezier(0.2, 0.64, 0.81, 0.23);
+        animation: move 4s infinite cubic-bezier(0.2, 0.64, 0.81, 0.23);
+    }
+ 
+    div:nth-child(2) {
+        -moz-animation-delay: 150ms;
+        -o-animation-delay: 150ms;
+        -webkit-animation-delay: 150ms;
+        animation-delay: 150ms;
+    }
+ 
+    div:nth-child(3) {
+        -moz-animation-delay: 300ms;
+        -o-animation-delay: 300ms;
+        -webkit-animation-delay: 300ms;
+        animation-delay: 300ms;
+    }
+ 
+    div:nth-child(4) {
+        -moz-animation-delay: 450ms;
+        -o-animation-delay: 450ms;
+        -webkit-animation-delay: 450ms;
+        animation-delay: 450ms;
+    }
+ 
+    div:nth-child(5) {
+        -moz-animation-delay: 600ms;
+        -o-animation-delay: 600ms;
+        -webkit-animation-delay: 600ms;
+        animation-delay: 600ms;
+    }
+}
 
-//     &.no-top-bar {
-//         top: $header-height !important;
-//     }
-// }
+@keyframes move {
+    0% {
+        left: 0%;
+    }
+    50% {
+        left: 100%;
+    }
+    75% {
+        left: 100%;
+    }
+    100% {
+        left: 100%;
+    }
+}

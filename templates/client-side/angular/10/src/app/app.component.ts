@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomizationService, PepStyleType } from '@pepperi-addons/ngx-lib';
+import { CustomizationService, LoaderService, PepStyleType } from '@pepperi-addons/ngx-lib';
 
 @Component({
     selector: 'addon-root',
@@ -7,13 +7,18 @@ import { CustomizationService, PepStyleType } from '@pepperi-addons/ngx-lib';
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-    
     footerHeight: number;
-
     showLoading = false;
 
-    constructor(public customizationService: CustomizationService) {
-    } 
+    constructor(
+        public customizationService: CustomizationService,
+        public loaderService: LoaderService
+    ) {
+        this.loaderService.onChanged$
+            .subscribe((show) => {
+                this.showLoading = show;
+            });
+    }
 
     ngOnInit() {
         this.customizationService.setThemeVariables();

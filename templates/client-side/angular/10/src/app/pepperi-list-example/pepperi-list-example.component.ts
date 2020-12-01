@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { CustomizationService, HttpService, ObjectSingleData, DataConvertorService,
     PepRowData, PepFieldData, AddonService, FIELD_TYPE, UtilitiesService } from '@pepperi-addons/ngx-lib';
@@ -11,13 +11,9 @@ import { FakeData } from './fake-data';
     templateUrl: './pepperi-list-example.component.html',
     styleUrls: ['./pepperi-list-example.component.scss']
 })
-export class PepperiListExampleComponent implements OnInit {
-     
-    // Just For example replace with service
-     dataSource = FakeData.Addons;
-
+export class PepperiListExampleComponent implements OnInit, AfterViewInit {
     @ViewChild(PepListComponent) customList: PepListComponent;
-
+    dataSource = FakeData.Addons;
 
     menuItems: Array<PepMenuItem>;
 
@@ -26,12 +22,13 @@ export class PepperiListExampleComponent implements OnInit {
         private dataConvertorService: DataConvertorService,
         private httpService: HttpService
     ) {
-
         const browserCultureLang = translate.getBrowserCultureLang();
     }
 
     ngOnInit() {
-        
+
+        this.loadMenuItems();
+
         // this.httpService.getPapiHttpCall('/meta_data/transactions/types')
         //     .subscribe(
         //         (res) => {
@@ -49,24 +46,10 @@ export class PepperiListExampleComponent implements OnInit {
 
     }
 
-    ngAfterViewInit() {
-    }
-
-    initPepList(dataSource) {
-        if (this.customList && dataSource) {
-            this.loadMenuItems();
-            this.loadlist('all');
+    ngAfterViewInit(): void {
+        if (this.customList && this.dataSource) {
+            this.loadlist(this.dataSource);
         }
-    }
-
-    getMenuItems(): Array<PepMenuItem> {
-        const menuItems: Array<PepMenuItem> = [
-            { key: 'test1', title: 'test 1'},
-            { key: 'test2', title: 'test 2', disable: true },
-            { key: 'sep', type: 'splitter' },
-            { key: 'test3', title: 'test 3'}];
-
-        return menuItems;
     }
 
     loadMenuItems(): void {
@@ -89,11 +72,17 @@ export class PepperiListExampleComponent implements OnInit {
 
     }
 
-    loadlist(apiEndpoint) {
-        // this.loadAddons(this.addons);
+    getMenuItems(): Array<PepMenuItem> {
+        const menuItems: Array<PepMenuItem> = [
+            { key: 'test1', title: 'test 1'},
+            { key: 'test2', title: 'test 2', disable: true },
+            { key: 'sep', type: 'splitter' },
+            { key: 'test3', title: 'test 3'}];
+
+        return menuItems;
     }
 
-    loadAddons(dataSource) {
+    loadlist(dataSource) {
         if (this.customList && dataSource) {
             const tableData = new Array<PepRowData>();
             dataSource.forEach((rowData: any) => {
@@ -155,7 +144,7 @@ export class PepperiListExampleComponent implements OnInit {
     onListChange(event) {
     }
 
-    onCustomizeFieldClick(event) {   
+    onCustomizeFieldClick(event) {
     }
 
     selectedRowsChanged(selectedRowsCount) {
