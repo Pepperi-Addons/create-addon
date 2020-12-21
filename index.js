@@ -64,7 +64,7 @@ async function copy(src, dest) {
     });
 }
 
-async function install() {
+async function install(useServer = true, useClient = true) {
     const npm = process.platform == 'win32' ? 'npm.cmd' : 'npm';
     const npmInstall = async function(cwd) {
         return new Promise((resolve, reject) => {
@@ -79,12 +79,14 @@ async function install() {
         })
     }
 
-
-    return await Promise.all([
-        npmInstall(path.join(cwd, 'server-side')),
-        npmInstall(path.join(cwd, 'client-side')),
-        npmInstall(cwd)
-    ]);
+    const promises = [npmInstall(cwd)];
+    if (useServer) { 
+        promises.push(npmInstall(path.join(cwd, 'server-side')));
+    }
+    if (useClient) { 
+        promises.push(npmInstall(path.join(cwd, 'client-side')));
+    }
+    return await Promise.all(promises);
 }
 
 async function createAddon(metadata) {
@@ -172,7 +174,7 @@ const main = async() => {
         const spinner = new Spinner('');
         spinner.setSpinnerString('|/-\\');
         spinner.start();
-        await install();
+        await install(userInput.template.useServer, userInput.template.useClient);
 
 
         console.log("creating your addon...");
