@@ -2,15 +2,15 @@
     "name": "client-side",
     "version": "0.0.0",
     "scripts": {
-        "ng": "ng",
-        "start": "ng serve --port 4400",
+        "ng": "ng",  
         "build": "ng build",
+        "build:single-spa": "ng build client-side --prod",
+        "serve:standalone": "ng serve",
+        "serve:single-spa": "ng s --project client-side --disable-host-check --port 4400 --deploy-url http://localhost:4400/ --live-reload false",
+        "assets-server": "http-server ./src/ -p 4300 -d --cors",
         "test": "ng test",
         "lint": "ng lint",
-        "e2e": "ng e2e",
-        "build:single-spa:client-side": "ng build client-side --prod",
-        "serve:single-spa:client-side": "ng s --project client-side --disable-host-check --port 4400 --deploy-url http://localhost:4400/ --live-reload false",
-        "assets-server": "http-server ./src/ -p 4300 -d --cors"
+        "e2e": "ng e2e"
     },
     "private": true,
     "dependencies": {
@@ -33,7 +33,7 @@
         "@ngx-gallery/core": "^5.0.0-beta.0",
         "@ngx-translate/core": "^13.0.0",
         "@ngx-translate/http-loader": "^6.0.0",
-        "@pepperi-addons/ngx-lib": "^0.1.23",
+        "@pepperi-addons/ngx-lib": "^0.1.41",
         "@pepperi-addons/papi-sdk": "^1.16.0",
         "@tweenjs/tween.js": "^17.1.1",
         "angular2-signaturepad": "^2.11.0",

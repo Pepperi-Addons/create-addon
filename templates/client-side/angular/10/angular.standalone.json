@@ -12,22 +12,23 @@
       },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "addon",
+      "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-builders/custom-webpack:browser",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "../publish/editors",
+            "outputPath": "dist/standalone-client-side",
             "index": "src/index.html",
-            "main": "src/main.single-spa.ts",
-            "polyfills": "src/polyfills.ts",
+            "main": "src/main.ts",
+            "polyfills": "",
             "tsConfig": "tsconfig.json",
             "aot": true,
             "stylePreprocessorOptions": {
-                "includePaths": [
-                    "node_modules/@pepperi-addons",
-                    "node_modules"
-                ]
+              "includePaths": [
+                  // "../../../../../../pepperi-angular-library/dist",
+                  "node_modules/@pepperi-addons",
+                  "node_modules"
+              ]
             },
             "assets": [
               "src/favicon.ico",
@@ -39,20 +40,15 @@
               }
             ],
             "styles": [
-              "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "node_modules/quill/dist/quill.snow.css",
               "node_modules/quill/dist/quill.core.css",
-              "src/theme.scss",
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/theme.scss"
             ],
             "scripts": [
+              "node_modules/zone.js/dist/zone.js",
               "node_modules/quill/dist/quill.core.js"
-            ],
-            "customWebpackConfig": {
-              "path": "extra-webpack.config.js",
-              "libraryName": "client-side",
-              "libraryTarget": "umd"
-            }
+            ]
           },
           "configurations": {
             "production": {
@@ -63,7 +59,7 @@
                 }
               ],
               "optimization": true,
-              "outputHashing": "none",
+              "outputHashing": "all",
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
@@ -86,7 +82,7 @@
           }
         },
         "serve": {
-          "builder": "@angular-builders/custom-webpack:dev-server",
+          "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "client-side:build"
           },

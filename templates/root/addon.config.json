@@ -3,13 +3,13 @@
   "AddonVersion": "0.0.0",
   "DebugPort": 4400,
   "WebappBaseUrl": "https://app.sandbox.pepperi.com",
-  "DefaultEditor": "editor",
+  "DefaultEditor": "main",
   "Endpoints": [
-    "installation.js",
+    "installation.ts",
     "api.ts"
   ],
   "Editors": [
-    "editor"
+    "main"
   ],
   "Assets": [
     "de.json",

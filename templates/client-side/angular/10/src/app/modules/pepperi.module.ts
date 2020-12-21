@@ -10,8 +10,6 @@ import { PepDateModule } from '@pepperi-addons/ngx-lib/date';
 import { PepGroupButtonsModule } from '@pepperi-addons/ngx-lib/group-buttons';
 import { PepImageModule } from '@pepperi-addons/ngx-lib/image';
 import { PepImagesFilmstripModule } from '@pepperi-addons/ngx-lib/images-filmstrip';
-import { PepInternalButtonModule } from '@pepperi-addons/ngx-lib/internal-button';
-import { PepMenuModule } from '@pepperi-addons/ngx-lib/menu';
 import { PepQuantitySelectorModule } from '@pepperi-addons/ngx-lib/quantity-selector';
 import { PepRichHtmlTextareaModule } from '@pepperi-addons/ngx-lib/rich-html-textarea';
 import { PepSelectModule } from '@pepperi-addons/ngx-lib/select';
@@ -21,8 +19,11 @@ import { PepSizeDetectorModule } from '@pepperi-addons/ngx-lib/size-detector';
 import { PepTextareaModule } from '@pepperi-addons/ngx-lib/textarea';
 import { PepTextboxModule } from '@pepperi-addons/ngx-lib/textbox';
 import { PepListModule } from '@pepperi-addons/ngx-lib/list';
+import { PepMenuModule } from '@pepperi-addons/ngx-lib/menu';
 
-import {PepIconModule, PepIconRegistry,
+import {
+    PepIconModule,
+    PepIconRegistry,
     pepIconSystemBolt,
     pepIconNoImage,
     pepIconArrowTwoWaysVerT,
@@ -103,8 +104,6 @@ const pepperiComponentsModules = [
     PepImagesFilmstripModule,
     PepListModule,
     PepCheckboxModule,
-    PepInternalButtonModule,
-    PepMenuModule,
     PepQuantitySelectorModule,
     PepRichHtmlTextareaModule,
     PepSelectModule,
@@ -113,7 +112,8 @@ const pepperiComponentsModules = [
     PepSizeDetectorModule,
     PepTextareaModule,
     PepTextboxModule,
-    PepIconModule
+    PepIconModule,
+    PepMenuModule
 ];
 
 import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
@@ -124,12 +124,14 @@ import { MultiTranslateHttpLoader } from 'ngx-translate-multi-http-loader';
 //    return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
 // }
 
-export function createTranslateLoader(http: HttpClient, fileService: FileService) {
+export function createTranslateLoader(http: HttpClient, fileService: FileService, addonService: AddonService) {
+    const addonStaticFolder = addonService.getAddonStaticFolder();
     const translationsPath: string = fileService.getAssetsTranslationsPath();
+    const translationsSuffix: string = fileService.getAssetsTranslationsSuffix();
 
     return new MultiTranslateHttpLoader(http, [
-        {prefix: translationsPath, suffix: '.json'},
-        {prefix: '/assets/i18n/', suffix: '.json'},
+        {prefix: addonStaticFolder.length > 0 ? addonStaticFolder : translationsPath, suffix: translationsSuffix},
+        {prefix: addonStaticFolder.length > 0 ? addonStaticFolder : '/assets/i18n/', suffix: '.json'},
     ]);
 }
 
@@ -143,7 +145,7 @@ export function createTranslateLoader(http: HttpClient, fileService: FileService
             loader: {
                 provide: TranslateLoader,
                 useFactory: createTranslateLoader,
-                deps: [HttpClient, FileService]
+                deps: [HttpClient, FileService, AddonService]
             }
         })
     ],
@@ -158,7 +160,6 @@ export class PepUIModule {
           translate: TranslateService,
           private pepperiIconRegistry: PepIconRegistry
       ) {
-        
         this.pepperiIconRegistry.registerIcons(pepIcons);
 
         let userLang = 'en';

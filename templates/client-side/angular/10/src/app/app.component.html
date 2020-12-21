@@ -25,14 +25,12 @@
     <aside>
     </aside>
     <main>
-        <!-- [style.height]="!userService.showModal ? '0' : '100%'" -->
-        <!-- <div #loadingSpinner [hidden]="!showLoading || isLogin" pepRtlClass
-            [ngClass]="{ 'no-top-bar': userService?.isObjectChooserOpen || userService?.isListOfObjectsOpen }"
+        <div #loadingSpinner pepRtlClass [ngStyle]="{ visibility: showLoading ? 'visible' : 'hidden' }"
             id="loadingSpinnerModal">
             <div id="loadingSpinner">
                 <div class="pep-loading-spinner" *ngFor="let number of [0, 1, 2, 3, 4]" [ngStyle]="{ 'background-color': customizationService?.getLoadingSpinnerColor() }"></div>
             </div>
-        </div> -->
+        </div>
         <div id="mainCont" #mainCont pepRtlDirection pepRtlClass
             [ngStyle]="{ 'padding-bottom': footerHeight + 'rem' }">
             <router-outlet [ngStyle]="{ 'padding-bottom': footerHeight + 'rem' }"></router-outlet>
