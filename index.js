@@ -91,7 +91,7 @@ async function install(useServer = true, useClient = true) {
 
 async function createAddon(metadata) {
 
-    const npx = process.platform == 'win32' ? 'npx.cmd' : 'npx';
+    const npx = /^win/.test(process.platform) ? 'npx.cmd' : 'npx';
     return new Promise((resolve, reject) => {
         const cmd = spawn(npx, ['create-addon'], { cwd: cwd });
         cmd.on('close', (code) => {
