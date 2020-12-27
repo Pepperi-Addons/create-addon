@@ -14,6 +14,7 @@
   "Assets": [
     "de.json",
     "en.json",
+    "en.ngx-lib.json",
     "es.json",
     "fr.json",
     "he.json",
@@ -25,5 +26,17 @@
     "pt.json",
     "ru.json",
     "zh.json"
-  ]
+  ],
+  "PublishConfig": {
+    "ClientStack": "ng10",
+    "Editors": [
+      {
+        "ParentPackageName": "CHANGE_TO_ADDON_CONTAINER_NAME",
+        "PackageName": "CHANGE_TO_ADDON_PATH",
+        "Description": "CHANGE_TO_ADDON_DESCRIPTION"
+      }
+    ],
+    "Dependencies": {
+    }
+  }
 }

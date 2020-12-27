@@ -4,11 +4,19 @@ export interface Client {
     BaseURL: string;
     AssetsBaseUrl: string;
     OAuthAccessToken: string;
+    Retry: (delay: number) => void;
+    CodeRevisionURL?: string;
+    EncryptedAddonUUID?: string;
+    ExecutionUUID?: string;
+    NumberOfTry?: number;
+    Module?: any;
 }
 export interface Request {
     method: string;
     body: any;
     query: any;
+    originalUrl?: string;
+    path?: string;
 }
 interface DebugServerOptions {
     port?: number;

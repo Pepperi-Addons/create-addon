@@ -9,12 +9,20 @@ export interface Client {
     AssetsBaseUrl: string;
     OAuthAccessToken: string;
     Retry: (delay: number) => void;
+    CodeRevisionURL? : string;
+    EncryptedAddonUUID? : string;
+    ExecutionUUID? : string;
+    NumberOfTry? : number;
+    Module?: any;
 }
 
+
 export interface Request {
-    method: string,
-    body: any, 
-    query: any
+    method: string;
+    body: any;
+    query: any;
+    originalUrl?: string;
+    path?: string;
 }
 
 interface DebugServerOptions {
@@ -74,6 +82,7 @@ export class DebugServer {
 
         return {
             AddonUUID: this.addonUUID,
+            EncryptedAddonUUID: this.addonUUID,
             BaseURL: parsedToken['pepperi.baseurl'],
             OAuthAccessToken: token,
             AssetsBaseUrl: this.assetsDirectory,

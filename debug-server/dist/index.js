@@ -44,9 +44,11 @@ class DebugServer {
         let parsedToken = jwt_decode_1.default(token);
         return {
             AddonUUID: this.addonUUID,
+            EncryptedAddonUUID: this.addonUUID,
             BaseURL: parsedToken['pepperi.baseurl'],
             OAuthAccessToken: token,
-            AssetsBaseUrl: this.assetsDirectory
+            AssetsBaseUrl: this.assetsDirectory,
+            Retry: () => { }
         };
     }
     createRequest(req) {
