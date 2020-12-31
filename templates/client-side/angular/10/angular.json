@@ -19,7 +19,7 @@
           "options": {
             "outputPath": "../publish/editors",
             "index": "src/index.html",
-            "main": "src/main.single-spa.ts",
+            "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.json",
             "aot": true,
@@ -91,6 +91,12 @@
             "browserTarget": "client-side:build"
           },
           "configurations": {
+            "Standalone": {
+                
+            },
+            "SingleSpa": {
+                
+            },
             "production": {
               "browserTarget": "client-side:build:production"
             }

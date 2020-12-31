@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 
-import { PepNgxLibModule, AddonService, CustomizationService, FileService } from '@pepperi-addons/ngx-lib';
+import { PepNgxLibModule, PepAddonService, PepFileService } from '@pepperi-addons/ngx-lib';
 import { PepAttachmentModule } from '@pepperi-addons/ngx-lib/attachment';
 import { PepCheckboxModule } from '@pepperi-addons/ngx-lib/checkbox';
 import { PepColorModule } from '@pepperi-addons/ngx-lib/color';
@@ -124,14 +124,26 @@ import { MultiTranslateHttpLoader } from 'ngx-translate-multi-http-loader';
 //    return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
 // }
 
-export function createTranslateLoader(http: HttpClient, fileService: FileService, addonService: AddonService) {
+export function createTranslateLoader(http: HttpClient, fileService: PepFileService, addonService: PepAddonService) {
     const addonStaticFolder = addonService.getAddonStaticFolder();
     const translationsPath: string = fileService.getAssetsTranslationsPath();
     const translationsSuffix: string = fileService.getAssetsTranslationsSuffix();
 
     return new MultiTranslateHttpLoader(http, [
-        {prefix: addonStaticFolder.length > 0 ? addonStaticFolder : translationsPath, suffix: translationsSuffix},
-        {prefix: addonStaticFolder.length > 0 ? addonStaticFolder : '/assets/i18n/', suffix: '.json'},
+        {
+            prefix:
+                addonStaticFolder.length > 0
+                    ? addonStaticFolder.indexOf('localhost') >= 0 ? addonStaticFolder + translationsPath : addonStaticFolder
+                    : translationsPath,
+            suffix: translationsSuffix,
+        },
+        {
+            prefix:
+                addonStaticFolder.length > 0
+                    ? addonStaticFolder.indexOf('localhost') >= 0 ? addonStaticFolder + "/assets/i18n/" : addonStaticFolder
+                    : "/assets/i18n/",
+            suffix: ".json",
+        },
     ]);
 }
 
@@ -145,7 +157,7 @@ export function createTranslateLoader(http: HttpClient, fileService: FileService
             loader: {
                 provide: TranslateLoader,
                 useFactory: createTranslateLoader,
-                deps: [HttpClient, FileService, AddonService]
+                deps: [HttpClient, PepFileService, PepAddonService]
             }
         })
     ],
