@@ -2,8 +2,10 @@
     "name": "client-side",
     "version": "0.0.0",
     "scripts": {
-        "ng": "ng",  
+        "ng": "ng",
         "build": "ng build",
+        "single-spa": "ng serve --port 4400 --configuration SingleSpa",
+        "standalone": "ng serve --port 4400 --configuration Standalone",
         "build:single-spa": "ng build client-side --prod",
         "serve:standalone": "ng serve",
         "serve:single-spa": "ng s --project client-side --disable-host-check --port 4400 --deploy-url http://localhost:4400/ --live-reload false",
@@ -33,18 +35,21 @@
         "@ngx-gallery/core": "^5.0.0-beta.0",
         "@ngx-translate/core": "^13.0.0",
         "@ngx-translate/http-loader": "^6.0.0",
-        "@pepperi-addons/ngx-lib": "^0.1.41",
-        "@pepperi-addons/papi-sdk": "^1.16.0",
+        "@pepperi-addons/ngx-lib": "^0.1.65",
+        "@pepperi-addons/papi-sdk": "^1.17.3",
         "@tweenjs/tween.js": "^17.1.1",
         "angular2-signaturepad": "^2.11.0",
         "disable-scroll": "^0.5.1",
         "hammerjs": "^2.0.8",
         "jquery": "^3.5.1",
         "moment": "^2.27.0",
+        "ng-gallery": "^5.0.0",
+        "jwt-decode": "^2.2.0",
         "ng2-file-upload": "^1.4.0",
         "ngx-image-viewer": "^1.0.13",
         "ngx-quill": "^12.0.1",
         "ngx-translate-multi-http-loader": "^3.0.0",
+        "ngx-signaturepad": "0.0.9",
         "quill": "^1.3.7",
         "rxjs": "^6.6.2",
         "single-spa": "5.4.0",
@@ -76,5 +81,8 @@
         "ts-node": "~8.3.0",
         "tslint": "~6.1.0",
         "typescript": "~3.9.7"
+    },
+    "browser": {
+        "perf_hooks": false
     }
 }

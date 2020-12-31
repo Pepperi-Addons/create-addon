@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomizationService, LoaderService, PepStyleType } from '@pepperi-addons/ngx-lib';
+import { PepCustomizationService, PepLoaderService, PepStyleType } from '@pepperi-addons/ngx-lib';
+
+declare var CLIENT_MODE: any;
 
 @Component({
     selector: 'addon-root',
@@ -9,15 +11,17 @@ import { CustomizationService, LoaderService, PepStyleType } from '@pepperi-addo
 export class AppComponent implements OnInit {
     footerHeight: number;
     showLoading = false;
+    clientMode: string;
 
     constructor(
-        public customizationService: CustomizationService,
-        public loaderService: LoaderService
+        public customizationService: PepCustomizationService,
+        public loaderService: PepLoaderService
     ) {
         this.loaderService.onChanged$
             .subscribe((show) => {
                 this.showLoading = show;
             });
+            this.clientMode = CLIENT_MODE;
     }
 
     ngOnInit() {
@@ -29,7 +33,7 @@ export class AppComponent implements OnInit {
     }
 
     getTopBarStyle() {
-        return document.documentElement.style.getPropertyValue(CustomizationService.STYLE_TOP_HEADER_KEY) as PepStyleType;
+        return document.documentElement.style.getPropertyValue(PepCustomizationService.STYLE_TOP_HEADER_KEY) as PepStyleType;
     }
 
     navigateHome() {
