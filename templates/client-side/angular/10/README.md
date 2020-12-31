@@ -1,27 +1,58 @@
 # ClientSide
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.0.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.0.
 
 ## Development server
+There are 2 different ways to develop your UI:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- Inside WebApp (Single-Spa)
 
-## Code scaffolding
+    to run this configuration, use `npm run single-spa` and than Navigate to https://app.sandbox.pepperi.com/settings/your-app-uuid/addon?dev=true to see your changes.
+- Standalone
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+    to run this configuration, use `npm run standalone` and than Navigate to http://localhost:4400/settings/your-app-uuid/addon to see your changes.
 
-## Build
+The app will automatically reload if you change any of the source files.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Project structure
+---
+The following is an overview of the project structure. 
+The node_modules folder is in use by `npm`
 
-## Running unit tests
+#### Folders
+|Folder | Description |
+| ---:  | :---       |
+| app | folder contains all project related files (eg. components, routing info, modules) |
+| assets | put any assets you might need for the front end (eg. translation files, images) |
+| single-spa | configuration files for single-spa wrapper |
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+#### Additional files
+`angular.json` contains configuration for the angular project
 
-## Running end-to-end tests
+`extra-webpack.config.js` extra configuration for bundling your application. 
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+`package.json` contains dependencies for your project, and all the scripts you can run
 
-## Further help
+`README.md` This file. You can file info here regarding your project.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Routing
+all your projects routes are inside `app-routing.module.ts` inside `app` folder.
+```
+const routes: Routes = [
+    {
+        path: `settings/:addon_uuid/`,
+        children: [
+            {
+                path: 'addon',
+                component: AddonComponent
+            },
+        ]
+    },
+    {
+        path: '**',
+        component: EmptyRouteComponent
+    }
+];
+```
+each object created inside **children** array will define a new path for the project. 
+it is recommended that each path will have it's own component
