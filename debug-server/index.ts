@@ -41,7 +41,7 @@ export class DebugServer {
     constructor(options: DebugServerOptions) {
         
         this.app = express();
-        this.port = options.port || 4400;
+        this.port = options.port || 4500;
         this.addonUUID = options.addonUUID || '';
         this.apiDirectory = options.apiDirectory || process.cwd();
         this.app.use((req, res, next) => {
