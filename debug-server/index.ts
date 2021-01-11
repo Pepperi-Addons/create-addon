@@ -12,8 +12,7 @@ export interface Client {
     OAuthAccessToken: string;
     Retry: (delay: number) => void;
     CodeRevisionURL? : string;
-    EncryptedAddonUUID? : string;
-    SecretKey? : string;
+    AddonSecretKey? : string;
     ExecutionUUID? : string;
     NumberOfTry? : number;
     Module?: any;
@@ -109,8 +108,7 @@ export class DebugServer {
 
         return {
             AddonUUID: this.addonUUID,
-            EncryptedAddonUUID: sk,
-            SecretKey: sk,
+            AddonSecretKey: sk,
             BaseURL: parsedToken['pepperi.baseurl'],
             OAuthAccessToken: token,
             AssetsBaseUrl: this.assetsDirectory,
