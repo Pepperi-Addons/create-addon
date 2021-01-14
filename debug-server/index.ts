@@ -2,6 +2,8 @@ import express, { request } from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import jwtDecode from 'jwt-decode'
+import path from 'path'
+import fs from 'fs'
 
 export interface Client {
     AddonUUID: string;
@@ -10,7 +12,7 @@ export interface Client {
     OAuthAccessToken: string;
     Retry: (delay: number) => void;
     CodeRevisionURL? : string;
-    EncryptedAddonUUID? : string;
+    AddonSecretKey? : string;
     ExecutionUUID? : string;
     NumberOfTry? : number;
     Module?: any;
@@ -41,7 +43,7 @@ export class DebugServer {
     constructor(options: DebugServerOptions) {
         
         this.app = express();
-        this.port = options.port || 4400;
+        this.port = options.port || 4500;
         this.addonUUID = options.addonUUID || '';
         this.apiDirectory = options.apiDirectory || process.cwd();
         this.app.use((req, res, next) => {
@@ -60,6 +62,29 @@ export class DebugServer {
         this.assetsDirectory = `http://localhost:${this.port}/${assetsRelativePath}`;
     }
 
+    async getSecret() :Promise<string> {
+        return new Promise ((resolve, reject) => {
+            const secretFile = path.join(process.cwd(), '/../var_sk');
+            const exist = fs.existsSync(secretFile);
+            if (!exist) {
+                reject(new Error(`Missing var_sk file in current directory`));
+            }
+            else {
+                fs.readFile(secretFile, (err, data) => {
+                    if (err) {
+                        reject(new Error(`Error reading var_sk file: ${err}`));
+                    }
+                    else if (!data) {
+                        reject(new Error('Secret is empty. Are you sure you have it?'));
+                    }
+                    else {
+                        resolve(data.toString());
+                    }
+                })
+            }
+        });
+    }
+
     start() {
         this.app.listen(this.port, () => {
             console.log(`listening on http://localhost:${this.port}`);
@@ -70,7 +95,7 @@ export class DebugServer {
         this.app.use(virtualPath, express.static(path));
     }
 
-    createClient(req: express.Request): Client {
+    async createClient(req: express.Request): Promise<Client> {
         const authorization = req.header('Authorization') || '';
 
         if (!authorization) {
@@ -79,10 +104,11 @@ export class DebugServer {
 
         const token = authorization.replace('Bearer ', '') || '';
         let parsedToken = jwtDecode<any>(token);
+        const sk = await this.getSecret() || '';
 
         return {
             AddonUUID: this.addonUUID,
-            EncryptedAddonUUID: this.addonUUID,
+            AddonSecretKey: sk,
             BaseURL: parsedToken['pepperi.baseurl'],
             OAuthAccessToken: token,
             AssetsBaseUrl: this.assetsDirectory,
@@ -108,7 +134,7 @@ export class DebugServer {
             const filePath = this.apiDirectory + '/' + file;
             const mod = await require(filePath);
             const func = mod[funcName];
-            result = await func(this.createClient(req), this.createRequest(req));
+            result = await func(await this.createClient(req), this.createRequest(req));
             
         } catch (ex) {
             console.log('error :', ex);
