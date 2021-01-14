@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
+import { NgModule } from 'src/app/components/empty-route/node_modules/@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { EmptyRouteComponent } from './empty-route/empty-route.component';
+import { EmptyRouteComponent } from './components/empty-route/empty-route.component';
 import { AddonComponent } from './components/addon/addon.component';
 // import * as config from '../../../addon.config.json';
 
 const routes: Routes = [
     {
-        path: `settings/:addon_uuid/`,
+        path: `settings/:addon_uuid`,
         children: [
             {
                 path: 'addon',

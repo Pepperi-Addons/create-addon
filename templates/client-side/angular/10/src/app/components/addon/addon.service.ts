@@ -1,6 +1,6 @@
 import jwt from 'jwt-decode';
 import { PapiClient } from '@pepperi-addons/papi-sdk';
-import { Injectable } from '@angular/core';
+import { Injectable } from 'src/app/components/empty-route/node_modules/@angular/core';
 
 import {PepAddonService, PepHttpService, PepDataConvertorService, PepSessionService} from '@pepperi-addons/ngx-lib';
 
@@ -13,7 +13,7 @@ export class AddonService {
     parsedToken: any
     papiBaseURL = ''
     pluginUUID;
-  
+
     get papiClient(): PapiClient {
         return new PapiClient({
             baseURL: this.papiBaseURL,
@@ -22,7 +22,7 @@ export class AddonService {
             suppressLogging:true
         })
     }
-  
+
     constructor(
         public addonService:  PepAddonService
         ,public session:  PepSessionService

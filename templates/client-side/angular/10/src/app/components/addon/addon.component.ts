@@ -8,7 +8,7 @@ import {
     Compiler,
     ViewChild,
     OnDestroy,
-} from "@angular/core";
+} from "src/app/components/empty-route/node_modules/@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { PepLayoutService, PepScreenSizeType } from '@pepperi-addons/ngx-lib';
