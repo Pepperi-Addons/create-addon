@@ -1,4 +1,4 @@
-import { Component, OnInit } from 'src/app/components/empty-route/node_modules/@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PepCustomizationService, PepLoaderService, PepStyleType } from '@pepperi-addons/ngx-lib';
 
 declare var CLIENT_MODE: any;

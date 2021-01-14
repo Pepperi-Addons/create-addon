@@ -1,4 +1,4 @@
-import { NgModule } from 'src/app/components/empty-route/node_modules/@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 
