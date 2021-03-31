@@ -1,0 +1,152 @@
+@import 'ngx-lib/src/core/style/abstracts/mixins';
+@import 'ngx-lib/src/core/style/abstracts/variables';
+
+.viewportDiv {
+    background: white;
+    display: -ms-grid;
+    display: grid;
+    height: 100vh;
+
+    max-width: $max-scr-width;
+    margin: 0 auto;
+
+    grid-template-areas: 'header header' 'sidebar content';
+    -ms-grid-rows: $header-height 1fr;
+    grid-template-rows: $header-height 1fr;
+    -ms-grid-columns: auto 1fr;
+    grid-template-columns: auto 1fr;
+
+    header {
+        grid-row: header;
+        -ms-grid-row: header;
+        grid-row-start: header;
+        -ms-grid-row-span: NaN;
+        grid-row-end: header;
+        grid-column: header;
+        -ms-grid-column: header;
+        grid-column-start: header;
+        -ms-grid-column-span: NaN;
+        grid-column-end: header;
+
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: $z-index-high + 1;
+    }
+
+    aside {
+        grid-area: sidebar;
+    }
+
+    main {
+        -ms-grid-row: 2;
+        -ms-grid-column: 2;
+        grid-area: content;
+    }
+}
+
+#header {
+    height: $header-height;
+
+    .navbar {
+        // border: none !important;
+        border-radius: 0;
+        @include box-sizing(border-box);
+        height: inherit;
+        width: 100%;
+        padding: $spacing-lg $double-content-padding;
+        margin: 0;
+        max-width: $max-scr-width;
+
+        @media (max-width: $screen-max-size-xs) {
+            padding-left: $content-padding;
+            padding-right: $content-padding;
+        }
+
+        .navbar-default {
+            background-color: transparent;
+            border-bottom-color: transparent;
+        }
+    }
+}
+
+#mainCont {
+    flex-grow: 1;
+    min-height: 100%;
+}
+
+#loadingSpinnerModal {
+    z-index: $z-index-high + 101;
+    height: 1rem;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    background-color: transparent;
+    opacity: 1;
+ 
+    &.no-top-bar {
+        top: $header-height !important;
+    }
+}
+ 
+#loadingSpinner {
+    z-index: $z-index-high;
+    width: 100%;
+    margin-top: 5px;
+ 
+    div {
+        width: 7px;
+        height: 7px;
+        position: absolute;
+        left: -20px;
+        // background-color: @pepperiGreen;
+        border-radius: 50%;
+        -moz-animation: move 4s infinite cubic-bezier(0.2, 0.64, 0.81, 0.23);
+        -o-animation: move 4s infinite cubic-bezier(0.2, 0.64, 0.81, 0.23);
+        -webkit-animation: move 4s infinite cubic-bezier(0.2, 0.64, 0.81, 0.23);
+        animation: move 4s infinite cubic-bezier(0.2, 0.64, 0.81, 0.23);
+    }
+ 
+    div:nth-child(2) {
+        -moz-animation-delay: 150ms;
+        -o-animation-delay: 150ms;
+        -webkit-animation-delay: 150ms;
+        animation-delay: 150ms;
+    }
+ 
+    div:nth-child(3) {
+        -moz-animation-delay: 300ms;
+        -o-animation-delay: 300ms;
+        -webkit-animation-delay: 300ms;
+        animation-delay: 300ms;
+    }
+ 
+    div:nth-child(4) {
+        -moz-animation-delay: 450ms;
+        -o-animation-delay: 450ms;
+        -webkit-animation-delay: 450ms;
+        animation-delay: 450ms;
+    }
+ 
+    div:nth-child(5) {
+        -moz-animation-delay: 600ms;
+        -o-animation-delay: 600ms;
+        -webkit-animation-delay: 600ms;
+        animation-delay: 600ms;
+    }
+}
+
+@keyframes move {
+    0% {
+        left: 0%;
+    }
+    50% {
+        left: 100%;
+    }
+    75% {
+        left: 100%;
+    }
+    100% {
+        left: 100%;
+    }
+}

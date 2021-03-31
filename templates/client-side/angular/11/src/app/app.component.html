@@ -1,0 +1,42 @@
+<ng-container *ngIf="clientMode == 'Standalone'; then standalone; else singleSpa">
+
+</ng-container>
+<ng-template #singleSpa>
+    <router-outlet></router-outlet>
+</ng-template>
+<ng-template #standalone>
+    <div class="viewportDiv" #viewportDiv pepRtlDirection >
+        <header>
+            <div id="header" pepRtlClass>
+                <nav class="navbar {{ getTopBarStyle() }} navbar-light bg-faded menuCont" [ngStyle]="{'background-color': customizationService.getBrandingMainColor() }">
+                    <button id="btnMenuHome" (click)="navigateHome()"
+                        class="spacing-element pep-button icon-button sm weak pull-left flip " [ngClass]="getButtonClassName()" mat-button>
+                        <mat-icon>
+                            <pep-icon name="system_home"></pep-icon>
+                        </mat-icon>
+                    </button>
+                    <button id="btnToggleSettings" class="spacing-element pep-button icon-button sm weak pull-right flip " [ngClass]="getButtonClassName()" mat-button>
+                        <mat-icon>
+                            <pep-icon name="system_menu"></pep-icon>
+                        </mat-icon>
+                    </button>
+                </nav>
+            </div>
+        </header>
+        <aside>
+        </aside>
+        <main>
+            <div #loadingSpinner pepRtlClass [ngStyle]="{ visibility: showLoading ? 'visible' : 'hidden' }"
+                id="loadingSpinnerModal">
+                <div id="loadingSpinner">
+                    <div class="pep-loading-spinner" *ngFor="let number of [0, 1, 2, 3, 4]" [ngStyle]="{ 'background-color': customizationService?.getLoadingSpinnerColor() }"></div>
+                </div>
+            </div>
+            <div id="mainCont" #mainCont pepRtlDirection pepRtlClass
+                [ngStyle]="{ 'padding-bottom': footerHeight + 'rem' }">
+                <router-outlet [ngStyle]="{ 'padding-bottom': footerHeight + 'rem' }"></router-outlet>
+            </div>
+        </main>
+    </div>
+</ng-template>
+<pep-size-detector></pep-size-detector>
