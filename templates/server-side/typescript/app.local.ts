@@ -3,7 +3,7 @@ import config from '../addon.config.json';
 
 const dir = __dirname;
 const server = new DebugServer({
-    addonUUID: process.env.AddonUUID,
+    addonUUID: config.AddonUUID,
     apiDirectory: dir,
     port: config.DebugPort
 });
