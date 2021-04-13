@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 4400",
-    "single-spa": "ng serve --port 4404 --configuration SingleSpa",
-    "standalone": "ng serve --port 4404 --configuration Standalone",
+    "single-spa": "ng serve --port 4400 --configuration SingleSpa",
+    "standalone": "ng serve --port 4400 --configuration Standalone",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
