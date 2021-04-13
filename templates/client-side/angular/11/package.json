@@ -10,7 +10,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build:single-spa:client-side": "ng build client-side --prod",
+    "build:single-spa": "ng build --prod",
     "serve:single-spa:client-side": "ng s --project client-side --disable-host-check --port 4400 --deploy-url http://localhost:4400/ --live-reload false",
     "assets-server": "http-server ./src/ -p 4300 -d --cors"
   },
