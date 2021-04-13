@@ -66,9 +66,10 @@ async function copy(src, dest) {
 
 async function install(useServer = true, useClient = true) {
     const npm = process.platform == 'win32' ? 'npm.cmd' : 'npm';
-    const npmInstall = async function(cwd) {
+    const yarn = process.platform == 'win32' ? 'yarn.cmd' : 'yarn';
+    const depsInstall = async function(cwd, type) {
         return new Promise((resolve, reject) => {
-            const cmd = spawn(npm, ['install'], { cwd: cwd });
+            const cmd = spawn(type, ['install'], { cwd: cwd });
             cmd.on('close', (code) => {
                 resolve()
             });
@@ -79,12 +80,12 @@ async function install(useServer = true, useClient = true) {
         })
     }
 
-    const promises = [npmInstall(cwd)];
+    const promises = [depsInstall(cwd, npm)];
     if (useServer) { 
-        promises.push(npmInstall(path.join(cwd, 'server-side')));
+        promises.push(depsInstall(path.join(cwd, 'server-side'), npm));
     }
     if (useClient) { 
-        promises.push(npmInstall(path.join(cwd, 'client-side')));
+        promises.push(depsInstall(path.join(cwd, 'client-side'), yarn));
     }
     return await Promise.all(promises);
 }
