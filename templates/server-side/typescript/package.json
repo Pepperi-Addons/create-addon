@@ -17,6 +17,7 @@
     },
     "devDependencies": {
         "@rollup/plugin-commonjs": "^12.0.0",
+        "@rollup/plugin-json": "^4.1.0",
         "@rollup/plugin-node-resolve": "^8.0.0",
         "@types/dotenv": "^8.2.0",
         "@types/node": "^10.17.24",
@@ -27,7 +28,7 @@
         "typescript": "~3.8.0"
     },
     "dependencies": {
-        "@pepperi-addons/debug-server": "0.0.24",
-        "@pepperi-addons/papi-sdk": "^1.0.14"
+        "@pepperi-addons/debug-server": "0.0.30",
+        "@pepperi-addons/papi-sdk": "^1.24.0"
     }
 }
