@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "target": "es2017",
+        "module": "commonjs",
+        "strict": true,
+        "rootDir": "..",
+        "outDir": "build",
+        "esModuleInterop": true,
+        "declaration": true,
+        "sourceMap": true,
+        "noImplicitAny": false,
+        "allowJs": true,
+        "resolveJsonModule": true,
+        "lib": [
+        "es2019"
+        ]
+    },
+    "exclude": [
+        "./build/**",
+        "./dest/**"
+    ]
+}
+  

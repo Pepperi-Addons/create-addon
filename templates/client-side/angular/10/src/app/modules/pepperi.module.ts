@@ -133,14 +133,14 @@ export function createTranslateLoader(http: HttpClient, fileService: PepFileServ
         {
             prefix:
                 addonStaticFolder.length > 0
-                    ? addonStaticFolder.indexOf('localhost') >= 0 ? addonStaticFolder + translationsPath : addonStaticFolder
+                    ? addonStaticFolder + translationsPath
                     : translationsPath,
             suffix: translationsSuffix,
         },
         {
             prefix:
                 addonStaticFolder.length > 0
-                    ? addonStaticFolder.indexOf('localhost') >= 0 ? addonStaticFolder + "/assets/i18n/" : addonStaticFolder
+                    ? addonStaticFolder + "assets/i18n/" 
                     : "/assets/i18n/",
             suffix: ".json",
         },
