@@ -125,7 +125,27 @@ async function chooseAddonMetadata() {
     return { metadata };
 }
 
-
+async function updateConfig(useServer = true, useClient = true, useCpi = false, clientVersion = '10') {
+    const configPath = './package.json';
+    if(fs.pathExists(configPath)) {
+        try {
+            const config = await fs.readJSON(configPath);
+            let buildCommand = useClient ? 'cd ./client-side && npm run build:single-spa && cd .. ' : '';
+            buildCommand += useCpi ? '&& cd ./cpi-side && npm run build && cd .. ' : '';
+            buildCommand += useServer ? '&& cd ./server-side && npm run build && cd ..' : '';
+            const clientManager = clientVersion === '11' ? 'yarn' : 'npm install';
+            let initCommand = useClient ? `cd ./client-side && ${clientManager} && cd .. ` : '';
+            initCommand += useCpi ? '&& cd ./cpi-side && npm install && cd .. ' : '';
+            initCommand += useServer ? '&& cd ./server-side && npm install && cd ..' : '';
+            config.scripts.init = initCommand.startsWith('&&') ?  initCommand.slice(2, initCommand.length) : initCommand;
+            config.scripts.build = buildCommand.startsWith('&&') ?  buildCommand.slice(2, buildCommand.length) : buildCommand;
+            await fs.writeFile(configPath, JSON.stringify(config, null, "\t"));
+        }
+        catch(err) {
+            console.error('could not read package.json file');
+        }
+    }
+}
 
 const main = async() => {
 
@@ -184,14 +204,13 @@ const main = async() => {
         }
 
         console.log("updating package.json...");
-        await updateConfig(userInput.template.useServer, userInput.template.useClient, userInput.template.useCpi);
+        await updateConfig(userInput.template.useServer, userInput.template.useClient, userInput.template.useCpi, userInput.template.frameworkVersion);
 
         console.log("installing dependencies...");
         const spinner = new Spinner('');
         spinner.setSpinnerString('|/-\\');
         spinner.start();
         await install(userInput.template.useServer, userInput.template.useClient, userInput.template.useCpi);
-
 
         console.log("creating your addon...");
         // const addon = await chooseAddonMetadata();
@@ -207,30 +226,7 @@ const main = async() => {
         console.log("removing temporary files");
         
         tmpDirObj.removeCallback();
-    }
-
-    
-}
-
-async function updateConfig(useClient = true, useServer = true, useCpi = false, clientVersion = '10') {
-    const configPath = './package.json';
-    if(fs.pathExists(configPath)) {
-        try {
-            const config = fs.readJSON(configPath);
-            let buildCommand = useClient ? 'cd ./client-side && npm run build:single-spa && cd ..' : '';
-            buildCommand += useCpi ? 'cd ./cpi-side && npm run build && cd ..' : '';
-            buildCommand += useServer ? 'cd ./server-side && npm run build && cd ..' : '';
-            const clientManager = clientVersion === '11' ? 'yarn' : 'npm install';
-            let initCommand = useClient ? `cd ./client-side && ${clientManager} && cd ..` : '';
-            initCommand += useCpi ? 'cd ./cpi-side && npm install && cd ..' : '';
-            initCommand += useServer ? 'cd ./server-side && npm install && cd ..' : '';
-            config.scripts.init = initCommand;
-            config.scripts.build = buildCommand;
-        }
-        catch(err) {
-            console.error('could not read package.json file');
-        }
-    }
+    }    
 }
 
 main();
