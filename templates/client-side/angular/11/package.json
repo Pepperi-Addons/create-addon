@@ -10,7 +10,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build:single-spa": "ng build --prod",
+    "build:single-spa": "ng build --prod --no-extract-licenses",
     "assets-server": "http-server ./src/ -p 4300 -d --cors"
   },
   "private": true,
