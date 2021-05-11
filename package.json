@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
     "name": "@pepperi-addons/create",
     "version": "0.0.68",
@@ -41,3 +42,48 @@
     },
     "devDependencies": {}
 }
+=======
+{
+    "name": "@pepperi-addons/create",
+    "version": "0.0.70",
+    "description": "a script that downloads the sample repo and installs locally",
+    "main": "index.js",
+    "bin": "./index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "prepublishOnly": "npm version patch",
+        "testaddon": "cd test-addon && npx ../"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Pepperi-Addons/create-addon-api.git"
+    },
+    "author": "chasky.h@pepperi.com",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Pepperi-Addons/create-addon-api/issues"
+    },
+    "homepage": "https://github.com/Pepperi-Addons/create-addon-api#readme",
+    "dependencies": {
+        "@octokit/auth-basic": "^1.4.6",
+        "@octokit/rest": "^18.0.6",
+        "adm-zip": "^0.4.14",
+        "chalk": "^4.1.0",
+        "clear": "^0.1.0",
+        "cli-spinner": "^0.2.10",
+        "clui": "^0.3.6",
+        "configstore": "^5.0.1",
+        "figlet": "^1.5.0",
+        "follow-redirects": "^1.11.0",
+        "fs-extra": "^9.0.0",
+        "inquirer": "^7.3.3",
+        "lodash": "^4.17.20",
+        "minimist": "^1.2.5",
+        "rimraf": "^3.0.2",
+        "simple-git": "^2.21.0",
+        "tmp": "^0.2.1",
+        "touch": "^3.1.0"
+    },
+    "devDependencies": {}
+}
+>>>>>>> 9a340f697c3afebf4eb436655bebf510412ede96

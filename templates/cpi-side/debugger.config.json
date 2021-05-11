@@ -1,0 +1,7 @@
+{
+    "AddonUUID": "{{Addon_UUID}}",
+    "BaseURL": "{{WebApi_BaseURL}}",
+    "FileName": "addon-cpi.js",
+    "SessionToken": "{{Session_Token}}",
+    "JWT": "{{Jwt_Token}}"
+}

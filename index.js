@@ -64,7 +64,7 @@ async function copy(src, dest) {
     });
 }
 
-async function install(useServer = true, useClient = true) {
+async function install(useServer = true, useClient = true, useCpi = false) {
     const npm = process.platform == 'win32' ? 'npm.cmd' : 'npm';
     const yarn = process.platform == 'win32' ? 'yarn.cmd' : 'yarn';
     const depsInstall = async function(cwd, type) {
@@ -86,6 +86,9 @@ async function install(useServer = true, useClient = true) {
     }
     if (useClient) { 
         promises.push(depsInstall(path.join(cwd, 'client-side'), yarn));
+    }    
+    if (useCpi) { 
+        promises.push(depsInstall(path.join(cwd, 'cpi-side'), npm));
     }
     return await Promise.all(promises);
 }
@@ -109,7 +112,7 @@ async function chooseTemplate() {
     // console.log(chalk.red('\n --- Write your credentials for a token: \n'));
     // const credentials = await inquirer.askPepperiCredentials();
 
-    console.log(chalk.yellow('\n --- Choose your server side and client side templates: \n'));
+    console.log(chalk.yellow('\n --- Choose your templates: \n'));
     const template = await inquirer.askTemplates();
     return { template };
 
@@ -122,7 +125,27 @@ async function chooseAddonMetadata() {
     return { metadata };
 }
 
-
+async function updateConfig(useServer = true, useClient = true, useCpi = false, clientVersion = '10') {
+    const configPath = './package.json';
+    if(fs.pathExists(configPath)) {
+        try {
+            const config = await fs.readJSON(configPath);
+            let buildCommand = useClient ? 'cd ./client-side && npm run build:single-spa && cd .. ' : '';
+            buildCommand += useCpi ? '&& cd ./cpi-side && npm run build && cd .. ' : '';
+            buildCommand += useServer ? '&& cd ./server-side && npm run build && cd ..' : '';
+            const clientManager = clientVersion === '11' ? 'yarn' : 'npm install';
+            let initCommand = useClient ? `cd ./client-side && ${clientManager} && cd .. ` : '';
+            initCommand += useCpi ? '&& cd ./cpi-side && npm install && cd .. ' : '';
+            initCommand += useServer ? '&& cd ./server-side && npm install && cd ..' : '';
+            config.scripts.init = initCommand.startsWith('&&') ?  initCommand.slice(2, initCommand.length) : initCommand;
+            config.scripts.build = buildCommand.startsWith('&&') ?  buildCommand.slice(2, buildCommand.length) : buildCommand;
+            await fs.writeFile(configPath, JSON.stringify(config, null, "\t"));
+        }
+        catch(err) {
+            console.error('could not read package.json file');
+        }
+    }
+}
 
 const main = async() => {
 
@@ -170,13 +193,24 @@ const main = async() => {
             await copy(clientTemplatePath, './client-side');
     
         }
+        if (userInput.template.useCpi) {
+            const cpiTemplatePath = tmpPath + '/create-addon-master/templates/cpi-side/';
+            if (!fs.existsSync(cpiTemplatePath)) {
+                throw new Error(`Template ${cpiTemplatePath} doesn't exists`);
+            }
+            console.log('copying client neccesary files');
+            await copy(cpiTemplatePath, './cpi-side');
+    
+        }
+
+        console.log("updating package.json...");
+        await updateConfig(userInput.template.useServer, userInput.template.useClient, userInput.template.useCpi, userInput.template.frameworkVersion);
 
         console.log("installing dependencies...");
         const spinner = new Spinner('');
         spinner.setSpinnerString('|/-\\');
         spinner.start();
-        await install(userInput.template.useServer, userInput.template.useClient);
-
+        await install(userInput.template.useServer, userInput.template.useClient, userInput.template.useCpi);
 
         console.log("creating your addon...");
         // const addon = await chooseAddonMetadata();
@@ -192,10 +226,7 @@ const main = async() => {
         console.log("removing temporary files");
         
         tmpDirObj.removeCallback();
-    }
-
-
+    }    
 }
-
 
 main();

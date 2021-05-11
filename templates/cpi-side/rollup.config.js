@@ -1,17 +1,18 @@
 import typescript from 'rollup-plugin-typescript2';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import config from '../addon.config.json'
-import json from '@rollup/plugin-json'
+import json from '@rollup/plugin-json';
+import config from '../addon.config.json';
+import path from 'path'
 
-export default config.Endpoints.map(endpoint => {
+export default config.CPISide.map(endpoint => {
     return {
         input: endpoint,
         output: [
-         {
-          dir: '../publish/',
-          format: 'cjs'
-         }
+            {
+                dir: '../publish',
+                format: 'cjs',
+            }
         ],
         external: [
         ],
@@ -20,9 +21,10 @@ export default config.Endpoints.map(endpoint => {
              tsconfigOverride: {
                  compilerOptions: {
                      module: "es2015",
-                     declaration: false
+                     declaration: false,
                  }
-             }
+             },
+             include: ['**/*.ts']
           }),
           resolve(),
           commonjs(),
