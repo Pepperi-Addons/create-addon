@@ -37,6 +37,15 @@
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}/server-side/app.local.js"
+        },
+        {
+            "type": "node",
+            "request": "attach",
+            "protocol": "inspector",
+            "port": 9222,
+            "address": "localhost",
+            // "websocketAddress": "ws://0.0.0.0:9222/f56157ef-6f9b-49d8-ae3a-db4ccd53ffff",
+            "name": "Launch CPINode debugger Server",
         }
     ]
 }
