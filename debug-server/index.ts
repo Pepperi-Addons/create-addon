@@ -16,6 +16,7 @@ export interface Client {
     ExecutionUUID? : string;
     NumberOfTry? : number;
     Module?: any;
+    ActionUUID?:string;
 }
 
 
