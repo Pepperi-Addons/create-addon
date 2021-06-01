@@ -16,6 +16,7 @@ export interface Client {
     ExecutionUUID? : string;
     NumberOfTry? : number;
     Module?: any;
+    ActionUUID?:string;
 }
 
 
@@ -25,6 +26,7 @@ export interface Request {
     query: any;
     originalUrl?: string;
     path?: string;
+    header: any;
 }
 
 interface DebugServerOptions {
@@ -120,7 +122,8 @@ export class DebugServer {
         return {
             method: req.method,
             body: req.body,
-            query: req.query
+            query: req.query,
+            header: req.headers,
         };
     }
 
