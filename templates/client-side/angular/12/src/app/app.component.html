@@ -1,0 +1,52 @@
+<ng-container *ngIf="clientMode == 'Standalone'; then standalone; else singleSpa">
+
+</ng-container>
+<ng-template #singleSpa>
+    <div  class="addon-page-container single-spa">
+        <pep-top-bar [inline]="false" [title]="('Title_Addon' | translate)">
+            <div header-start-content>
+            </div>
+            <div header-end-content>
+                <pep-menu class="pep-spacing-element" [items]="menuItems" (menuItemClick)="onMenuItemClicked($event)">
+                </pep-menu>
+            </div>
+        </pep-top-bar>
+        <div class="main-content">
+            <div class="content">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<ng-template #standalone>
+    <div class="viewportDiv" #viewportDiv pepRtlDirection >
+        <header>
+            <div id="header" pepRtlClass>
+                <nav class="navbar {{ getTopBarStyle() }} navbar-light bg-faded menuCont" [ngStyle]="{'background-color': customizationService.getBrandingMainColor() }">
+                    <button id="btnMenuHome" (click)="navigateHome()"
+                        class="spacing-element pep-button icon-button sm weak pull-left flip " [ngClass]="getButtonClassName()" mat-button>
+                            <pep-icon name="system_home"></pep-icon>
+                    </button>
+                    <button id="btnToggleSettings" class="spacing-element pep-button icon-button sm weak pull-right flip " [ngClass]="getButtonClassName()" mat-button>
+                            <pep-icon name="system_menu"></pep-icon>
+                    </button>
+                </nav>
+            </div>
+        </header>
+        <aside>
+        </aside>
+        <main>
+            <div #loadingSpinner pepRtlClass [ngStyle]="{ visibility: showLoading ? 'visible' : 'hidden' }"
+                id="loadingSpinnerModal">
+                <div id="loadingSpinner">
+                    <div class="pep-loading-spinner" *ngFor="let number of [0, 1, 2, 3, 4]" [ngStyle]="{ 'background-color': customizationService?.getLoadingSpinnerColor() }"></div>
+                </div>
+            </div>
+            <div id="mainCont" #mainCont pepRtlDirection pepRtlClass
+                [ngStyle]="{ 'padding-bottom': footerHeight + 'rem' }">
+                <router-outlet [ngStyle]="{ 'padding-bottom': footerHeight + 'rem' }"></router-outlet>
+            </div>
+        </main>
+    </div>
+</ng-template>
+<pep-size-detector></pep-size-detector>
