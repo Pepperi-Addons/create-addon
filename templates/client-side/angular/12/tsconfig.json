@@ -28,12 +28,12 @@
               "@ngx-translate/http-loader": [
                 "node_modules/@ngx-translate/http-loader"
               ],
-             "@pepperi-addons/ngx-lib": [
-                 "../../ngx-lib/dist/ngx-lib"
-            ],
-            "@pepperi-addons/ngx-lib/*": [
-              "../../ngx-lib/dist/ngx-lib/*"
-            ]
+            //  "@pepperi-addons/ngx-lib": [
+            //      "../../ngx-lib/dist/ngx-lib"
+            // ],
+            // "@pepperi-addons/ngx-lib/*": [
+            //   "../../ngx-lib/dist/ngx-lib/*"
+            // ]
             // "@pepperi-addons/papi-sdk": [
             //     "../../../pepperi_addons/papi-sdk/"
             // ],
