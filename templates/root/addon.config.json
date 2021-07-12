@@ -12,20 +12,8 @@
     "main"
   ],
   "Assets": [
-    "de.json",
     "en.json",
-    "en.ngx-lib.json",
-    "es.json",
-    "fr.json",
-    "he.json",
-    "hu.json",
-    "it.json",
-    "ja.json",
-    "nl.json",
-    "pl.json",
-    "pt.json",
-    "ru.json",
-    "zh.json"
+    "en.ngx-lib.json"
   ],
   "PublishConfig": {
     "ClientStack": "ng10",
@@ -37,9 +25,9 @@
       }
     ],
     "Dependencies": {
-    }
-  },
-  "CPISide": [
+    },
+    "CPISide": [
       "addon-cpi.ts"
-  ]
+    ]
+  }
 }

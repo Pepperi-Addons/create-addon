@@ -85,7 +85,7 @@ async function install(useServer = true, useClient = true, useCpi = false) {
         promises.push(depsInstall(path.join(cwd, 'server-side'), npm));
     }
     if (useClient) { 
-        promises.push(depsInstall(path.join(cwd, 'client-side'), yarn));
+        promises.push(depsInstall(path.join(cwd, 'client-side'), npm));
     }    
     if (useCpi) { 
         promises.push(depsInstall(path.join(cwd, 'cpi-side'), npm));
@@ -143,6 +143,26 @@ async function updateConfig(useServer = true, useClient = true, useCpi = false, 
         }
         catch(err) {
             console.error('could not read package.json file');
+        }
+    }
+
+    const addonConfigPath = './addon.config.json';
+    if(fs.pathExists(addonConfigPath)) {
+        try {
+            const config = await fs.readJSON(addonConfigPath);
+            
+            if (!useCpi) {
+                config.PublishConfig.CPISide = [];
+            }
+
+            if (!useClient) {
+                config.PublishConfig.Editors = [];
+            }
+
+            await fs.writeFile(addonConfigPath, JSON.stringify(config, null, "\t"));
+        }
+        catch(err) {
+            console.error('could not read addon.config.json file');
         }
     }
 }

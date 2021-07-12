@@ -5,7 +5,7 @@ import json from '@rollup/plugin-json';
 import config from '../addon.config.json';
 import path from 'path'
 
-export default config.CPISide.map(endpoint => {
+export default config.PublishConfig.CPISide.map(endpoint => {
     return {
         input: endpoint,
         output: [
