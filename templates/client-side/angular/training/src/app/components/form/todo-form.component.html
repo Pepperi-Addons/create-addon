@@ -1,0 +1,24 @@
+<div class="content">
+    <pep-top-bar [inline]="false">
+        <div header-start-content>
+            <pep-button [value]="'Todos List' | translate" (buttonClick)="backClicked()" [iconName]="'arrow_left_alt'"></pep-button>
+        </div>
+        <div  header-end-content>
+            <pep-button [value]="'Cancel' | translate" (buttonClick)="cancelClicked()"></pep-button>
+            <pep-button [value]="'Save' | translate" [styleType]="'strong'" (buttonClick)="saveClicked()"></pep-button>
+        </div>
+    </pep-top-bar>
+    <h5>{{ 'Define the todo details' | translate}}</h5>
+    <br/>
+    <div *ngIf="!loading" class="form">
+        <div class="grid-container">
+            <div class="key">
+                <pep-textbox [(value)]="key" [disabled]="true" [readonly]="true"></pep-textbox>
+            </div>
+
+            <div class="field1">
+                <pep-textbox [(value)]="field1" [disabled]="false" [readonly]="false"></pep-textbox>
+            </div>
+        </div>          
+    </div>
+</div>

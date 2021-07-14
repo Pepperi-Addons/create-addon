@@ -1,0 +1,58 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
+        "resolveJsonModule": true,
+        "baseUrl": "./",
+        "outDir": "./dist/out-tsc",
+        "declaration": false,
+        "downlevelIteration": true,
+        "experimentalDecorators": true,
+        "module": "es2020",
+        "moduleResolution": "node",
+        "importHelpers": true,
+        "target": "es2015",
+        "esModuleInterop": true,
+        "types": [],
+        "typeRoots": [
+            "node_modules/@types"
+        ],
+        "lib": [
+            "es2018",
+            "dom"
+        ],
+        "paths": {
+            "@ngx-translate/core": [
+                "node_modules/@ngx-translate/core"
+              ],
+              "@ngx-translate/http-loader": [
+                "node_modules/@ngx-translate/http-loader"
+              ],
+            //  "@pepperi-addons/ngx-lib": [
+            //      "../../ngx-lib/dist/ngx-lib"
+            // ],
+            // "@pepperi-addons/ngx-lib/*": [
+            //   "../../ngx-lib/dist/ngx-lib/*"
+            // ]
+            // "@pepperi-addons/papi-sdk": [
+            //     "../../../pepperi_addons/papi-sdk/"
+            // ],
+            // "@pepperi-addons/papi-sdk/*": [
+            //     "../../../pepperi_addons/papi-sdk/*"
+            // ]
+
+          }
+    },
+    "angularCompilerOptions": {
+        "fullTemplateTypeCheck": true,
+        "strictInjectionParameters": true
+    },
+    "files": [
+      "src/main.ts"
+    ],
+    "include": [
+      "src/**/*.d.ts"
+    ],
+
+
+}
