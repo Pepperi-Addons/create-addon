@@ -1338,17 +1338,17 @@
     puka "^1.0.1"
     read-package-json-fast "^2.0.1"
 
-"@pepperi-addons/ngx-lib@^0.1.154":
-  version "0.1.202"
-  resolved "https://registry.yarnpkg.com/@pepperi-addons/ngx-lib/-/ngx-lib-0.1.202.tgz#6b960b3d60b3a200c8ab030a6da01d2dea2a9ea8"
-  integrity sha512-yUWrnJFFif86FacyUxjLAV3lbT2DgFQsvyahHK68N5Wkj29Rkl6ELxmHVv+7h6aaAUTD6RnGGI+eCrKui64IWA==
+"@pepperi-addons/ngx-lib@^0.1.216":
+  version "0.1.255"
+  resolved "https://registry.yarnpkg.com/@pepperi-addons/ngx-lib/-/ngx-lib-0.1.255.tgz#58e526f74ae2a3529b9b8c1eb7aaf0dcfad511d2"
+  integrity sha512-z1iz2+XcyYPeoXER4JBFbn2jsFmGqhvm4DsxOxT9g9aELUqRDBhft7QVlvb+WsD2ivVoytVD78aQXYtenLQRww==
   dependencies:
-    tslib "^2.0.0"
+    tslib "^2.2.0"
 
-"@pepperi-addons/papi-sdk@^1.17.3":
-  version "1.20.2"
-  resolved "https://registry.yarnpkg.com/@pepperi-addons/papi-sdk/-/papi-sdk-1.20.2.tgz#41688412a124303e881b19bcead98b1bad9c6b8c"
-  integrity sha512-nyEBg3dtxHHYQjvixFa3A2eybopZCf4uUJY+/ZZDLB8OSWPQcV9bQlhbRjfiSBocxL9UUSj/SrYqD6Yk8Qhnjw==
+"@pepperi-addons/papi-sdk@^1.24.0":
+  version "1.27.4"
+  resolved "https://registry.yarnpkg.com/@pepperi-addons/papi-sdk/-/papi-sdk-1.27.4.tgz#bd4590eb159f4b71a7d4a30bdd9650682448d33f"
+  integrity sha512-3UBfx0cnZovxSCmAvzYYW00vXWGVUTOX+6Dgv4JzzROjq7bCbaAnCaNO+RMrEa40eZu+j4lCwAkTLjz94yrvqQ==
   dependencies:
     node-fetch "^2.6.0"
 
@@ -2544,9 +2544,9 @@ color-name@^1.0.0, color-name@~1.1.4:
   integrity sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==
 
 color-string@^1.5.4:
-  version "1.5.4"
-  resolved "https://registry.yarnpkg.com/color-string/-/color-string-1.5.4.tgz#dd51cd25cfee953d138fe4002372cc3d0e504cb6"
-  integrity sha512-57yF5yt8Xa3czSEW1jfQDE79Idk0+AkN/4KWad6tbdxUmAs3MvjxlWSWD4deYytcRfoZ9nhKyFl1kj5tBvidbw==
+  version "1.5.5"
+  resolved "https://registry.yarnpkg.com/color-string/-/color-string-1.5.5.tgz#65474a8f0e7439625f3d27a6a19d89fc45223014"
+  integrity sha512-jgIoum0OfQfq9Whcfc2z/VhCNcmQjWbey6qBX0vqt7YICflUmBCh9E9CiQD5GSJ+Uehixm3NUwHVhqUAWRivZg==
   dependencies:
     color-name "^1.0.0"
     simple-swizzle "^0.2.2"
@@ -8087,6 +8087,11 @@ tslib@^1.10.0, tslib@^1.13.0, tslib@^1.8.1, tslib@^1.9.0:
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
+
+tslib@^2.2.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.3.0.tgz#803b8cdab3e12ba581a4ca41c8839bbb0dacb09e"
+  integrity sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==
 
 tslint@~6.1.0:
   version "6.1.3"
