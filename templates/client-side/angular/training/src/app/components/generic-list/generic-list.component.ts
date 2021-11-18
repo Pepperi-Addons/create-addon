@@ -157,7 +157,7 @@ export class GenericListComponent implements OnInit, AfterViewInit {
             this.dataObjects[i].UID = obj.UID;
           })
           const uiControl = this.dataConvertorService.getUiControl(tableData[0]);
-          this.customList.initListData(uiControl, data.length, data, 'table');
+          this.customList.initListData(uiControl, data.length, data);
         
           this.loadMenuItems();
       }
