@@ -181,7 +181,7 @@ const main = async() => {
 
         const serverSideTmp = userInput.template.serverLanguage || 'typescript';
         const clientSideTmp = userInput.template.clientFramework || 'angular';
-        const clientSideVer = userInput.template.frameworkVersion || null;
+        const clientSideVer = userInput.template.clientProjectType || null;
         console.log("template = ", serverSideTmp + ', ' + clientSideTmp + ' ' + clientSideVer ? clientSideVer : '');
         console.log('downloading files from github...');
         await downloadRepo('https://github.com/Pepperi-Addons/create-addon/archive/master.zip', zipFile);
@@ -224,7 +224,7 @@ const main = async() => {
         }
 
         console.log("updating package.json...");
-        await updateConfig(userInput.template.useServer, userInput.template.useClient, userInput.template.useCpi, userInput.template.frameworkVersion);
+        await updateConfig(userInput.template.useServer, userInput.template.useClient, userInput.template.useCpi, userInput.template.clientProjectType);
 
         console.log("installing dependencies...");
         const spinner = new Spinner('');

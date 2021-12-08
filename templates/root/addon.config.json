@@ -11,10 +11,6 @@
   "Editors": [
     "main"
   ],
-  "Assets": [
-    "en.json",
-    "en.ngx-lib.json"
-  ],
   "PublishConfig": {
     "ClientStack": "ng10",
     "Editors": [
