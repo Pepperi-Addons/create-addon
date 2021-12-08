@@ -1,8 +1,8 @@
 {
-    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-    "version": 1,
-    "projects": {
-        "block": {
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "projects": {
+        "client-side": {
             "projectType": "application",
             "schematics": {},
             "root": "./",
@@ -16,7 +16,7 @@
                         "index": "src/index.html",
                         "main": "src/main.ts",
                         "polyfills": "src/polyfills.ts",
-                        "tsConfig": "tsconfig.json",
+                        "tsConfig": "tsconfig.app.json",
                         "aot": true,
                         "assets": [
                             "src/favicon.ico",
@@ -27,10 +27,15 @@
                                 "output": "./assets/ngx-lib"
                             }
                         ],
-                        "styles": [],
+                        "styles": [
+                            "src/styles.scss",
+                            "src/theme.scss"
+                        ],
                         "scripts": [],
                         "customWebpackConfig": {
-                            "path": "webpack.config.js"
+                            "path": "webpack.config.js",
+                            "libraryName": "client-side",
+                            "libraryTarget": "umd"
                         }
                     },
                     "configurations": {
@@ -51,25 +56,25 @@
                             "buildOptimizer": true,
                             "budgets": [
                                 {
-                                  "type": "initial",
-                                  "maximumWarning": "2mb",
-                                  "maximumError": "5mb"
+                                    "type": "initial",
+                                    "maximumWarning": "2mb",
+                                    "maximumError": "5mb"
                                 },
                                 {
-                                  "type": "anyComponentStyle",
-                                  "maximumWarning": "6kb",
-                                  "maximumError": "10kb"
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb",
+                                    "maximumError": "10kb"
                                 }
                             ]
                         },
                         "development": {
-                          "buildOptimizer": false,
-                          "optimization": false,
-                          "vendorChunk": true,
-                          "extractLicenses": false,
-                          "sourceMap": true,
-                          "namedChunks": true,
-                          "outputHashing": "none"
+                            "buildOptimizer": false,
+                            "optimization": false,
+                            "vendorChunk": true,
+                            "extractLicenses": false,
+                            "sourceMap": true,
+                            "namedChunks": true,
+                            "outputHashing": "none"
                         }
                     },
                     "defaultConfiguration": "production"
@@ -77,14 +82,14 @@
                 "serve": {
                     "builder": "@angular-builders/custom-webpack:dev-server",
                     "options": {
-                        "browserTarget": "block:build"
+                        "browserTarget": "client-side:build"
                     },
                     "configurations": {
                         "development": {
-                            "browserTarget": "block:build:development"
+                            "browserTarget": "client-side:build:development"
                         },
                         "production": {
-                            "browserTarget": "block:build:production"
+                            "browserTarget": "client-side:build:production"
                         }
                     },
                     "defaultConfiguration": "development"
@@ -92,7 +97,7 @@
             }
         }
     },
-    "defaultProject": "block",
+    "defaultProject": "client-side",
     "cli": {
         "analytics": false
     }
