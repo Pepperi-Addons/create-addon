@@ -6,7 +6,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule, TranslateService, TranslateStore } from '@ngx-translate/core';
 import { PepAddonService, PepFileService, PepHttpService } from '@pepperi-addons/ngx-lib';
 
-import { BlockComponent } from './block.component';
+import { BlockComponent } from './index';
 
 import { config } from '../addon.config';
 
@@ -33,6 +33,8 @@ export const routes: Routes = [
     ],
     exports: [BlockComponent],
     providers: [
+        TranslateStore,
+        // Add here all used services.
     ]
 })
 export class BlockModule {

@@ -34,10 +34,8 @@ module.exports = {
             name: `${filename}`,
             filename: `${filename}.js`,
             exposes: {
-                './BlockComponent': './src/app/block/block.component.ts',
-                './BlockModule': './src/app/block/block.module.ts',
-                './BlockEditorComponent': './src/app/block-editor/block-editor.component.ts',
-                './BlockEditorModule': './src/app/block-editor/block-editor.module.ts',
+                './BlockModule': './src/app/block/index.ts',
+                './BlockEditorModule': './src/app/block-editor/index.ts',
             },
             shared: share({
                 "@angular/core": { eager: true, singleton: true, strictVersion: true, requiredVersion: 'auto' }, 

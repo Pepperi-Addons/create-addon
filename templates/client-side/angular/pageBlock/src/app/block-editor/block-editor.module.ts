@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { PepAddonService, PepFileService } from '@pepperi-addons/ngx-lib';
 
-import { BlockEditorComponent } from './block-editor.component';
+import { BlockEditorComponent } from './index';
 
 import { config } from '../addon.config';
 
