@@ -16,7 +16,7 @@ module.exports = (config, options, env) => {
     const mfConfig = {
         output: {
             uniqueName: "addon",
-            publicPath: "http://localhost:4400/",
+            publicPath: "auto",
         },
         optimization: {
             // Only needed to bypass a temporary bug
@@ -32,7 +32,7 @@ module.exports = (config, options, env) => {
                 name: "addon",
                 filename: "addon.js",
                 exposes: {
-                  './AddonModule': './src/app/addon/addon.module.ts'
+                  './AddonModule': './src/app/addon/index.ts'
                 },
                 shared: share({
                     "@angular/core": { eager: true, singleton: true, strictVersion: true, requiredVersion: 'auto' },

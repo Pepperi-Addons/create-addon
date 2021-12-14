@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { PepFileService, PepAddonService } from '@pepperi-addons/ngx-lib';
 
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateModule, TranslateLoader, TranslateStore } from '@ngx-translate/core';
 
 import { AppRoutingModule } from './app.routes';
 import { AddonModule } from './addon/addon.module';
@@ -29,7 +29,10 @@ import { AppComponent } from './app.component';
             }
         })
     ],
-    providers: [],
+    providers: [
+        TranslateStore,
+        // When loading this module from route we need to add this here (because only this module is loading).
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {
