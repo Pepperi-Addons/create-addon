@@ -6,7 +6,11 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 There are 2 different ways to develop your UI:
 
 - Inside WebApp (Single-Spa)
+
     to run this configuration, use `npm run single-spa` and than Navigate to https://app.sandbox.pepperi.com/settings/your-app-uuid/addon?dev=true to see your changes.
+- Standalone
+
+    to run this configuration, use `npm run standalone` and than Navigate to http://localhost:4400/settings/your-app-uuid/addon to see your changes.
 
 The app will automatically reload if you change any of the source files.
 

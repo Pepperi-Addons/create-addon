@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AddonComponent } from './addon/addon.component';
-import { TodoForm } from './addon/form/todo-form.component';
+import { AddonComponent } from './components/addon/addon.component';
+import { TodoForm } from './components/form/todo-form.component';
 
 // Important for single spa
 @Component({
