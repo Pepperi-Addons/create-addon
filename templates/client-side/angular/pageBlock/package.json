@@ -32,7 +32,7 @@
         "@mat-datetimepicker/moment": "^6.0.2",
         "@ngx-translate/core": "^13.0.0",
         "@ngx-translate/http-loader": "^6.0.0",
-        "@pepperi-addons/ngx-lib": "^0.2.43",
+        "@pepperi-addons/ngx-lib": "^0.3.0",
         "@pepperi-addons/papi-sdk": "*",
         "@tweenjs/tween.js": "^17.1.1",
         "disable-scroll": "^0.5.1",
