@@ -5,6 +5,8 @@ const share = mf.share;
 const singleSpaAngularWebpack = require('single-spa-angular/lib/webpack').default;
 const { merge } = require('webpack-merge');
 
+const filename = 'addon'; // addon
+
 const sharedMappings = new mf.SharedMappings();
 sharedMappings.register(
     path.join(__dirname, './tsconfig.json'),
@@ -15,7 +17,7 @@ sharedMappings.register(
 module.exports = (config, options, env) => {
     const mfConfig = {
         output: {
-            uniqueName: "addon",
+            uniqueName: `${filename}`,
             publicPath: "auto",
         },
         optimization: {
@@ -29,8 +31,8 @@ module.exports = (config, options, env) => {
         },
         plugins: [
             new ModuleFederationPlugin({
-                name: "addon",
-                filename: "addon.js",
+                name: `${filename}`,
+                filename: `${filename}.js`,
                 exposes: {
                   './AddonModule': './src/app/addon/index.ts'
                 },
