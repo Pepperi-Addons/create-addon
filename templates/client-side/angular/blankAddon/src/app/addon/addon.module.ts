@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
-import { PepNgxLibModule, PepFileService, PepAddonService } from '@pepperi-addons/ngx-lib';
+import { PepNgxLibModule, PepAddonService } from '@pepperi-addons/ngx-lib';
 import { PepTopBarModule } from '@pepperi-addons/ngx-lib/top-bar';
 import { PepSizeDetectorModule } from '@pepperi-addons/ngx-lib/size-detector';
 import { PepPageLayoutModule } from '@pepperi-addons/ngx-lib/page-layout';
@@ -39,8 +39,8 @@ export const routes: Routes = [
         TranslateModule.forChild({
             loader: {
                 provide: TranslateLoader,
-                useFactory: PepAddonService.createDefaultMultiTranslateLoader,
-                deps: [HttpClient, PepFileService, PepAddonService]
+                useFactory: PepAddonService.createMultiTranslateLoader,
+                deps: [PepAddonService]
             }, isolate: false
         }),
         RouterModule.forChild(routes)

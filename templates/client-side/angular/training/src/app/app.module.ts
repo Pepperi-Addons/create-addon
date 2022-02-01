@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { PepFileService, PepAddonService } from '@pepperi-addons/ngx-lib';
+import { PepAddonService } from '@pepperi-addons/ngx-lib';
 
 import { TranslateModule, TranslateLoader, TranslateStore } from '@ngx-translate/core';
 
@@ -24,8 +24,9 @@ import { AppComponent } from './app.component';
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
-                useFactory: PepAddonService.createDefaultMultiTranslateLoader,
-                deps: [HttpClient, PepFileService, PepAddonService]
+                useFactory: (addonService: PepAddonService) => 
+                    PepAddonService.createMultiTranslateLoader(addonService, ['ngx-lib', 'ngx-composite-lib']),
+                deps: [PepAddonService]
             }
         })
     ],
