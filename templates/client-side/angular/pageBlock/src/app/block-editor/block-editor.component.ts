@@ -11,14 +11,12 @@ export class BlockEditorComponent implements OnInit {
 
     @Output() hostEvents: EventEmitter<any> = new EventEmitter<any>();
 
-    constructor(private translate: TranslateService) { }
+    constructor(private translate: TranslateService) {
+    }
 
     ngOnInit(): void {
-        // When finish load raise block-editor-loaded.
-        // this.hostEvents.emit({action: 'block-editor-loaded'});
     }
 
     ngOnChanges(e: any): void {
-        
     }
 }
