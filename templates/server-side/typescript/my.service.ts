@@ -11,7 +11,7 @@ class MyService {
             token: client.OAuthAccessToken,
             addonUUID: client.AddonUUID,
             addonSecretKey: client.AddonSecretKey,
-            actionUUID: client.AddonUUID
+            actionUUID: client["ActionUUID"]
         });
     }
 
