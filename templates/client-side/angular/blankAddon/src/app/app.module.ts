@@ -8,7 +8,7 @@ import { PepAddonService } from '@pepperi-addons/ngx-lib';
 import { TranslateModule, TranslateLoader, TranslateStore } from '@ngx-translate/core';
 
 import { AppRoutingModule } from './app.routes';
-import { AddonModule } from './addon/addon.module';
+import { BlockModule } from './addon/addon.module';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -19,7 +19,7 @@ import { AppComponent } from './app.component';
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
-        AddonModule,
+        BlockModule,
         AppRoutingModule,
         TranslateModule.forRoot({
             loader: {

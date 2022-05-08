@@ -1,8 +1,11 @@
-
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 const mf = require("@angular-architects/module-federation/webpack");
 const path = require("path");
 const share = mf.share;
+
+// file_name should be lowercase and if it more then one word put '_' between them,
+const addonConfig = require('../addon.config.json');
+const filename = `file_${addonConfig.AddonUUID.replace(/-/g, '_').toLowerCase()}`;
 
 const sharedMappings = new mf.SharedMappings();
 sharedMappings.register(
@@ -10,10 +13,6 @@ sharedMappings.register(
     [
         /* mapped paths to share */
     ]);
-
-// TODO: Change block_file_name to block name (lowercase and if it more then one word put '_' between them),
-// this name should be the same as AddonRelativeURL that declared on the relation object (search for runMigration function in installation.ts file).
-const filename = 'block_file_name'; // block_file_name
 
 module.exports = {
     output: {

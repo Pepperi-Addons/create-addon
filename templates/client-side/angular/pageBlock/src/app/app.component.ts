@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'block-root',
+    selector: 'page-block-root',
     templateUrl: 'app.component.html',
     styleUrls: ['./app.component.scss']
 })

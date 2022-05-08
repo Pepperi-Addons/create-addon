@@ -13,8 +13,8 @@ import { Relation } from '@pepperi-addons/papi-sdk'
 import MyService from './my.service';
 
 export async function install(client: Client, request: Request): Promise<any> {
-    // For page block template uncomment this.
-    // const res = await createPageBlockRelation(client);
+    // For block template uncomment this.
+    // const res = await createBlockRelation(client, false);
     // return res;
     return {success:true,resultObject:{}}
 }
@@ -31,17 +31,15 @@ export async function downgrade(client: Client, request: Request): Promise<any> 
     return {success:true,resultObject:{}}
 }
 
-
-async function createPageBlockRelation(client: Client): Promise<any> {
+async function createBlockRelation(client: Client, isPageBlock: boolean): Promise<any> {
     try {
-        // TODO: change to block name (this is the unique relation name and the description that will be on the page builder editor in Blocks section).
+        // TODO: change to block name (this is the unique relation name and the description that will be on the block).
         const blockName = 'BLOCK_NAME_TO_CHANGE';
 
-        // TODO: Change to fileName that declared in webpack.config.js
-        const filename = 'block_file_name';
+        const filename = `file_${client.AddonUUID.replace(/-/g, '_').toLowerCase()}`;
 
         const pageComponentRelation: Relation = {
-            RelationName: "PageBlock",
+            RelationName: isPageBlock ? 'PageBlock' : 'AddonBlock',
             Name: blockName,
             Description: `${blockName} block`,
             Type: "NgComponent",
@@ -50,9 +48,13 @@ async function createPageBlockRelation(client: Client): Promise<any> {
             AddonRelativeURL: filename,
             ComponentName: `BlockComponent`, // This is should be the block component name (from the client-side)
             ModuleName: `BlockModule`, // This is should be the block module name (from the client-side)
-            EditorComponentName: `BlockEditorComponent`, // This is should be the block editor component name (from the client-side)
-            EditorModuleName: `BlockEditorModule` // This is should be the block editor module name (from the client-side)
         };
+
+        // For Page block we need to declare the editor data.
+        if (isPageBlock) {
+            pageComponentRelation['EditorComponentName'] = `BlockEditorComponent`, // This is should be the block editor component name (from the client-side)
+            pageComponentRelation['EditorModuleName'] = `BlockEditorModule` // This is should be the block editor module name (from the client-side)}
+        }
 
         const service = new MyService(client);
         const result = await service.upsertRelation(pageComponentRelation);

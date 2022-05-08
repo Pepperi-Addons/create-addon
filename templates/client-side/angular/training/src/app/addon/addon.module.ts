@@ -24,7 +24,7 @@ import { PepTextboxModule } from '@pepperi-addons/ngx-lib/textbox';
 import { TranslateLoader, TranslateModule, TranslateService, TranslateStore } from '@ngx-translate/core';
 
 import { AddonService } from '../services/addon.service';
-import { AddonComponent } from './index';
+import { BlockComponent } from './index';
 import { TodoForm } from './form/todo-form.component';
 
 const pepIcons = [
@@ -34,13 +34,13 @@ const pepIcons = [
 export const routes: Routes = [
     {
         path: '',
-        component: AddonComponent
+        component: BlockComponent
     }
 ];
 
 @NgModule({
     declarations: [
-        AddonComponent,
+        BlockComponent,
         TodoForm
     ],
     imports: [
@@ -73,14 +73,14 @@ export const routes: Routes = [
         }),
         RouterModule.forChild(routes)
     ],
-    exports:[AddonComponent],
+    exports:[BlockComponent],
     providers: [
         TranslateStore,
         // When loading this module from route we need to add this here (because only this module is loading).
         AddonService
     ]
 })
-export class AddonModule {
+export class BlockModule {
     constructor(
         translate: TranslateService,
         private pepIconRegistry: PepIconRegistry,

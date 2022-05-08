@@ -5,11 +5,11 @@ import { TranslateService } from '@ngx-translate/core';
 import { AddonService } from "./addon.service";
 
 @Component({
-    selector: 'addon-module',
+    selector: 'addon-block',
     templateUrl: './addon.component.html',
     styleUrls: ['./addon.component.scss']
 })
-export class AddonComponent implements OnInit {
+export class BlockComponent implements OnInit {
     @Input() hostObject: any;
     
     @Output() hostEvents: EventEmitter<any> = new EventEmitter<any>();

@@ -2,7 +2,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
-    selector: 'block',
+    selector: 'page-block',
     templateUrl: './block.component.html',
     styleUrls: ['./block.component.scss']
 })

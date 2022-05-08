@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AddonComponent } from './addon/addon.component';
+import { BlockComponent } from './addon/addon.component';
 import { TodoForm } from './addon/form/todo-form.component';
 
 // Important for single spa
@@ -17,7 +17,7 @@ const routes: Routes = [
         children: [
             {
                 path: 'todos',
-                component: AddonComponent,
+                component: BlockComponent,
             },
             {
                 path: 'todos/:todo_uuid',

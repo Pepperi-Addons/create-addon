@@ -40,7 +40,7 @@ const routes: Routes = [
         children: [
             {
                 path: 'addon',
-                component: AddonComponent
+                component: BlockComponent
             },
         ]
     },

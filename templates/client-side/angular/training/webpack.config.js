@@ -5,7 +5,9 @@ const share = mf.share;
 const singleSpaAngularWebpack = require('single-spa-angular/lib/webpack').default;
 const { merge } = require('webpack-merge');
 
-const filename = 'addon'; // addon
+// file_name should be lowercase and if it more then one word put '_' between them,
+const addonConfig = require('../addon.config.json');
+const filename = `file_${addonConfig.AddonUUID.replace(/-/g, '_').toLowerCase()}`;
 
 const sharedMappings = new mf.SharedMappings();
 sharedMappings.register(
@@ -34,7 +36,7 @@ module.exports = (config, options, env) => {
                 name: `${filename}`,
                 filename: `${filename}.js`,
                 exposes: {
-                  './AddonModule': './src/app/addon/index.ts'
+                  './BlockModule': './src/app/addon/index.ts'
                 },
                 shared: share({
                     "@angular/core": { eager: true, singleton: true, strictVersion: true, requiredVersion: 'auto' },
