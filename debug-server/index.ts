@@ -17,6 +17,7 @@ export interface Client {
     NumberOfTry? : number;
     Module?: any;
     ActionUUID?:string;
+    ValidatePermission: (policyName: string) => void;
 }
 
 
@@ -114,7 +115,8 @@ export class DebugServer {
             BaseURL: parsedToken['pepperi.baseurl'],
             OAuthAccessToken: token,
             AssetsBaseUrl: this.assetsDirectory,
-            Retry: () => {}
+            Retry: () => {},
+            ValidatePermission: () => {}
         };
     }
 
