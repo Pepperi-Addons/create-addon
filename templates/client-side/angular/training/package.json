@@ -46,6 +46,7 @@
         "ngx-quill": "^14.0.0",
         "ngx-signaturepad": "0.0.9",
         "ngx-translate-multi-http-loader": "^3.0.0",
+        "ngx-virtual-scroller": "^4.0.3",
         "quill": "^1.3.7",
         "rxjs": "^6.6.2",
         "single-spa": "^5.9.1",
