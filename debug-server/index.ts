@@ -4,6 +4,7 @@ import cors from 'cors'
 import jwtDecode from 'jwt-decode'
 import path from 'path'
 import fs from 'fs'
+import axios, { AxiosRequestConfig } from 'axios'
 
 export interface Client {
     AddonUUID: string;
@@ -16,8 +17,9 @@ export interface Client {
     ExecutionUUID? : string;
     NumberOfTry? : number;
     Module?: any;
-    ActionUUID?:string;
-    ValidatePermission: (policyName: string) => void;
+    ActionUUID?: string;
+    ValidatePermission: (policyName: string) => Promise<void>;
+    DebugValidatePermission: (policyName: string, addonUUID: string) => Promise<void>;
 }
 
 
@@ -116,9 +118,31 @@ export class DebugServer {
             OAuthAccessToken: token,
             AssetsBaseUrl: this.assetsDirectory,
             Retry: () => {},
-            ValidatePermission: () => {}
+            ValidatePermission: async (policyName) => { await this.validatePermission(policyName, token); },
+            DebugValidatePermission: async (_policyName, _addonUUID) => { throw new Error('Not implemented') } // In case addon accidentally calls this
         };
     }
+
+    async validatePermission(policyName: string, token: string): Promise<void> {
+        const permmisionsUUID = '3c888823-8556-4956-a49c-77a189805d22';
+        const url = `https://papi.staging.pepperi.com/v1.0/addons/api/${permmisionsUUID}/api/validate`;
+
+        const headers: AxiosRequestConfig = {
+            headers: { Authorization: `Bearer ${token}` }
+        };
+
+        const body = {
+            policyName: policyName,
+            addonUUID: this.addonUUID
+        };
+
+        try {
+            await axios.post(url, body, headers);
+        } catch (error) {
+            throw new Error(JSON.stringify((error as any).response.data));
+        }
+    }
+
 
     createRequest(req: express.Request): Request {
         return {
