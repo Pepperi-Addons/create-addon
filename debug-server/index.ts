@@ -4,6 +4,7 @@ import cors from 'cors'
 import jwtDecode from 'jwt-decode'
 import path from 'path'
 import fs from 'fs'
+import fetch from 'node-fetch'
 
 export interface Client {
     AddonUUID: string;
@@ -115,9 +116,34 @@ export class DebugServer {
             BaseURL: parsedToken['pepperi.baseurl'],
             OAuthAccessToken: token,
             AssetsBaseUrl: this.assetsDirectory,
-            Retry: () => { },
-            ValidatePermission: async () => { }
+            Retry: () => {},
+            ValidatePermission: async (policyName) => { await this.validatePermission(policyName, token, parsedToken['pepperi.baseurl']); }
         };
+    }
+
+    async validatePermission(policyName: string, token: string, baseURL: string): Promise<void> {
+        const permmisionsUUID = '3c888823-8556-4956-a49c-77a189805d22';
+        const url = `${baseURL}/addons/api/${permmisionsUUID}/api/validate_permission`;
+
+        const headers = {
+            Authorization: `Bearer ${token}`
+        };
+
+        const body = {
+            policyName: policyName,
+            addonUUID: this.addonUUID
+        };
+
+        const response = await fetch(url, { method: 'POST', headers: headers, body: JSON.stringify(body) });
+        
+        if (response.ok) {
+            return;
+        } else {
+            const responseJson = await response.json();
+            const error: any = new Error(responseJson.fault.faultstring);
+            error.code = response.status;
+            throw error; 
+        }
     }
 
     createRequest(req: express.Request): Request {
