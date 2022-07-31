@@ -4,7 +4,7 @@ import cors from 'cors'
 import jwtDecode from 'jwt-decode'
 import path from 'path'
 import fs from 'fs'
-import axios, { AxiosRequestConfig } from 'axios'
+import fetch from 'node-fetch'
 
 export interface Client {
     AddonUUID: string;
@@ -125,8 +125,8 @@ export class DebugServer {
         const permmisionsUUID = '3c888823-8556-4956-a49c-77a189805d22';
         const url = `${baseURL}/addons/api/${permmisionsUUID}/api/validate_permission`;
 
-        const headers: AxiosRequestConfig = {
-            headers: { Authorization: `Bearer ${token}` }
+        const headers = {
+            Authorization: `Bearer ${token}`
         };
 
         const body = {
@@ -134,10 +134,15 @@ export class DebugServer {
             addonUUID: this.addonUUID
         };
 
-        try {
-            await axios.post(url, body, headers);
-        } catch (error) {
-            throw new Error(JSON.stringify((error as any).response.data));
+        const response = await fetch(url, { method: 'POST', headers: headers, body: JSON.stringify(body) });
+        
+        if (response.ok) {
+            return;
+        } else {
+            const responseJson = await response.json();
+            const error: any = new Error(responseJson.fault.faultstring);
+            error.code = response.status;
+            throw error; 
         }
     }
 
