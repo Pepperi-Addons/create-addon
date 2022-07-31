@@ -23,7 +23,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "jwt-decode": "^2.2.0",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.7"
   },
   "devDependencies": {
     "@types/cors": "^2.8.6",
