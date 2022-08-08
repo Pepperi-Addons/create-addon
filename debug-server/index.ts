@@ -124,7 +124,7 @@ export class DebugServer {
     async validatePermission(policyName: string, token: string, baseURL: string): Promise<void> {
         const permmisionsUUID = '3c888823-8556-4956-a49c-77a189805d22';
         const url = `${baseURL}/addons/api/${permmisionsUUID}/api/validate_permission`;
-        console.log(`validatePermission: URL is '${url}'`);
+        console.log(`validatePermission URL is '${url}'`);
 
         const headers = {
             Authorization: `Bearer ${token}`
@@ -135,15 +135,15 @@ export class DebugServer {
             addonUUID: this.addonUUID
         };
 
-        console.log(`validatePermission: calling endpoint with: ${JSON.stringify(body)}`);
+        console.log(`Calling validatePermission endpoint with: ${JSON.stringify(body)}`);
         const response = await fetch(url, { method: 'POST', headers: headers, body: JSON.stringify(body) });
 
         if (response.ok) {
-            console.log('validatePermission: endpoint returned OK');
+            console.log('validatePermission endpoint returned OK');
             return;
         } else {
             const responseJson = await response.json();
-            console.error(`validatePermission: endpoint returned error: ${responseJson.fault.faultstring}`);
+            console.error(`validatePermission endpoint returned error: ${responseJson.fault.faultstring}`);
             const error: any = new Error(responseJson.fault.faultstring);
             error.code = response.status;
             throw error;
