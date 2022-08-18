@@ -4,6 +4,7 @@ import cors from 'cors'
 import jwtDecode from 'jwt-decode'
 import path from 'path'
 import fs from 'fs'
+import fetch from 'node-fetch'
 
 export interface Client {
     AddonUUID: string;
@@ -11,13 +12,13 @@ export interface Client {
     AssetsBaseUrl: string;
     OAuthAccessToken: string;
     Retry: (delay: number) => void;
-    CodeRevisionURL? : string;
-    AddonSecretKey? : string;
-    ExecutionUUID? : string;
-    NumberOfTry? : number;
+    CodeRevisionURL?: string;
+    AddonSecretKey?: string;
+    ExecutionUUID?: string;
+    NumberOfTry?: number;
     Module?: any;
-    ActionUUID?:string;
-    ValidatePermission: (policyName: string) => void;
+    ActionUUID?: string;
+    ValidatePermission: (policyName: string) => Promise<void>;
 }
 
 
@@ -44,7 +45,7 @@ export class DebugServer {
     assetsDirectory: string;
 
     constructor(options: DebugServerOptions) {
-        
+
         this.app = express();
         this.port = options.port || 4500;
         this.addonUUID = options.addonUUID || '';
@@ -56,7 +57,7 @@ export class DebugServer {
         this.app.use(bodyParser.json());
         this.app.use(cors());
         this.app.all('/:file/:func', (req, res) => {
-            
+
             this.handler(req, res);
         })
 
@@ -65,8 +66,8 @@ export class DebugServer {
         this.assetsDirectory = `http://localhost:${this.port}/${assetsRelativePath}`;
     }
 
-    async getSecret() :Promise<string> {
-        return new Promise ((resolve, reject) => {
+    async getSecret(): Promise<string> {
+        return new Promise((resolve, reject) => {
             const secretFile = path.join(process.cwd(), '/../var_sk');
             const exist = fs.existsSync(secretFile);
             if (!exist) {
@@ -116,8 +117,37 @@ export class DebugServer {
             OAuthAccessToken: token,
             AssetsBaseUrl: this.assetsDirectory,
             Retry: () => {},
-            ValidatePermission: () => {}
+            ValidatePermission: async (policyName) => { await this.validatePermission(policyName, token, parsedToken['pepperi.baseurl']); }
         };
+    }
+
+    async validatePermission(policyName: string, token: string, baseURL: string): Promise<void> {
+        const permmisionsUUID = '3c888823-8556-4956-a49c-77a189805d22';
+        const url = `${baseURL}/addons/api/${permmisionsUUID}/api/validate_permission`;
+        console.log(`validatePermission URL is '${url}'`);
+
+        const headers = {
+            Authorization: `Bearer ${token}`
+        };
+
+        const body = {
+            policyName: policyName,
+            addonUUID: this.addonUUID
+        };
+
+        console.log(`Calling validatePermission endpoint with: ${JSON.stringify(body)}`);
+        const response = await fetch(url, { method: 'POST', headers: headers, body: JSON.stringify(body) });
+
+        if (response.ok) {
+            console.log('validatePermission endpoint returned OK');
+            return;
+        } else {
+            const responseJson = await response.json();
+            console.error(`validatePermission endpoint returned error: ${responseJson.fault.faultstring}`);
+            const error: any = new Error(responseJson.fault.faultstring);
+            error.code = response.status;
+            throw error;
+        }
     }
 
     createRequest(req: express.Request): Request {
@@ -130,8 +160,8 @@ export class DebugServer {
     }
 
     async handler(req: express.Request, res: express.Response) {
-        
-        var result= {};
+
+        var result = {};
         try {
             res.status(200);
             const file = req.params['file'];
@@ -140,20 +170,19 @@ export class DebugServer {
             const mod = await require(filePath);
             const func = mod[funcName];
             result = await func(await this.createClient(req), this.createRequest(req));
-            
+
         } catch (ex) {
             console.log('error :', ex);
             // set the correct status code
-            if(ex.message == "unauthorized") {
+            if (ex.message == "unauthorized") {
                 res.status(401);
             }
             else {
                 res.status(500);
             }
-            result = { message: ex.message, stack: ex.stack};
+            result = { message: ex.message, stack: ex.stack };
         }
-        finally
-        {
+        finally {
             res.json(result);
         }
     }
