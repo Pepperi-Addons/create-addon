@@ -4,20 +4,29 @@
     "projects": {
         "block": {
             "projectType": "application",
-            "schematics": {},
+            "schematics": {
+                "@schematics/angular:component": {
+                    "style": "scss"
+                }
+            },
             "root": "./",
             "sourceRoot": "src",
-            "prefix": "app",
+            "prefix": "block",
             "architect": {
                 "build": {
-                    "builder": "@angular-builders/custom-webpack:browser",
+                    "builder": "ngx-build-plus:browser",
                     "options": {
                         "outputPath": "../publish",
                         "index": "src/index.html",
                         "main": "src/main.ts",
                         "polyfills": "src/polyfills.ts",
                         "tsConfig": "tsconfig.json",
-                        "aot": true,
+                        "stylePreprocessorOptions": {
+                            "includePaths": [
+                                "node_modules/@pepperi-addons",
+                                "node_modules"
+                            ]
+                        },
                         "assets": [
                             "src/favicon.ico",
                             "src/assets",
@@ -25,65 +34,56 @@
                                 "glob": "**/*",
                                 "input": "node_modules/@pepperi-addons/ngx-lib/src/assets",
                                 "output": "./assets/ngx-lib"
+                            },
+                            {
+                                "glob": "**/*",
+                                "input": "node_modules/@pepperi-addons/ngx-composite-lib/src/assets",
+                                "output": "./assets/ngx-composite-lib"
                             }
                         ],
-                        "styles": [],
-                        "scripts": [],
-                        "customWebpackConfig": {
-                            "path": "webpack.config.js"
-                        }
+                        "commonChunk": false,
+                        "extraWebpackConfig": "webpack.config.js"
                     },
                     "configurations": {
+                        "development": {
+                            "buildOptimizer": false,
+                            "optimization": false,
+                            "vendorChunk": true,
+                            "extractLicenses": false,
+                            "sourceMap": true,
+                            "namedChunks": true
+                        },
                         "production": {
-                            "fileReplacements": [
-                                {
-                                    "replace": "src/environments/environment.ts",
-                                    "with": "src/environments/environment.prod.ts"
-                                }
-                            ],
                             "optimization": true,
-                            "outputHashing": "none",
                             "sourceMap": false,
                             "namedChunks": false,
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": true,
-                            "budgets": [
-                                {
-                                  "type": "initial",
-                                  "maximumWarning": "2mb",
-                                  "maximumError": "5mb"
-                                },
-                                {
-                                  "type": "anyComponentStyle",
-                                  "maximumWarning": "6kb",
-                                  "maximumError": "10kb"
-                                }
-                            ]
-                        },
-                        "development": {
-                          "buildOptimizer": false,
-                          "optimization": false,
-                          "vendorChunk": true,
-                          "extractLicenses": false,
-                          "sourceMap": true,
-                          "namedChunks": true,
-                          "outputHashing": "none"
+                            "outputHashing": "none",
+                            "fileReplacements": [{
+                                "replace": "src/environments/environment.ts",
+                                "with": "src/environments/environment.prod.ts"
+                            }],
+                            "extraWebpackConfig": "webpack.prod.config.js"
                         }
                     },
                     "defaultConfiguration": "production"
                 },
                 "serve": {
-                    "builder": "@angular-builders/custom-webpack:dev-server",
+                    "builder": "ngx-build-plus:dev-server",
                     "options": {
-                        "browserTarget": "block:build"
-                    },
+						"port": 4400,
+						"publicHost": "http://localhost:4400",
+						"extraWebpackConfig": "webpack.config.js"
+					},
                     "configurations": {
-                        "development": {
-                            "browserTarget": "block:build:development"
-                        },
                         "production": {
                             "browserTarget": "block:build:production"
+                        },
+                        "development": {
+                            "browserTarget": "block:build:development",
+                            "extraWebpackConfig": "webpack.prod.config.js"
                         }
                     },
                     "defaultConfiguration": "development"
@@ -91,7 +91,6 @@
             }
         }
     },
-    "defaultProject": "block",
     "cli": {
         "analytics": false
     }

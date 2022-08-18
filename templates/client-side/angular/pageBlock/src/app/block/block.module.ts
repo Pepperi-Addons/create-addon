@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
 import { TranslateLoader, TranslateModule, TranslateService, TranslateStore } from '@ngx-translate/core';
+
 import { PepAddonService } from '@pepperi-addons/ngx-lib';
 
 import { BlockComponent } from './index';
 
-import { config } from '../addon.config';
+import { config } from '../app.config';
 
 export const routes: Routes = [
     {
@@ -24,7 +25,7 @@ export const routes: Routes = [
             loader: {
                 provide: TranslateLoader,
                 useFactory: (addonService: PepAddonService) => 
-                    PepAddonService.createMultiTranslateLoader(addonService, ['ngx-lib', 'ngx-composite-lib'], config.AddonUUID),
+                    PepAddonService.createMultiTranslateLoader(config.AddonUUID, addonService, ['ngx-lib', 'ngx-composite-lib']),
                 deps: [PepAddonService]
             }, isolate: false
         }),

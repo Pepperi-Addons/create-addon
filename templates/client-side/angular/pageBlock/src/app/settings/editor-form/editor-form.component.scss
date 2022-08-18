@@ -1,0 +1,16 @@
+.form-container {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    max-width: 600px;
+
+    .grid-container {
+        display: grid;
+        gap: 1px 10px;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "key ." "field1 field1";
+        
+        .key { grid-area: key; }
+    
+        .field1 { grid-area: field1; }
+    }
+}

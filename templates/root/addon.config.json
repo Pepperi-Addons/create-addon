@@ -12,7 +12,7 @@
     "main"
   ],
   "PublishConfig": {
-    "ClientStack": "ng10",
+    "ClientStack": "ng14",
     "Editors": [
       {
         "ParentPackageName": "CHANGE_TO_ADDON_CONTAINER_NAME",

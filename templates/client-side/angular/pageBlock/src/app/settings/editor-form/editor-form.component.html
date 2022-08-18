@@ -1,0 +1,29 @@
+<pep-page-layout [addPadding]="true">
+    <ng-container pep-top-area>
+        <pep-top-bar>
+            <div header-start-content>
+                <pep-button class="pep-spacing-element" [value]="'Todos List' | translate" (buttonClick)="backClicked()" [iconName]="'arrow_left_alt'"></pep-button>
+            </div>
+            <div header-end-content>
+                <pep-button class="pep-spacing-element" [value]="'Cancel' | translate" (buttonClick)="cancelClicked()"></pep-button>
+                <pep-button class="pep-spacing-element" [value]="'Save' | translate" [styleType]="'strong'" (buttonClick)="saveClicked()"></pep-button>
+            </div>
+        </pep-top-bar>
+    </ng-container>
+
+    <ng-container pep-main-area>
+        <div class="form-container">
+            <h5>{{ 'TODO_DETAILS' | translate}}</h5>
+            <div *ngIf="!loading">
+                <div class="grid-container">
+                    <div class="key">
+                        <pep-textbox [(value)]="key" [disabled]="true" [readonly]="true"></pep-textbox>
+                    </div>
+                    <div class="field1">
+                        <pep-textbox [(value)]="field1" [disabled]="false" [readonly]="false"></pep-textbox>
+                    </div>
+                </div>          
+            </div>
+        </div>
+    </ng-container>
+</pep-page-layout>

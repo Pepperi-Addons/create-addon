@@ -1,0 +1,20 @@
+<pep-page-layout [addPadding]="true">
+    <ng-container pep-top-area>
+        <pep-top-bar title="Manage a list of todo's.">
+            <div header-start-content>
+                <!-- Add components you want after the title -->
+            </div>
+            <div header-end-content>
+                <!-- Add components you want at the right side -->
+            </div>
+        </pep-top-bar>
+    </ng-container>
+
+    <ng-container pep-main-area>
+        <pep-generic-list title="You can create and edit this list here" [dataSource]="listDataSource"
+            [actions]="actions" [showTopBar]="true" [selectionType]="'multi'" [inline]="true">
+        </pep-generic-list>
+    </ng-container>
+</pep-page-layout>
+
+<pep-size-detector></pep-size-detector>

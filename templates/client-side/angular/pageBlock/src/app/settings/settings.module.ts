@@ -3,32 +3,36 @@ import { CommonModule } from '@angular/common';
 
 import { TranslateLoader, TranslateModule, TranslateService, TranslateStore } from '@ngx-translate/core';
 
-import { PepAddonService } from '@pepperi-addons/ngx-lib';
+import { PepNgxLibModule, PepAddonService } from '@pepperi-addons/ngx-lib';
 
-import { BlockEditorComponent } from './index';
+import { SettingsRoutingModule } from './settings.routes';
+import { SettingsComponent } from './settings.component';
 
 import { config } from '../app.config';
 
 @NgModule({
-    declarations: [BlockEditorComponent],
+    declarations: [
+        SettingsComponent
+    ],
     imports: [
         CommonModule,
+        PepNgxLibModule,
         TranslateModule.forChild({
             loader: {
                 provide: TranslateLoader,
                 useFactory: (addonService: PepAddonService) => 
-                    PepAddonService.createMultiTranslateLoader(config.AddonUUID, addonService, ['ngx-lib', 'ngx-composite-lib']),
+                    PepAddonService.createMultiTranslateLoader(config.AddonUUID , addonService, ['ngx-lib', 'ngx-composite-lib']),
                 deps: [PepAddonService]
-            }, isolate: false
+            }
         }),
+        SettingsRoutingModule,
     ],
-    exports: [BlockEditorComponent],
     providers: [
         TranslateStore,
-        // Add here all used services.
+        // When loading this module from route we need to add this here (because only this module is loading).
     ]
 })
-export class BlockEditorModule {
+export class SettingsModule {
     constructor(
         translate: TranslateService,
         private pepAddonService: PepAddonService

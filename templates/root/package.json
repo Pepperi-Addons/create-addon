@@ -5,10 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cd ./server-side && npm run build && cd .. && cd ./client-side && npm run build && cd ..",
-    "init": "npm install && cd ./server-side && npm install && cd .. && cd ./client-side && npm install && cd ..",
-    "client:singlespa": "cd client-side && ng serve --port 4400 --configuration SingleSpa && cd..",
-    "client:standalone": "cd client-side && ng serve --port 4400 --configuration Standalone && cd..",
+    "build": "cd ./client-side && npm run build && cd .. && cd ./server-side && npm run build && cd ..",
+    "init": "npm i && cd ./client-side && npm i --force && cd .. && cd ./server-side && npm i && cd ..",
     "publish-addon": "npm run build && publish-addon",
     "cpi-publish-addon": "cd ./cpi-side && npm run build:debug && cd .. && cpi-node-debug"
   },
