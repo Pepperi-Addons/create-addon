@@ -1,13 +1,6 @@
 import { NgModule } from '@angular/core';
-import { Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SettingsComponent } from './settings.component';
-
-@Component({
-    selector: 'app-empty-route',
-    template: '<div>Route is not exist.</div>',
-})
-export class EmptyRouteComponent {}
 
 const routes: Routes = [
     {
@@ -15,14 +8,13 @@ const routes: Routes = [
         component: SettingsComponent,
         children: [
             {
-                path: '',
-                loadChildren: () => import('./editor-list/editor-list.module').then(m => m.EditorListModule),
-            },
-            {
                 path: ':form_key',
                 loadChildren: () => import('./editor-form/editor-form.module').then(m => m.EditorFormModule)
             },
-            { path: '**', component: EmptyRouteComponent }
+            {
+                path: '**',
+                loadChildren: () => import('./editor-list/editor-list.module').then(m => m.EditorListModule),
+            }
         ]
     }
 ];
