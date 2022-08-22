@@ -172,11 +172,14 @@ async function updateConfig(useServer = true, useClient = true, useCpi = false, 
     if(fs.pathExists(appConfigPath)) {
         try {
             const data = fs.readFileSync(appConfigPath, 'utf8');
+            console.log('data before replace is' + data);
             data.replace('[ADDON_UUID]', addonUUID);
-            fs.writeFileSync(appConfigPath, config);
+            console.log('addonUUID is - ' + addonUUID);
+            console.log('data after replace is' + data);
+            await fs.writeFile(appConfigPath, config);
         }
         catch(err) {
-            console.error('could not read package.json file');
+            console.error('could not read app.config.ts file');
         }
     }
 }
