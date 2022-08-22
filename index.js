@@ -160,10 +160,11 @@ async function updateConfig(useServer = true, useClient = true, useCpi = false, 
                 config.PublishConfig.Editors = [];
             }
 
-            console.log('config is - ' + JSON.stringify(config, null, "\t"));
+            console.log('config AddonUUID is - ' + config.AddonUUID);
+            console.log('config is - ' + JSON.stringify(config));
+            addonUUID = config.AddonUUID;
 
             await fs.writeFile(addonConfigPath, JSON.stringify(config, null, "\t"));
-            addonUUID = config.AddonUUID;
         }
         catch(err) {
             console.error('could not read addon.config.json file');
