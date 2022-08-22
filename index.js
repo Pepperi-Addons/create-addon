@@ -133,10 +133,10 @@ async function updateConfig(useServer = true, useClient = true, useCpi = false, 
             let buildCommand = useClient ? 'cd ./client-side && npm run build && cd .. ' : '';
             buildCommand += useCpi ? '&& cd ./cpi-side && npm run build && cd .. ' : '';
             buildCommand += useServer ? '&& cd ./server-side && npm run build && cd ..' : '';
-            const clientManager = clientVersion === '11' ? 'yarn' : 'npm install';
+            const clientManager = clientVersion === '11' ? 'yarn' : 'npm install --force';
             let initCommand = useClient ? `cd ./client-side && ${clientManager} && cd .. ` : '';
-            initCommand += useCpi ? '&& cd ./cpi-side && npm install && cd .. ' : '';
-            initCommand += useServer ? '&& cd ./server-side && npm install && cd ..' : '';
+            initCommand += useCpi ? '&& cd ./cpi-side && npm install --force && cd .. ' : '';
+            initCommand += useServer ? '&& cd ./server-side && npm install --force && cd ..' : '';
             config.scripts.init = initCommand.startsWith('&&') ?  initCommand.slice(2, initCommand.length) : initCommand;
             config.scripts.build = buildCommand.startsWith('&&') ?  buildCommand.slice(2, buildCommand.length) : buildCommand;
             await fs.writeFile(configPath, JSON.stringify(config, null, "\t"));
