@@ -1,6 +1,6 @@
 {
     "name": "@pepperi-addons/create",
-    "version": "0.0.82",
+    "version": "0.0.83",
     "description": "a script that downloads the sample repo and installs locally",
     "main": "index.js",
     "bin": "./index.js",
