@@ -130,7 +130,7 @@ async function updateConfig(useServer = true, useClient = true, useCpi = false, 
     if(fs.pathExists(configPath)) {
         try {
             const config = await fs.readJSON(configPath);
-            let buildCommand = useClient ? 'cd ./client-side && npm run build:single-spa && cd .. ' : '';
+            let buildCommand = useClient ? 'cd ./client-side && npm run build && cd .. ' : '';
             buildCommand += useCpi ? '&& cd ./cpi-side && npm run build && cd .. ' : '';
             buildCommand += useServer ? '&& cd ./server-side && npm run build && cd ..' : '';
             const clientManager = clientVersion === '11' ? 'yarn' : 'npm install';
