@@ -146,7 +146,6 @@ async function updateConfig(useServer = true, useClient = true, useCpi = false, 
         }
     }
 
-    let addonUUID;
     const addonConfigPath = './addon.config.json';
     if(fs.pathExists(addonConfigPath)) {
         try {
@@ -160,29 +159,10 @@ async function updateConfig(useServer = true, useClient = true, useCpi = false, 
                 config.PublishConfig.Editors = [];
             }
 
-            console.log('config AddonUUID is - ' + config.AddonUUID);
-            console.log('config is - ' + JSON.stringify(config));
-            addonUUID = config.AddonUUID;
-
             await fs.writeFile(addonConfigPath, JSON.stringify(config, null, "\t"));
         }
         catch(err) {
             console.error('could not read addon.config.json file');
-        }
-    }
-
-    const appConfigPath = './client-side/src/app/app.config.ts';
-    if(fs.pathExists(appConfigPath)) {
-        try {
-            const data = fs.readFileSync(appConfigPath, 'utf8');
-            console.log('data before replace is' + data);
-            data.replace('[ADDON_UUID]', addonUUID);
-            console.log('addonUUID is - ' + addonUUID);
-            console.log('data after replace is' + data);
-            await fs.writeFile(appConfigPath, config);
-        }
-        catch(err) {
-            console.error('could not read app.config.ts file');
         }
     }
 }
