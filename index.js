@@ -160,6 +160,8 @@ async function updateConfig(useServer = true, useClient = true, useCpi = false, 
                 config.PublishConfig.Editors = [];
             }
 
+            console.log('config is - ' + config);
+
             await fs.writeFile(addonConfigPath, JSON.stringify(config, null, "\t"));
             addonUUID = config.AddonUUID;
         }
