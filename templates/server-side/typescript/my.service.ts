@@ -70,9 +70,9 @@ class MyService {
 
         // For Page block we need to declare the editor data.
         if (isPageBlock) {
-            blockRelation['EditorComponentName'] = `${blockName}EditorComponent`, // This is should be the block editor component name (from the client-side)
-            blockRelation['EditorModuleName'] = `${blockName}EditorModule` // This is should be the block editor module name (from the client-side)}
-            blockRelation['EditorElementName'] = `${blockName.toLocaleLowerCase()}-editor-element-${this.client.AddonUUID}`,
+            blockRelation['EditorComponentName'] = `${blockName}EditorComponent`; // This is should be the block editor component name (from the client-side)
+            blockRelation['EditorModuleName'] = `${blockName}EditorModule`; // This is should be the block editor module name (from the client-side)}
+            blockRelation['EditorElementName'] = `${blockName.toLocaleLowerCase()}-editor-element-${this.client.AddonUUID}`;
         }
         
         return this.upsertRelation(blockRelation);
