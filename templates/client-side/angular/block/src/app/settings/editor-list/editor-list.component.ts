@@ -9,8 +9,8 @@ import { IPepGenericListDataSource, IPepGenericListActions } from "@pepperi-addo
 
 @Component({
     selector: 'editor-list',
-    templateUrl: './addon.component.html',
-    styleUrls: ['./addon.component.scss']
+    templateUrl: './editor-list.component.html',
+    styleUrls: ['./editor-list.component.scss']
 })
 export class EditorListComponent implements OnInit {
     screenSize: PepScreenSizeType;
