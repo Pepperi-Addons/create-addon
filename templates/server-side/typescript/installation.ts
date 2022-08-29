@@ -14,7 +14,7 @@ import MyService from './my.service';
 export async function install(client: Client, request: Request): Promise<any> {
     try {
         const service = new MyService(client);
-        service.upsertRelations();
+        await service.upsertRelations();
     } catch (err) {
         throw new Error(`Failed to create ADAL Tables. error - ${err}`);
     }
