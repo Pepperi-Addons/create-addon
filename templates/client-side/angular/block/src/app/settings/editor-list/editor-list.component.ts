@@ -91,8 +91,8 @@ export class EditorListComponent implements OnInit {
             if (data.rows.length) {
                 return [{
                     title: this.translate.instant("Edit"),
-                    handler: async (objs) => {
-                        this.router.navigate([objs[0].Key], {
+                    handler: async (data) => {
+                        this.router.navigate([[data?.rows[0]].toString()], {
                             relativeTo: this.route,
                             queryParamsHandling: 'merge'
                         });

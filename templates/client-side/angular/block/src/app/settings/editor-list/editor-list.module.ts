@@ -10,10 +10,10 @@ import { PepTopBarModule } from '@pepperi-addons/ngx-lib/top-bar';
 import { PepSizeDetectorModule } from '@pepperi-addons/ngx-lib/size-detector';
 import { PepPageLayoutModule } from '@pepperi-addons/ngx-lib/page-layout';
 import { PepIconRegistry, PepIconModule, pepIconSystemClose } from '@pepperi-addons/ngx-lib/icon';
-import { PepButtonModule } from '@pepperi-addons/ngx-lib/button';
-import { PepDialogModule } from '@pepperi-addons/ngx-lib/dialog';
-import { PepMenuModule } from '@pepperi-addons/ngx-lib/menu';
-import { PepTextboxModule } from '@pepperi-addons/ngx-lib/textbox';
+// import { PepButtonModule } from '@pepperi-addons/ngx-lib/button';
+// import { PepDialogModule } from '@pepperi-addons/ngx-lib/dialog';
+// import { PepMenuModule } from '@pepperi-addons/ngx-lib/menu';
+// import { PepTextboxModule } from '@pepperi-addons/ngx-lib/textbox';
 
 import { PepGenericListModule } from '@pepperi-addons/ngx-composite-lib/generic-list';
 
@@ -39,13 +39,13 @@ export const routes: Routes = [
         HttpClientModule,
         PepNgxLibModule,
         PepSizeDetectorModule,
-        PepIconModule,
+        // PepIconModule,
+        // PepDialogModule,
         PepTopBarModule,
-        PepMenuModule,
+        // PepMenuModule,
         PepPageLayoutModule,
-        PepButtonModule,
-        PepDialogModule,
-        PepTextboxModule,
+        // PepButtonModule,
+        // PepTextboxModule,
         PepGenericListModule,
         TranslateModule.forChild(),
         RouterModule.forChild(routes)

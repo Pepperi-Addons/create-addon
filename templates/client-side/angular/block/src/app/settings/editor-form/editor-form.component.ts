@@ -28,10 +28,8 @@ export class EditorFormComponent implements OnInit {
             this.screenSize = size;
         });
 
-        this.key = this.activatedRoute.snapshot.params["todo_uuid"];
+        this.key = this.activatedRoute.snapshot.params['form_key'];
         this.loading = false;
-
-
     }
 
     mode: 'Edit' | 'Add'
