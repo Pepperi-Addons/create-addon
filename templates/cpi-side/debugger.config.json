@@ -1,5 +1,5 @@
 {
-    "AddonUUID": "{{Addon_UUID}}",
+    "AddonUUID": "[ADDON_UUID]",
     "BaseURL": "http://localhost:8088",
     "FileName": "addon-cpi.js",
     "SessionToken": "{{Session_Token}}",
