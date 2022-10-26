@@ -1,3 +1,5 @@
-/publish/api
-/publish/editors
+publish
 var_sk
+cpi-side/build
+server-side/build
+**/node_modules/**
