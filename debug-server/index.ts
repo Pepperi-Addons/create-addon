@@ -19,6 +19,7 @@ export interface Client {
     Module?: any;
     ActionUUID?: string;
     ValidatePermission: (policyName: string) => Promise<void>;
+    isDebug: boolean;
 }
 
 
@@ -117,7 +118,8 @@ export class DebugServer {
             OAuthAccessToken: token,
             AssetsBaseUrl: this.assetsDirectory,
             Retry: () => {},
-            ValidatePermission: async (policyName) => { await this.validatePermission(policyName, token, parsedToken['pepperi.baseurl']); }
+            ValidatePermission: async (policyName) => { await this.validatePermission(policyName, token, parsedToken['pepperi.baseurl']); },
+            isDebug: true
         };
     }
 
