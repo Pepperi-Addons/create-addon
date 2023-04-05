@@ -126,31 +126,48 @@ async function chooseAddonMetadata() {
 }
 
 async function updateConfig(useServer = true, useClient = true, useCpi = false, clientVersion = '10') {
+    await updatePackageJsonFile(useClient, useCpi, useServer, clientVersion);
+    await updateAddonConfigFile(useCpi, useClient);
+}
+
+async function updatePackageJsonFile(useClient, useCpi, useServer, clientVersion) {
     const configPath = './package.json';
-    if(fs.pathExists(configPath)) {
+    if (fs.pathExists(configPath)) {
         try {
             const config = await fs.readJSON(configPath);
-            let buildCommand = useClient ? 'cd ./client-side && npm run build && cd .. ' : '';
+            let lintCommand = "eslint --ext .ts ";
+            lintCommand += useClient ? "'./client-side/**/*.ts' " : '';
+            lintCommand += useCpi ? "'./cpi-side/**/*.ts' " : '';
+            lintCommand += useServer ? "'./server-side/**/*.ts' " : '';
+
+            let buildCommand = 'npm run lint ';
+            buildCommand += useClient ? 'cd ./client-side && npm run build && cd .. ' : '';
             buildCommand += useCpi ? '&& cd ./cpi-side && npm run build && cd .. ' : '';
             buildCommand += useServer ? '&& cd ./server-side && npm run build && cd ..' : '';
+
             const clientManager = clientVersion === '11' ? 'yarn' : 'npm install --force';
+
             let initCommand = useClient ? `cd ./client-side && ${clientManager} && cd .. ` : '';
             initCommand += useCpi ? '&& cd ./cpi-side && npm install --force && cd .. ' : '';
             initCommand += useServer ? '&& cd ./server-side && npm install --force && cd ..' : '';
-            config.scripts.init = initCommand.startsWith('&&') ?  initCommand.slice(2, initCommand.length) : initCommand;
-            config.scripts.build = buildCommand.startsWith('&&') ?  buildCommand.slice(2, buildCommand.length) : buildCommand;
+
+            config.scripts.lint = lintCommand;
+            config.scripts.build = buildCommand;
+            config.scripts.init = initCommand.startsWith('&&') ? initCommand.slice(2, initCommand.length) : initCommand;
             await fs.writeFile(configPath, JSON.stringify(config, null, "\t"));
         }
-        catch(err) {
+        catch (err) {
             console.error('could not read package.json file');
         }
     }
+}
 
+async function updateAddonConfigFile(useCpi, useClient) {
     const addonConfigPath = './addon.config.json';
-    if(fs.pathExists(addonConfigPath)) {
+    if (fs.pathExists(addonConfigPath)) {
         try {
             const config = await fs.readJSON(addonConfigPath);
-            
+
             if (!useCpi) {
                 config.PublishConfig.CPISide = [];
             }
@@ -161,7 +178,7 @@ async function updateConfig(useServer = true, useClient = true, useCpi = false, 
 
             await fs.writeFile(addonConfigPath, JSON.stringify(config, null, "\t"));
         }
-        catch(err) {
+        catch (err) {
             console.error('could not read addon.config.json file');
         }
     }
@@ -194,14 +211,14 @@ const main = async() => {
         if (!fs.existsSync(rootTemplatePath)) {
             throw new Error(`Template ${rootTemplatePath} doesn't exists`);
         }
-        console.log('copying root neccesary files');
+        console.log('copying root necessary files');
         await copy(rootTemplatePath, './');
         if (userInput.template.useServer) {
             const serverTemplatePath = tmpPath + '/create-addon-master/templates/server-side/' + serverSideTmp;
             if (!fs.existsSync(serverTemplatePath)) {
                 throw new Error(`Template ${serverSideTmp} doesn't exists`);
             }
-            console.log('copying server neccesary files');
+            console.log('copying server necessary files');
             await copy(serverTemplatePath, './server-side');
         }
         if (userInput.template.useClient) {
@@ -209,7 +226,7 @@ const main = async() => {
             if (!fs.existsSync(clientTemplatePath)) {
                 throw new Error(`Template ${clientTemplatePath} doesn't exists`);
             }
-            console.log('copying client neccesary files');
+            console.log('copying client necessary files');
             await copy(clientTemplatePath, './client-side');
     
         }
@@ -218,7 +235,7 @@ const main = async() => {
             if (!fs.existsSync(cpiTemplatePath)) {
                 throw new Error(`Template ${cpiTemplatePath} doesn't exists`);
             }
-            console.log('copying client neccesary files');
+            console.log('copying client necessary files');
             await copy(cpiTemplatePath, './cpi-side');
     
         }
