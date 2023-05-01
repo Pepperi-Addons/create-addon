@@ -15,11 +15,5 @@
   "license": "ISC",
   "dependencies": {
     "@pepperi-addons/scripts": "*"
-  },
-  "devDependencies": {
-    "@pepperi-addons/eslint-plugin-pepperi-lint": "*",
-    "@typescript-eslint/eslint-plugin": "^3.3.0",
-    "@typescript-eslint/parser": "^3.3.0",
-    "eslint": "^7.2.0"
   }
 }

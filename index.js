@@ -135,10 +135,9 @@ async function updatePackageJsonFile(useClient, useCpi, useServer, clientVersion
     if (fs.pathExists(configPath)) {
         try {
             const config = await fs.readJSON(configPath);
-            let lintCommand = "eslint --ext .ts ";
-            lintCommand += useClient ? "'./client-side/**/*.ts' " : '';
-            lintCommand += useCpi ? "'./cpi-side/**/*.ts' " : '';
-            lintCommand += useServer ? "'./server-side/**/*.ts' " : '';
+            let lintCommand = "";
+            lintCommand += useCpi ? "cd ./cpi-side && npm run build && cd .. " : '';
+            lintCommand += useServer ? "&& cd ./server-side && npm run build && cd .." : '';
 
             let buildCommand = 'npm run lint ';
             buildCommand += useClient ? 'cd ./client-side && npm run build && cd .. ' : '';
@@ -151,7 +150,7 @@ async function updatePackageJsonFile(useClient, useCpi, useServer, clientVersion
             initCommand += useCpi ? '&& cd ./cpi-side && npm install --force && cd .. ' : '';
             initCommand += useServer ? '&& cd ./server-side && npm install --force && cd ..' : '';
 
-            config.scripts.lint = lintCommand;
+            config.scripts.lint = lintCommand.startsWith('&&') ? lintCommand.slice(2, initCommand.length) : lintCommand;
             config.scripts.build = buildCommand;
             config.scripts.init = initCommand.startsWith('&&') ? initCommand.slice(2, initCommand.length) : initCommand;
             await fs.writeFile(configPath, JSON.stringify(config, null, "\t"));
