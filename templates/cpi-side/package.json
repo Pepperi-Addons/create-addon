@@ -6,10 +6,12 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "prepare": "tsc",
-    "build": "rollup -c rollup.config.js",
+    "build": "npm run lint && rollup -c rollup.config.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepublishOnly": "npm version patch",
-    "build:debug": "tsc && rollup -c debug.rollup.config.js"
+    "build:debug": "tsc && rollup -c debug.rollup.config.js",
+    "lint": "eslint './**/*.ts'",
+    "fix-lint": "eslint --fix './**/*.ts'"
   },
   "author": "",
   "license": "ISC",
@@ -18,11 +20,15 @@
     "rollup-plugin-typescript2": "^0.30.0"
   },
   "devDependencies": {
+    "@pepperi-addons/eslint-plugin-pepperi-lint": "*",
     "@rollup/plugin-commonjs": "^15.1.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^13.0.6",
     "@types/node": "^14.0.13",
     "@types/uuid": "^8.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.57.1",
+    "@typescript-eslint/parser": "^5.57.1",
+    "eslint": "^7.2.0",
     "nodemon": "^2.0.6",
     "rollup": "^2.32.0",
     "ts-node": "^8.10.2",

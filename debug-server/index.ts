@@ -63,8 +63,8 @@ export class DebugServer {
             this.handler(req, res);
         })
 
-        let assetsRelativePath = 'publish/assets';
-        this.addStaticFolder(`/${assetsRelativePath}`, process.cwd() + `/../${assetsRelativePath}`);
+        const assetsRelativePath = 'publish/assets';
+        this.addStaticFolder(`/${assetsRelativePath}`, `${process.cwd() }/../${assetsRelativePath}`);
         this.assetsDirectory = `http://localhost:${this.port}/${assetsRelativePath}`;
     }
 
@@ -109,7 +109,7 @@ export class DebugServer {
         }
 
         const token = authorization.replace('Bearer ', '') || '';
-        let parsedToken = jwtDecode<any>(token);
+        const parsedToken = jwtDecode<any>(token);
         const sk = await this.getSecret() || '';
 
         return {
@@ -144,7 +144,7 @@ export class DebugServer {
 
         if (response.ok) {
             console.log('validatePermission endpoint returned OK');
-            return;
+
         } else {
             const responseJson = await response.json();
             console.error(`validatePermission endpoint returned error: ${responseJson.fault.faultstring}`);
@@ -165,12 +165,12 @@ export class DebugServer {
 
     async handler(req: express.Request, res: express.Response) {
 
-        var result = {};
+        let result = {};
         try {
             res.status(200);
             const file = req.params['file'];
             const funcName = req.params['func'];
-            const filePath = this.apiDirectory + '/' + file;
+            const filePath = `${this.apiDirectory }/${ file}`;
             const mod = await require(filePath);
             const func = mod[funcName];
             result = await func(await this.createClient(req), this.createRequest(req));
