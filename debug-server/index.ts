@@ -19,7 +19,7 @@ export interface Client {
     Module?: any;
     ActionUUID?: string;
     ValidatePermission: (policyName: string) => Promise<void>;
-    isAsync?: boolean;
+    isAsync?: () => boolean;
     isDebug?: boolean;
 }
 
