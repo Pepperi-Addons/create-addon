@@ -19,7 +19,7 @@
     },
     "overrides": [
         {
-          "files": ["templates/server-side/installation.ts", "templates/server-side/typescript/api.ts"],
+          "files": ["templates/server-side/typescript/installation.ts", "templates/server-side/typescript/api.ts"],
           "rules": {
             "@typescript-eslint/naming-convention": [
                 "error",
