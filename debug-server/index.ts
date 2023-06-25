@@ -120,7 +120,7 @@ export class DebugServer {
             AssetsBaseUrl: this.assetsDirectory,
             Retry: () => {},
             ValidatePermission: async (policyName) => { await this.validatePermission(policyName, token, parsedToken['pepperi.baseurl']); },
-            isAsync: false,
+            isAsync: () => { return false },
             isDebug: true
         };
     }
