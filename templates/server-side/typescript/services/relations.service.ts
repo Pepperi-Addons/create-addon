@@ -1,4 +1,4 @@
-import { PapiClient, InstalledAddon, Relation } from '@pepperi-addons/papi-sdk'
+import { PapiClient, Relation } from '@pepperi-addons/papi-sdk'
 import { Client } from '@pepperi-addons/debug-server';
 
 export class RelationsService {
@@ -14,17 +14,17 @@ export class RelationsService {
             addonSecretKey: client.AddonSecretKey,
             actionUUID: client.ActionUUID
         });
-        
+
         this.bundleFileName = `file_${this.client.AddonUUID}`;
     }
-    
+
     // For page block template
-    private async upsertRelation(relation): Promise<any> {
-        return await this.papiClient.post('/addons/data/relations', relation);
+    private async upsertRelation(relation): Promise<Relation> {
+        return await this.papiClient.addons.data.relations.upsert(relation);
     }
 
     private getCommonRelationProperties(
-        relationName: 'SettingsBlock' | 'PageBlock' | 'AddonBlock', 
+        relationName: 'SettingsBlock' | 'PageBlock' | 'AddonBlock',
         blockRelationName: string,
         blockRelationDescription: string,
         blockName: string
@@ -55,11 +55,11 @@ export class RelationsService {
 
         blockRelation['SlugName'] = blockRelationSlugName;
         blockRelation['GroupName'] = blockRelationGroupName;
-        
+
         return await this.upsertRelation(blockRelation);
     }
 
-    private async upsertBlockRelation(blockRelationName: string, isPageBlock: boolean): Promise<any> {
+    private async upsertBlockRelation(blockRelationName: string, isPageBlock: boolean): Promise<Relation> {
         const blockName = 'Block';
 
         const blockRelation: Relation = this.getCommonRelationProperties(
@@ -74,11 +74,11 @@ export class RelationsService {
             blockRelation['EditorModuleName'] = `${blockName}EditorModule`; // This is should be the block editor module name (from the client-side)}
             blockRelation['EditorElementName'] = `${blockName.toLocaleLowerCase()}-editor-element-${this.client.AddonUUID}`;
         }
-        
+
         return await this.upsertRelation(blockRelation);
     }
 
-    async upsertRelations() {
+    async upsertRelations(): Promise<Relation> {
         // For settings block use this.
         // const blockRelationSlugName = 'CHANGE_TO_SETTINGS_SLUG_NAME';
         // const blockRelationGroupName = 'CHANGE_TO_SETTINGS_GROUP_NAME';
