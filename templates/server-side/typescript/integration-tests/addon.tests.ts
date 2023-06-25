@@ -1,7 +1,7 @@
 import { BaseTest } from '@pepperi-addons/addon-testing-framework';
 
 export class AddonTests extends BaseTest {
-    
+
     title = 'Addon Tests';
 
     tests(
@@ -10,7 +10,7 @@ export class AddonTests extends BaseTest {
         expect: Chai.ExpectStatic,
     ): void {
         describe('Addon Tests', () => {
-            
+
             it('should fail - add some tests', () => {
                 expect.fail();
             });
