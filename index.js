@@ -146,7 +146,7 @@ async function updatePackageJsonFile(useClient, useCpi, useServer, clientVersion
             initCommand += useCpi ? '&& cd ./cpi-side && npm install --force && cd .. ' : '';
             initCommand += useServer ? '&& cd ./server-side && npm install --force && cd ..' : '';
 
-            config.scripts.build = buildCommand;
+            config.scripts.build = buildCommand.startsWith('&&') ? buildCommand.slice(2, buildCommand.length) : buildCommand;
             config.scripts.init = initCommand.startsWith('&&') ? initCommand.slice(2, initCommand.length) : initCommand;
             await fs.writeFile(configPath, JSON.stringify(config, null, "\t"));
         }
