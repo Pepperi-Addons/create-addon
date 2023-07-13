@@ -1,5 +1,6 @@
 import { DoBootstrap, Injector, NgModule, Type } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { PepAddonService } from '@pepperi-addons/ngx-lib';
@@ -20,6 +21,7 @@ import { config } from './app.config';
     ],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         // BlockModule,
         // BlockEditorModule,
         SettingsModule,
