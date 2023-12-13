@@ -41,7 +41,7 @@
                                 "output": "./assets/ngx-composite-lib"
                             }
                         ],
-                        "commonChunk": false,
+                        "commonChunk": true,
                         "extraWebpackConfig": "webpack.config.js"
                     },
                     "configurations": {
