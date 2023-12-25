@@ -22,37 +22,9 @@
             }
         ],
         "Dependencies": {
-            "pepperi_pack": "1.1.2"
         },
         "CPISide": [
             "addon-cpi.ts"
         ]
-    },
-    "AddonPackage": {
-        "ClientZip": true,
-        "Dependencies": {
-            "@angular/animations": "14",
-            "@angular/cdk": "14",
-            "@angular/common": "14",
-            "@angular/core": "14",
-            "@angular/elements": "14",
-            "@angular/flex-layout": "14",
-            "@angular/forms": "14",
-            "@angular/material": "14",
-            "@angular/platform-browser": "14",
-            "@angular/router": "14",
-            "@mat-datetimepicker/core": "9",
-            "@ngx-translate/core": "14",
-            "@pepperi-addons/ngx-composite-lib": "0",
-            "@pepperi-addons/ngx-lib": "0",
-            "hammerjs": "2",
-            "moment": "2",
-            "ng-gallery": "5",
-            "ng2-file-upload": "1",
-            "ngx-quill": "12",
-            "ngx-signaturepad": "0",
-            "ngx-virtual-scroller": "4",
-            "quill": "1"
-        }
     }
 }
