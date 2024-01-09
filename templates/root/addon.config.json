@@ -22,6 +22,7 @@
             }
         ],
         "Dependencies": {
+            "pepperi_pack": "1.1.6"
         },
         "CPISide": [
             "addon-cpi.ts"
