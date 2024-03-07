@@ -79,6 +79,7 @@ export class RelationsService {
     }
 
     async upsertRelations(): Promise<Relation> {
+        throw new Error('Not implemented - choose your relation type and implement the upsertRelations method.');
         // For settings block use this.
         // const blockRelationSlugName = 'CHANGE_TO_SETTINGS_SLUG_NAME';
         // const blockRelationGroupName = 'CHANGE_TO_SETTINGS_GROUP_NAME';
