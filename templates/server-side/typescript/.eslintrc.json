@@ -30,6 +30,14 @@
               ],
             "camelcase": "off"
           }
+        },
+        {
+          "files": ["*.tests.ts"],
+          "rules": {
+            "max-lines-per-function": [
+              "off"
+            ]
+          }
         }
       ]
 }
