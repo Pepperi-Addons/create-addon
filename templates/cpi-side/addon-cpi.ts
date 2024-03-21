@@ -1,7 +1,7 @@
 import '@pepperi-addons/cpi-node'
 
-export async function load(configuration: any) {
-    
+export async function load(configuration: any): Promise<void>{
+    return Promise.resolve();
 }
 
 export const router = Router()
