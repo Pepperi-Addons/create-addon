@@ -176,13 +176,14 @@ export class DebugServer {
         } catch (ex) {
             console.log('error :', ex);
             // set the correct status code
-            if (ex.message == "unauthorized") {
+            const error = ex as Error;
+            if (error.message == "unauthorized") {
                 res.status(401);
             }
             else {
                 res.status(500);
             }
-            result = { message: ex.message, stack: ex.stack };
+            result = { message: error.message, stack: error.stack };
         }
         finally {
             res.json(result);
