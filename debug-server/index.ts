@@ -4,7 +4,6 @@ import cors from 'cors'
 import jwtDecode from 'jwt-decode'
 import path from 'path'
 import fs from 'fs'
-import fetch from 'node-fetch'
 
 export interface Client {
     AddonUUID: string;
