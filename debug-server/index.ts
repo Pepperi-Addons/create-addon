@@ -1,10 +1,8 @@
-import express, { request } from 'express'
-import bodyParser from 'body-parser'
+import express from 'express'
 import cors from 'cors'
 import jwtDecode from 'jwt-decode'
 import path from 'path'
 import fs from 'fs'
-import fetch from 'node-fetch'
 
 export interface Client {
     AddonUUID: string;
@@ -56,7 +54,7 @@ export class DebugServer {
             console.log(`Request URL: http://localhost:${this.port}${req.url}`);
             next();
         })
-        this.app.use(bodyParser.json());
+        this.app.use(express.json());
         this.app.use(cors());
         this.app.all('/:file/:func', (req, res) => {
 
@@ -178,13 +176,14 @@ export class DebugServer {
         } catch (ex) {
             console.log('error :', ex);
             // set the correct status code
-            if (ex.message == "unauthorized") {
+            const error = ex as Error;
+            if (error.message == "unauthorized") {
                 res.status(401);
             }
             else {
                 res.status(500);
             }
-            result = { message: ex.message, stack: ex.stack };
+            result = { message: error.message, stack: error.stack };
         }
         finally {
             res.json(result);
