@@ -1,5 +1,0 @@
-{
-    "Plugin_Title": "Demo plugin",
-    "Test_Prompt_Title": "Enter the relative API you want to test (eg. /api/foo)",
-    "Submit_Btn_Title": "Test"
-}

@@ -78,7 +78,7 @@ export class RelationsService {
         return await this.upsertRelation(blockRelation);
     }
 
-    async upsertRelations(): Promise<Relation> {
+    async upsertRelations(): Promise<void> {
         // For settings block use this.
         // const blockRelationSlugName = 'CHANGE_TO_SETTINGS_SLUG_NAME';
         // const blockRelationGroupName = 'CHANGE_TO_SETTINGS_GROUP_NAME';
@@ -95,5 +95,6 @@ export class RelationsService {
         // // TODO: change to block name (this is the unique relation name and the description that will be on the block).
         // const blockRelationName = 'CHANGE_TO_BLOCK_RELATION_NAME';
         // await this.upsertBlockRelation(blockRelationName, false);
+        return Promise.resolve();
     }
 }

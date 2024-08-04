@@ -1,0 +1,266 @@
+{
+	"info": {
+		"_postman_id": "",
+		"name": "Addon",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": ""
+	},
+	"item": [
+		{
+			"name": "Versions",
+			"item": [
+				{
+					"name": "Upgrade",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{PAPI_BASE_URL}}/addons/installed_addons/{{ADDON_UUID}}/upgrade/0.0.1",
+							"host": [
+								"{{PAPI_BASE_URL}}"
+							],
+							"path": [
+								"addons",
+								"installed_addons",
+								"{{ADDON_UUID}}",
+								"upgrade",
+								"0.0.1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Installed Addon",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PAPI_BASE_URL}}/addons/installed_addons/{{ADDON_UUID}}",
+							"host": [
+								"{{PAPI_BASE_URL}}"
+							],
+							"path": [
+								"addons",
+								"installed_addons",
+								"{{ADDON_UUID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API",
+			"item": [
+				{
+					"name": "Test",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tests",
+			"item": [
+				{
+					"name": "Get Tests",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ADDON_API_BASE_URL}}/tests/tests",
+							"host": [
+								"{{ADDON_API_BASE_URL}}"
+							],
+							"path": [
+								"tests",
+								"tests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Run Test Sync",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"eval(pm.globals.get('format-test-result'))"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Name\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ADDON_API_BASE_URL}}/tests/tests",
+							"host": [
+								"{{ADDON_API_BASE_URL}}"
+							],
+							"path": [
+								"tests",
+								"tests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Run Test Local",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"eval(pm.globals.get('format-test-result'))"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Name\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ADDON_API_BASE_URL}}/tests/tests",
+							"host": [
+								"{{ADDON_API_BASE_URL}}"
+							],
+							"path": [
+								"tests",
+								"tests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Run Test Async",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"eval(pm.globals.get('poll-tests-response'))"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Name\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PAPI_BASE_URL}}/addons/api/async/{{ADDON_UUID}}/tests/tests",
+							"host": [
+								"{{PAPI_BASE_URL}}"
+							],
+							"path": [
+								"addons",
+								"api",
+								"async",
+								"{{ADDON_UUID}}",
+								"tests",
+								"tests"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"eval(pm.globals.get('auth-script'))"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "ADDON_UUID",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "LOCAL_HOST_URL",
+			"value": "http://localhost:4200",
+			"type": "string"
+		},
+		{
+			"key": "ADDON_API_BASE_URL",
+			"value": "{{PAPI_BASE_URL}}/addons/api/{{ADDON_UUID}}",
+			"type": "string"
+		},
+		{
+			"key": "API_BASE_URL",
+			"value": "{{ADDON_API_BASE_URL}}",
+			"type": "string"
+		}
+	]
+}
