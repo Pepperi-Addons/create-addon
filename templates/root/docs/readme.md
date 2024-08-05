@@ -52,7 +52,7 @@
 ---
 
 ## Architecture
-see: [Architechture](./architechture.md)
+see: [Architecture](./architecture.md)
 
 ---
 
