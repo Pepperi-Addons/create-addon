@@ -141,8 +141,8 @@ async function updatePackageJsonFile(useClient, useCpi, useServer, clientVersion
             buildCommand += useServer ? '&& cd ./server-side && npm run build && cd ..' : '';
 
             const clientManager = clientVersion === '11' ? 'yarn' : 'npm install --force';
-
-            let initCommand = useClient ? `cd ./client-side && ${clientManager} && cd .. ` : '';
+            let initCommand = 'npm i '
+            initCommand += useClient ? `&& cd ./client-side && ${clientManager} && cd .. ` : '';
             initCommand += useCpi ? '&& cd ./cpi-side && npm install --force && cd .. ' : '';
             initCommand += useServer ? '&& cd ./server-side && npm install --force && cd ..' : '';
 
