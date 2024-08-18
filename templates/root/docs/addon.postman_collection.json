@@ -293,7 +293,7 @@
 		},
 		{
 			"key": "LOCAL_HOST_URL",
-			"value": "http://localhost:4200",
+			"value": "http://localhost:4500",
 			"type": "string"
 		},
 		{
