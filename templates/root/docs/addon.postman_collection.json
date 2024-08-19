@@ -172,9 +172,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{ADDON_API_BASE_URL}}/tests/tests",
+							"raw": "{{LOCAL_HOST_URL}}/tests/tests",
 							"host": [
-								"{{ADDON_API_BASE_URL}}"
+								"{{LOCAL_HOST_URL}}"
 							],
 							"path": [
 								"tests",
