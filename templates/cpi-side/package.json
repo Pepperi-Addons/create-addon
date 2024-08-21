@@ -17,7 +17,7 @@
   "license": "ISC",
   "dependencies": {
     "@pepperi-addons/cpi-node": "*",
-    "rollup-plugin-typescript2": "^0.30.0"
+    "rollup-plugin-typescript2": "^0.31.0"
   },
   "devDependencies": {
     "@pepperi-addons/eslint-plugin-pepperi-lint": "*",
